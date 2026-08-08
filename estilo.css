@@ -96,6 +96,27 @@ button {
     font-size: 0.83rem;
 }
 
+.alternativa-acceso {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    color: var(--texto-suave);
+    font-size: 0.78rem;
+}
+
+.boton-enlace {
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--verde);
+    font-weight: 800;
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
 .cabecera {
     position: sticky;
     top: 0;
@@ -921,6 +942,15 @@ button {
     text-align: left;
 }
 
+.tabla-informe thead {
+    display: table-header-group;
+}
+
+.tabla-informe tr {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+}
+
 .tabla-informe .fila-licencia td {
     background: var(--rojo-claro);
     color: var(--rojo-texto);
@@ -1104,15 +1134,4 @@ button {
         min-height: auto;
         padding: 0;
     }
-}
-
-
-/* salto de pagina adecuadoi */
-.tabla-informe thead {
-    display: table-header-group;
-}
-
-.tabla-informe tr {
-    break-inside: avoid !important;
-    page-break-inside: avoid !important;
 }

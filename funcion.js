@@ -1,4 +1,5 @@
 const URL_SUPABASE = "https://ldyczacdmhmprvbtpvku.supabase.co";
+
 const CLAVE_PUBLICA_SUPABASE =
     "sb_publishable_wYDLIYIC8gAUw8Z4JKxnaQ_QnEGTsue";
 
@@ -17,22 +18,77 @@ const correoAccesoInput = document.getElementById("correoAcceso");
 const contrasenaAccesoInput = document.getElementById("contrasenaAcceso");
 const mensajeAcceso = document.getElementById("mensajeAcceso");
 const botonAcceder = document.getElementById("botonAcceder");
+const botonMostrarRegistro = document.getElementById("botonMostrarRegistro");
 const correoUsuario = document.getElementById("correoUsuario");
 const botonCerrarSesion = document.getElementById("botonCerrarSesion");
 
-const formularioRegistro = document.getElementById("formularioRegistro");
+const modalRegistroUsuario = document.getElementById(
+    "modalRegistroUsuario"
+);
+
+const formularioRegistroUsuario = document.getElementById(
+    "formularioRegistroUsuario"
+);
+
+const correoRegistroInput = document.getElementById(
+    "correoRegistro"
+);
+
+const contrasenaRegistroInput = document.getElementById(
+    "contrasenaRegistro"
+);
+
+const repetirContrasenaRegistroInput = document.getElementById(
+    "repetirContrasenaRegistro"
+);
+
+const mensajeRegistroUsuario = document.getElementById(
+    "mensajeRegistroUsuario"
+);
+
+const botonCrearUsuario = document.getElementById(
+    "botonCrearUsuario"
+);
+
+const cancelarRegistroUsuario = document.getElementById(
+    "cancelarRegistroUsuario"
+);
+
+const formularioRegistro = document.getElementById(
+    "formularioRegistro"
+);
+
 const fechaInput = document.getElementById("fecha");
 const horasInput = document.getElementById("horas");
 const licenciaInput = document.getElementById("esLicencia");
-const observacionesInput = document.getElementById("observaciones");
-const mesSeleccionadoInput = document.getElementById("mesSeleccionado");
-const mensajeFormulario = document.getElementById("mensajeFormulario");
+
+const observacionesInput = document.getElementById(
+    "observaciones"
+);
+
+const mesSeleccionadoInput = document.getElementById(
+    "mesSeleccionado"
+);
+
+const mensajeFormulario = document.getElementById(
+    "mensajeFormulario"
+);
 
 const tituloMes = document.getElementById("tituloMes");
-const cantidadJornadas = document.getElementById("cantidadJornadas");
+
+const cantidadJornadas = document.getElementById(
+    "cantidadJornadas"
+);
+
 const totalHoras = document.getElementById("totalHoras");
-const contadorRegistros = document.getElementById("contadorRegistros");
-const listaRegistros = document.getElementById("listaRegistros");
+
+const contadorRegistros = document.getElementById(
+    "contadorRegistros"
+);
+
+const listaRegistros = document.getElementById(
+    "listaRegistros"
+);
 
 const panelSaldoLicencia = document.getElementById(
     "panelSaldoLicencia"
@@ -54,29 +110,54 @@ const detalleDiasLicencia = document.getElementById(
     "detalleDiasLicencia"
 );
 
-const botonCerrarMes = document.getElementById("botonCerrarMes");
+const botonCerrarMes = document.getElementById(
+    "botonCerrarMes"
+);
+
 const modalCierre = document.getElementById("modalCierre");
-const formularioCierre = document.getElementById("formularioCierre");
+
+const formularioCierre = document.getElementById(
+    "formularioCierre"
+);
+
 const nombreTrabajadorInput = document.getElementById(
     "nombreTrabajador"
 );
 
-const totalModalCierre = document.getElementById("totalModalCierre");
-const cancelarCierre = document.getElementById("cancelarCierre");
+const totalModalCierre = document.getElementById(
+    "totalModalCierre"
+);
+
+const cancelarCierre = document.getElementById(
+    "cancelarCierre"
+);
 
 const aplicacion = document.getElementById("aplicacion");
 const vistaInforme = document.getElementById("vistaInforme");
 const botonVolver = document.getElementById("botonVolver");
-const botonCompartir = document.getElementById("botonCompartir");
-const botonQR = document.getElementById("botonQR");
-const botonImprimir = document.getElementById("botonImprimir");
-const botonPDF = document.getElementById("botonPDF");
 
+const botonCompartir = document.getElementById(
+    "botonCompartir"
+);
+
+const botonQR = document.getElementById("botonQR");
+
+const botonImprimir = document.getElementById(
+    "botonImprimir"
+);
+
+const botonPDF = document.getElementById("botonPDF");
 const modalQR = document.getElementById("modalQR");
 const codigoQR = document.getElementById("codigoQR");
 const cerrarQR = document.getElementById("cerrarQR");
-const advertenciaQR = document.getElementById("advertenciaQR");
-const notificacion = document.getElementById("notificacion");
+
+const advertenciaQR = document.getElementById(
+    "advertenciaQR"
+);
+
+const notificacion = document.getElementById(
+    "notificacion"
+);
 
 const numerosTexto = {
     cero: 0,
@@ -134,11 +215,17 @@ async function iniciarAplicacion() {
         return;
     }
 
-    fechaInput.value = convertirFechaParaInput(new Date());
-    mesSeleccionadoInput.value = obtenerMesActual();
+    fechaInput.value = convertirFechaParaInput(
+        new Date()
+    );
+
+    mesSeleccionadoInput.value =
+        obtenerMesActual();
 
     nombreTrabajadorInput.value =
-        localStorage.getItem("nombreTrabajador") || "";
+        localStorage.getItem(
+            "nombreTrabajador"
+        ) || "";
 
     try {
         const respuesta =
@@ -176,6 +263,21 @@ function prepararEventos() {
         cerrarSesion
     );
 
+    botonMostrarRegistro.addEventListener(
+        "click",
+        abrirRegistroUsuario
+    );
+
+    cancelarRegistroUsuario.addEventListener(
+        "click",
+        cerrarRegistroUsuario
+    );
+
+    formularioRegistroUsuario.addEventListener(
+        "submit",
+        crearCuentaUsuario
+    );
+
     formularioRegistro.addEventListener(
         "submit",
         guardarRegistro
@@ -194,12 +296,15 @@ function prepararEventos() {
     document
         .querySelectorAll(".boton-microfono")
         .forEach(function (boton) {
-            boton.addEventListener("click", function () {
-                iniciarReconocimientoVoz(
-                    boton.dataset.campo,
-                    boton
-                );
-            });
+            boton.addEventListener(
+                "click",
+                function () {
+                    iniciarReconocimientoVoz(
+                        boton.dataset.campo,
+                        boton
+                    );
+                }
+            );
         });
 
     botonCerrarMes.addEventListener(
@@ -242,28 +347,136 @@ function prepararEventos() {
         compartirInforme
     );
 
-    cerrarQR.addEventListener("click", function () {
-        modalQR.close();
-    });
+    cerrarQR.addEventListener(
+        "click",
+        function () {
+            modalQR.close();
+        }
+    );
+}
+
+function abrirRegistroUsuario() {
+    formularioRegistroUsuario.reset();
+    ocultarMensajeRegistroUsuario();
+
+    modalRegistroUsuario.showModal();
+
+    correoRegistroInput.focus();
+}
+
+function cerrarRegistroUsuario() {
+    modalRegistroUsuario.close();
+}
+
+async function crearCuentaUsuario(evento) {
+    evento.preventDefault();
+
+    const correo =
+        correoRegistroInput.value.trim();
+
+    const contrasena =
+        contrasenaRegistroInput.value;
+
+    const repetirContrasena =
+        repetirContrasenaRegistroInput.value;
+
+    ocultarMensajeRegistroUsuario();
+
+    if (contrasena.length < 8) {
+        mostrarMensajeRegistroUsuario(
+            "La contraseña debe tener al menos 8 caracteres.",
+            true
+        );
+
+        return;
+    }
+
+    if (
+        contrasena !==
+        repetirContrasena
+    ) {
+        mostrarMensajeRegistroUsuario(
+            "Las contraseñas no coinciden.",
+            true
+        );
+
+        return;
+    }
+
+    botonCrearUsuario.disabled = true;
+    botonCrearUsuario.textContent =
+        "Creando...";
+
+    try {
+        const respuesta =
+            await clienteSupabase.auth.signUp({
+                email: correo,
+                password: contrasena,
+
+                options: {
+                    emailRedirectTo:
+                        window.location.origin
+                }
+            });
+
+        if (respuesta.error) {
+            throw respuesta.error;
+        }
+
+        if (respuesta.data.session) {
+            modalRegistroUsuario.close();
+
+            await activarAplicacion(
+                respuesta.data.user
+            );
+
+            mostrarNotificacion(
+                "Cuenta creada correctamente.",
+                false
+            );
+        } else {
+            formularioRegistroUsuario.reset();
+
+            mostrarMensajeRegistroUsuario(
+                "Cuenta creada. Revisá tu correo para confirmarla.",
+                false
+            );
+        }
+    } catch (error) {
+        mostrarMensajeRegistroUsuario(
+            "No se pudo crear la cuenta. Verificá el correo y la contraseña.",
+            true
+        );
+    } finally {
+        botonCrearUsuario.disabled = false;
+
+        botonCrearUsuario.textContent =
+            "Crear cuenta";
+    }
 }
 
 async function iniciarSesion(evento) {
     evento.preventDefault();
 
-    const correo = correoAccesoInput.value.trim();
-    const contrasena = contrasenaAccesoInput.value;
+    const correo =
+        correoAccesoInput.value.trim();
+
+    const contrasena =
+        contrasenaAccesoInput.value;
 
     ocultarMensajeAcceso();
 
     botonAcceder.disabled = true;
-    botonAcceder.textContent = "Ingresando...";
+    botonAcceder.textContent =
+        "Ingresando...";
 
     try {
         const respuesta =
-            await clienteSupabase.auth.signInWithPassword({
-                email: correo,
-                password: contrasena
-            });
+            await clienteSupabase.auth
+                .signInWithPassword({
+                    email: correo,
+                    password: contrasena
+                });
 
         if (respuesta.error) {
             throw respuesta.error;
@@ -281,7 +494,8 @@ async function iniciarSesion(evento) {
         );
     } finally {
         botonAcceder.disabled = false;
-        botonAcceder.textContent = "Ingresar";
+        botonAcceder.textContent =
+            "Ingresar";
     }
 }
 
@@ -336,11 +550,20 @@ async function agregarRegistroBase(registro) {
     const respuesta = await clienteSupabase
         .from("registros_laborales")
         .insert({
-            usuario_id: usuarioActual.id,
-            fecha: registro.fecha,
-            minutos: registro.minutos,
-            observaciones: registro.observaciones,
-            es_licencia: registro.esLicencia
+            usuario_id:
+                usuarioActual.id,
+
+            fecha:
+                registro.fecha,
+
+            minutos:
+                registro.minutos,
+
+            observaciones:
+                registro.observaciones,
+
+            es_licencia:
+                registro.esLicencia
         })
         .select()
         .single();
@@ -359,7 +582,10 @@ async function eliminarRegistroBase(id) {
         .from("registros_laborales")
         .delete()
         .eq("id", id)
-        .eq("usuario_id", usuarioActual.id);
+        .eq(
+            "usuario_id",
+            usuarioActual.id
+        );
 
     if (respuesta.error) {
         throw respuesta.error;
@@ -372,21 +598,32 @@ async function obtenerRegistrosDelMes(mes) {
         .select(
             "id, fecha, minutos, observaciones, es_licencia, creado_en"
         )
-        .eq("usuario_id", usuarioActual.id)
-        .gte("fecha", mes + "-01")
+        .eq(
+            "usuario_id",
+            usuarioActual.id
+        )
+        .gte(
+            "fecha",
+            mes + "-01"
+        )
         .lt(
             "fecha",
             obtenerInicioMesSiguiente(mes)
         )
-        .order("fecha", {
-            ascending: false
-        });
+        .order(
+            "fecha",
+            {
+                ascending: false
+            }
+        );
 
     if (respuesta.error) {
         throw respuesta.error;
     }
 
-    return (respuesta.data || []).map(
+    return (
+        respuesta.data || []
+    ).map(
         convertirRegistroSupabase
     );
 }
@@ -397,13 +634,18 @@ async function obtenerTodosLosRegistros() {
         .select(
             "id, fecha, minutos, observaciones, es_licencia, creado_en"
         )
-        .eq("usuario_id", usuarioActual.id);
+        .eq(
+            "usuario_id",
+            usuarioActual.id
+        );
 
     if (respuesta.error) {
         throw respuesta.error;
     }
 
-    return (respuesta.data || []).map(
+    return (
+        respuesta.data || []
+    ).map(
         convertirRegistroSupabase
     );
 }
@@ -413,16 +655,27 @@ async function guardarCierreBase(cierre) {
         .from("cierres_mensuales")
         .upsert(
             {
-                usuario_id: usuarioActual.id,
-                mes: cierre.mes + "-01",
-                total_minutos: cierre.totalMinutos,
+                usuario_id:
+                    usuarioActual.id,
+
+                mes:
+                    cierre.mes + "-01",
+
+                total_minutos:
+                    cierre.totalMinutos,
+
                 dias_licencia_restantes:
                     cierre.diasLicenciaRestantes,
-                detalle: cierre,
-                creado_en: cierre.fechaCierre
+
+                detalle:
+                    cierre,
+
+                creado_en:
+                    cierre.fechaCierre
             },
             {
-                onConflict: "usuario_id,mes"
+                onConflict:
+                    "usuario_id,mes"
             }
         );
 
@@ -435,8 +688,14 @@ async function obtenerCierreBase(mes) {
     const respuesta = await clienteSupabase
         .from("cierres_mensuales")
         .select("detalle")
-        .eq("usuario_id", usuarioActual.id)
-        .eq("mes", mes + "-01")
+        .eq(
+            "usuario_id",
+            usuarioActual.id
+        )
+        .eq(
+            "mes",
+            mes + "-01"
+        )
         .maybeSingle();
 
     if (respuesta.error) {
@@ -456,13 +715,18 @@ async function guardarConfiguracion(
         .from("configuracion_licencia")
         .upsert(
             {
-                usuario_id: usuarioActual.id,
-                dias_totales: valor,
+                usuario_id:
+                    usuarioActual.id,
+
+                dias_totales:
+                    valor,
+
                 actualizado_en:
                     new Date().toISOString()
             },
             {
-                onConflict: "usuario_id"
+                onConflict:
+                    "usuario_id"
             }
         );
 
@@ -471,11 +735,16 @@ async function guardarConfiguracion(
     }
 }
 
-async function obtenerConfiguracion(clave) {
+async function obtenerConfiguracion(
+    clave
+) {
     const respuesta = await clienteSupabase
         .from("configuracion_licencia")
         .select("dias_totales")
-        .eq("usuario_id", usuarioActual.id)
+        .eq(
+            "usuario_id",
+            usuarioActual.id
+        )
         .maybeSingle();
 
     if (respuesta.error) {
@@ -488,23 +757,39 @@ async function obtenerConfiguracion(clave) {
 
     return {
         clave: clave,
-        valor: respuesta.data.dias_totales
+        valor:
+            respuesta.data.dias_totales
     };
 }
 
 function convertirRegistroSupabase(fila) {
     return {
-        id: fila.id,
-        fecha: fila.fecha,
-        mes: fila.fecha.substring(0, 7),
-        minutos: Number(fila.minutos),
-        observaciones: fila.observaciones || "",
-        esLicencia: fila.es_licencia === true,
-        creadoEn: fila.creado_en
+        id:
+            fila.id,
+
+        fecha:
+            fila.fecha,
+
+        mes:
+            fila.fecha.substring(0, 7),
+
+        minutos:
+            Number(fila.minutos),
+
+        observaciones:
+            fila.observaciones || "",
+
+        esLicencia:
+            fila.es_licencia === true,
+
+        creadoEn:
+            fila.creado_en
     };
 }
 
-async function guardarCantidadLicencia(evento) {
+async function guardarCantidadLicencia(
+    evento
+) {
     evento.preventDefault();
 
     const cantidad = Number(
@@ -554,17 +839,25 @@ async function actualizarSaldoLicencia() {
     const todosLosRegistros =
         await obtenerTodosLosRegistros();
 
-    diasLicenciaTotales = configuracion
-        ? Number(configuracion.valor)
-        : 0;
+    diasLicenciaTotales =
+        configuracion
+            ? Number(
+                configuracion.valor
+            )
+            : 0;
 
-    const fechasDeLicencia = new Set();
+    const fechasDeLicencia =
+        new Set();
 
-    todosLosRegistros.forEach(function (registro) {
-        if (registro.esLicencia) {
-            fechasDeLicencia.add(registro.fecha);
+    todosLosRegistros.forEach(
+        function (registro) {
+            if (registro.esLicencia) {
+                fechasDeLicencia.add(
+                    registro.fecha
+                );
+            }
         }
-    });
+    );
 
     diasLicenciaUsados =
         fechasDeLicencia.size;
@@ -601,7 +894,8 @@ async function actualizarSaldoLicencia() {
 async function guardarRegistro(evento) {
     evento.preventDefault();
 
-    const fecha = fechaInput.value;
+    const fecha =
+        fechaInput.value;
 
     const horasDecimales =
         convertirHorasDecimales(
@@ -667,18 +961,30 @@ async function guardarRegistro(evento) {
         }
 
         const registro = {
-            fecha: fecha,
-            mes: fecha.substring(0, 7),
-            minutos: Math.round(
-                horasDecimales * 60
-            ),
-            observaciones: observaciones,
-            esLicencia: esLicencia,
+            fecha:
+                fecha,
+
+            mes:
+                fecha.substring(0, 7),
+
+            minutos:
+                Math.round(
+                    horasDecimales * 60
+                ),
+
+            observaciones:
+                observaciones,
+
+            esLicencia:
+                esLicencia,
+
             creadoEn:
                 new Date().toISOString()
         };
 
-        await agregarRegistroBase(registro);
+        await agregarRegistroBase(
+            registro
+        );
 
         horasInput.value = "";
         observacionesInput.value = "";
@@ -710,7 +1016,8 @@ async function guardarRegistro(evento) {
 }
 
 async function cargarMesSeleccionado() {
-    const mes = mesSeleccionadoInput.value;
+    const mes =
+        mesSeleccionadoInput.value;
 
     if (!mes || !usuarioActual) {
         return;
@@ -718,19 +1025,24 @@ async function cargarMesSeleccionado() {
 
     try {
         registrosActuales =
-            await obtenerRegistrosDelMes(mes);
+            await obtenerRegistrosDelMes(
+                mes
+            );
 
         cierreActual =
-            await obtenerCierreBase(mes);
+            await obtenerCierreBase(
+                mes
+            );
 
         registrosActuales.sort(
             function (
                 registroA,
                 registroB
             ) {
-                return registroB.fecha.localeCompare(
-                    registroA.fecha
-                );
+                return registroB.fecha
+                    .localeCompare(
+                        registroA.fecha
+                    );
             }
         );
 
@@ -789,9 +1101,12 @@ function renderizarResumen() {
 function renderizarRegistros() {
     listaRegistros.innerHTML = "";
 
-    if (registrosActuales.length === 0) {
+    if (
+        registrosActuales.length === 0
+    ) {
         listaRegistros.innerHTML = `
             <div class="estado-vacio">
+
                 <div class="estado-vacio-icono">
                     🗓
                 </div>
@@ -803,6 +1118,7 @@ function renderizarRegistros() {
                 <p>
                     Agregá tu primera jornada de este mes.
                 </p>
+
             </div>
         `;
 
@@ -861,12 +1177,17 @@ function renderizarRegistros() {
                 registro.observaciones ||
                 "Sin observaciones";
 
-            contenido.appendChild(horas);
+            contenido.appendChild(
+                horas
+            );
+
             contenido.appendChild(
                 observacion
             );
 
-            if (registro.esLicencia) {
+            if (
+                registro.esLicencia
+            ) {
                 const distintivo =
                     document.createElement(
                         "span"
@@ -911,7 +1232,10 @@ function renderizarRegistros() {
                 }
             );
 
-            articulo.appendChild(fecha);
+            articulo.appendChild(
+                fecha
+            );
+
             articulo.appendChild(
                 contenido
             );
@@ -953,7 +1277,9 @@ async function confirmarEliminacion(id) {
 }
 
 function abrirCierre() {
-    if (registrosActuales.length === 0) {
+    if (
+        registrosActuales.length === 0
+    ) {
         return;
     }
 
@@ -1045,7 +1371,9 @@ async function generarCierre(evento) {
     };
 
     try {
-        await guardarCierreBase(cierre);
+        await guardarCierreBase(
+            cierre
+        );
 
         cierreActual = cierre;
 
@@ -1070,16 +1398,21 @@ function mostrarInforme(
     cierreActual = cierre;
 
     enlaceInformeActual =
-        crearEnlaceInforme(cierre);
+        crearEnlaceInforme(
+            cierre
+        );
 
     document.getElementById(
         "informeTrabajador"
-    ).textContent = cierre.trabajador;
+    ).textContent =
+        cierre.trabajador;
 
     document.getElementById(
         "informePeriodo"
     ).textContent =
-        obtenerNombreMes(cierre.mes);
+        obtenerNombreMes(
+            cierre.mes
+        );
 
     document.getElementById(
         "informeFechaCierre"
@@ -1136,7 +1469,9 @@ function mostrarInforme(
                     "tr"
                 );
 
-            if (registro.esLicencia) {
+            if (
+                registro.esLicencia
+            ) {
                 fila.classList.add(
                     "fila-licencia"
                 );
@@ -1209,14 +1544,21 @@ function descargarPDF() {
     html2pdf()
         .set({
             margin: 8,
+
             filename:
                 "registro-laboral-" +
                 cierreActual.mes +
                 ".pdf",
 
             pagebreak: {
-                mode: ["css", "legacy"],
-                avoid: [".tabla-informe tr"]
+                mode: [
+                    "css",
+                    "legacy"
+                ],
+
+                avoid: [
+                    ".tabla-informe tr"
+                ]
             },
 
             html2canvas: {
@@ -1245,15 +1587,28 @@ function mostrarCodigoQR() {
     codigoQR.innerHTML = "";
 
     try {
-        new QRCode(codigoQR, {
-            text: enlaceInformeActual,
-            width: 220,
-            height: 220,
-            colorDark: "#173734",
-            colorLight: "#ffffff",
-            correctLevel:
-                QRCode.CorrectLevel.L
-        });
+        new QRCode(
+            codigoQR,
+            {
+                text:
+                    enlaceInformeActual,
+
+                width:
+                    220,
+
+                height:
+                    220,
+
+                colorDark:
+                    "#173734",
+
+                colorLight:
+                    "#ffffff",
+
+                correctLevel:
+                    QRCode.CorrectLevel.L
+            }
+        );
 
         advertenciaQR.textContent =
             window.location.protocol ===
@@ -1298,7 +1653,10 @@ async function compartirInforme() {
             "noopener,noreferrer"
         );
     } catch (error) {
-        if (error.name !== "AbortError") {
+        if (
+            error.name !==
+            "AbortError"
+        ) {
             mostrarNotificacion(
                 "No se pudo compartir el informe.",
                 true
@@ -1309,9 +1667,10 @@ async function compartirInforme() {
 
 function crearEnlaceInforme(cierre) {
     const comprimido =
-        LZString.compressToEncodedURIComponent(
-            JSON.stringify(cierre)
-        );
+        LZString
+            .compressToEncodedURIComponent(
+                JSON.stringify(cierre)
+            );
 
     return (
         window.location.href.split(
@@ -1338,9 +1697,10 @@ function cargarInformeDesdeEnlace() {
             );
 
         const texto =
-            LZString.decompressFromEncodedURIComponent(
-                contenido
-            );
+            LZString
+                .decompressFromEncodedURIComponent(
+                    contenido
+                );
 
         const cierre =
             JSON.parse(texto);
@@ -1390,8 +1750,11 @@ function iniciarReconocimientoVoz(
     const reconocimiento =
         new ConstructorReconocimiento();
 
-    reconocimiento.lang = "es-UY";
-    reconocimientoActivo = reconocimiento;
+    reconocimiento.lang =
+        "es-UY";
+
+    reconocimientoActivo =
+        reconocimiento;
 
     boton.classList.add(
         "escuchando"
@@ -1454,7 +1817,8 @@ function procesarTextoReconocido(
             );
 
         if (fecha) {
-            fechaInput.value = fecha;
+            fechaInput.value =
+                fecha;
         }
     }
 
@@ -1476,10 +1840,11 @@ function interpretarHorasDictadas(
     texto
 ) {
     const limpio =
-        limpiarTexto(texto).replace(
-            ",",
-            "."
-        );
+        limpiarTexto(texto)
+            .replace(
+                ",",
+                "."
+            );
 
     const numero =
         limpio.match(
@@ -1487,17 +1852,21 @@ function interpretarHorasDictadas(
         );
 
     if (numero) {
-        return Number(numero[0]);
+        return Number(
+            numero[0]
+        );
     }
 
     const palabra =
         Object.keys(
             numerosTexto
-        ).find(function (clave) {
-            return limpio.includes(
-                clave
-            );
-        });
+        ).find(
+            function (clave) {
+                return limpio.includes(
+                    clave
+                );
+            }
+        );
 
     if (!palabra) {
         return null;
@@ -1506,7 +1875,9 @@ function interpretarHorasDictadas(
     let resultado =
         numerosTexto[palabra];
 
-    if (limpio.includes("media")) {
+    if (
+        limpio.includes("media")
+    ) {
         resultado += 0.5;
     }
 
@@ -1519,15 +1890,20 @@ function interpretarFechaDictada(
     const limpio =
         limpiarTexto(texto);
 
-    const fecha = new Date();
+    const fecha =
+        new Date();
 
-    if (limpio.includes("hoy")) {
+    if (
+        limpio.includes("hoy")
+    ) {
         return convertirFechaParaInput(
             fecha
         );
     }
 
-    if (limpio.includes("ayer")) {
+    if (
+        limpio.includes("ayer")
+    ) {
         fecha.setDate(
             fecha.getDate() - 1
         );
@@ -1567,7 +1943,9 @@ function interpretarFechaDictada(
             coincidencia[2]
         ];
 
-    if (numeroMes === undefined) {
+    if (
+        numeroMes === undefined
+    ) {
         return null;
     }
 
@@ -1576,7 +1954,8 @@ function interpretarFechaDictada(
             ? Number(
                 coincidencia[3]
             )
-            : new Date().getFullYear();
+            : new Date()
+                .getFullYear();
 
     const fechaInterpretada =
         new Date(
@@ -1609,7 +1988,10 @@ function convertirHorasDecimales(
     const numero = Number(
         valor
             .trim()
-            .replace(",", ".")
+            .replace(
+                ",",
+                "."
+            )
     );
 
     if (
@@ -1644,7 +2026,9 @@ function calcularTotalMinutos(
 
 function mostrarHoras(minutos) {
     const horas =
-        Math.floor(minutos / 60);
+        Math.floor(
+            minutos / 60
+        );
 
     const resto =
         minutos % 60;
@@ -1661,9 +2045,14 @@ function mostrarFecha(fechaTexto) {
     return new Intl.DateTimeFormat(
         "es-UY",
         {
-            weekday: "short",
-            day: "2-digit",
-            month: "short"
+            weekday:
+                "short",
+
+            day:
+                "2-digit",
+
+            month:
+                "short"
         }
     ).format(
         new Date(
@@ -1679,10 +2068,17 @@ function mostrarFechaCompleta(
     return new Intl.DateTimeFormat(
         "es-UY",
         {
-            weekday: "long",
-            day: "2-digit",
-            month: "long",
-            year: "numeric"
+            weekday:
+                "long",
+
+            day:
+                "2-digit",
+
+            month:
+                "long",
+
+            year:
+                "numeric"
         }
     ).format(
         new Date(
@@ -1698,11 +2094,20 @@ function formatearFechaHora(
     return new Intl.DateTimeFormat(
         "es-UY",
         {
-            day: "2-digit",
-            month: "2-digit",
-            year: "numeric",
-            hour: "2-digit",
-            minute: "2-digit"
+            day:
+                "2-digit",
+
+            month:
+                "2-digit",
+
+            year:
+                "numeric",
+
+            hour:
+                "2-digit",
+
+            minute:
+                "2-digit"
         }
     ).format(
         new Date(fechaTexto)
@@ -1718,13 +2123,22 @@ function obtenerNombreMes(
     return new Intl.DateTimeFormat(
         "es-UY",
         {
-            month: "long",
-            year: "numeric"
+            month:
+                "long",
+
+            year:
+                "numeric"
         }
     ).format(
         new Date(
-            Number(partes[0]),
-            Number(partes[1]) - 1,
+            Number(
+                partes[0]
+            ),
+
+            Number(
+                partes[1]
+            ) - 1,
+
             1
         )
     );
@@ -1738,18 +2152,27 @@ function convertirFechaParaInput(
         "-" +
         String(
             fecha.getMonth() + 1
-        ).padStart(2, "0") +
+        ).padStart(
+            2,
+            "0"
+        ) +
         "-" +
         String(
             fecha.getDate()
-        ).padStart(2, "0")
+        ).padStart(
+            2,
+            "0"
+        )
     );
 }
 
 function obtenerMesActual() {
     return convertirFechaParaInput(
         new Date()
-    ).substring(0, 7);
+    ).substring(
+        0,
+        7
+    );
 }
 
 function obtenerInicioMesSiguiente(
@@ -1793,11 +2216,19 @@ function limpiarTexto(texto) {
 }
 
 function generarIdentificador() {
-    if (crypto.randomUUID) {
+    if (
+        crypto.randomUUID
+    ) {
         return crypto
             .randomUUID()
-            .replaceAll("-", "")
-            .substring(0, 16)
+            .replaceAll(
+                "-",
+                ""
+            )
+            .substring(
+                0,
+                16
+            )
             .toUpperCase();
     }
 
@@ -1807,7 +2238,10 @@ function generarIdentificador() {
             .toString(16)
             .substring(2)
     )
-        .substring(0, 16)
+        .substring(
+            0,
+            16
+        )
         .toUpperCase();
 }
 
@@ -1817,7 +2251,8 @@ function escaparHTML(texto) {
             "div"
         );
 
-    elemento.textContent = texto;
+    elemento.textContent =
+        texto;
 
     return elemento.innerHTML;
 }
@@ -1826,7 +2261,8 @@ function mostrarMensajeAcceso(
     texto,
     esError
 ) {
-    mensajeAcceso.textContent = texto;
+    mensajeAcceso.textContent =
+        texto;
 
     mensajeAcceso.classList.add(
         "visible"
@@ -1842,6 +2278,33 @@ function ocultarMensajeAcceso() {
     mensajeAcceso.textContent = "";
 
     mensajeAcceso.classList.remove(
+        "visible",
+        "error"
+    );
+}
+
+function mostrarMensajeRegistroUsuario(
+    texto,
+    esError
+) {
+    mensajeRegistroUsuario.textContent =
+        texto;
+
+    mensajeRegistroUsuario.classList.add(
+        "visible"
+    );
+
+    mensajeRegistroUsuario.classList.toggle(
+        "error",
+        esError
+    );
+}
+
+function ocultarMensajeRegistroUsuario() {
+    mensajeRegistroUsuario.textContent =
+        "";
+
+    mensajeRegistroUsuario.classList.remove(
         "visible",
         "error"
     );
@@ -1878,7 +2341,8 @@ function mostrarNotificacion(
     texto,
     esError
 ) {
-    notificacion.textContent = texto;
+    notificacion.textContent =
+        texto;
 
     notificacion.classList.toggle(
         "error",
@@ -1889,9 +2353,12 @@ function mostrarNotificacion(
         "visible"
     );
 
-    setTimeout(function () {
-        notificacion.classList.remove(
-            "visible"
-        );
-    }, 3200);
+    setTimeout(
+        function () {
+            notificacion.classList.remove(
+                "visible"
+            );
+        },
+        3200
+    );
 }
