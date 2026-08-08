@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Registro Laboral</title>
+
+    <link rel="stylesheet" href="estilo.css">
+
+    <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/lz-string@1.5.0/libs/lz-string.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/html2pdf.js@0.10.2/dist/html2pdf.bundle.min.js"></script>
+    <script defer src="funcion.js"></script>
+</head>
+
+<body>
+
+    <section id="vistaAcceso" class="vista-acceso">
+
+        <form id="formularioAcceso" class="tarjeta-acceso">
+
+            <div class="marca marca-acceso">
+
+                <div class="marca-icono">⏱</div>
+
+                <div>
+                    <h1>Registro Laboral</h1>
+                    <p>Control personal de horas</p>
+                </div>
+
+            </div>
+
+            <div class="encabezado-acceso">
+                <p class="etiqueta">ACCESO PERSONAL</p>
+                <h2>Iniciar sesión</h2>
+                <p>Ingresá con el usuario creado en Supabase.</p>
+            </div>
+
+            <div class="campo">
+
+                <label for="correoAcceso">Correo electrónico</label>
+
+                <input type="email" id="correoAcceso" autocomplete="username" required>
+
+            </div>
+
+            <div class="campo">
+
+                <label for="contrasenaAcceso">Contraseña</label>
+
+                <input type="password" id="contrasenaAcceso" autocomplete="current-password" required>
+
+            </div>
+
+            <p id="mensajeAcceso" class="mensaje" aria-live="polite"></p>
+
+            <button type="submit" id="botonAcceder" class="boton boton-principal boton-completo">
+                Ingresar
+            </button>
+
+        </form>
+
+    </section>
+
+    <main id="aplicacion" class="oculto">
+
+        <header class="cabecera">
+
+            <div class="contenedor cabecera-contenido">
+
+                <div class="marca">
+
+                    <div class="marca-icono">⏱</div>
+
+                    <div>
+                        <h1>Registro Laboral</h1>
+                        <p>Control personal de horas</p>
+                    </div>
+
+                </div>
+
+                <div class="cabecera-acciones">
+
+                    <div class="indicador-base">
+                        <span></span>
+                        Supabase conectado
+                    </div>
+
+                    <div class="sesion-usuario">
+
+                        <span id="correoUsuario"></span>
+
+                        <button type="button" id="botonCerrarSesion" class="boton-salir">
+                            Salir
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+        <div class="contenedor contenido-principal">
+
+            <section class="resumen-mensual">
+
+                <div>
+                    <p class="etiqueta">RESUMEN DEL PERÍODO</p>
+                    <h2 id="tituloMes">Mes actual</h2>
+                    <p id="cantidadJornadas">0 jornadas registradas</p>
+                </div>
+
+                <div class="selector-mes">
+
+                    <label for="mesSeleccionado">Consultar mes</label>
+
+                    <input type="month" id="mesSeleccionado">
+
+                </div>
+
+                <div class="total-mes">
+
+                    <span>Total acumulado</span>
+
+                    <strong id="totalHoras">0 h</strong>
+
+                </div>
+
+            </section>
+
+            <section id="panelSaldoLicencia" class="panel-saldo-licencia">
+
+                <div class="saldo-licencia-informacion">
+
+                    <div class="saldo-licencia-icono">☂</div>
+
+                    <div>
+
+                        <p class="etiqueta">SALDO DE LICENCIA</p>
+
+                        <strong id="diasLicenciaRestantes">
+                            0 días disponibles
+                        </strong>
+
+                        <small id="detalleDiasLicencia">
+                            Configurá la cantidad total de días.
+                        </small>
+
+                    </div>
+
+                </div>
+
+                <form id="formularioDiasLicencia" class="formulario-dias-licencia">
+
+                    <div>
+
+                        <label for="diasLicenciaTotales">Cantidad total</label>
+
+                        <input type="number" id="diasLicenciaTotales" min="0" step="1" required>
+
+                    </div>
+
+                    <button type="submit" class="boton boton-secundario">
+                        Guardar
+                    </button>
+
+                </form>
+
+            </section>
+
+            <div class="grilla-principal">
+
+                <section class="tarjeta tarjeta-formulario">
+
+                    <div class="encabezado-tarjeta">
+
+                        <div class="encabezado-icono">＋</div>
+
+                        <div>
+                            <p class="etiqueta">NUEVA JORNADA</p>
+                            <h2>Registrar horas</h2>
+                        </div>
+
+                    </div>
+
+                    <form id="formularioRegistro">
+
+                        <div class="campo">
+
+                            <label for="fecha">Fecha</label>
+
+                            <div class="entrada-con-boton">
+
+                                <input type="date" id="fecha" required>
+
+                                <button type="button" class="boton-microfono" data-campo="fecha"
+                                    aria-label="Ingresar fecha por voz" title="Ingresar fecha por voz">
+                                    🎙
+                                </button>
+
+                            </div>
+
+                            <small>Podés decir “hoy”, “ayer” o “7 de agosto”.</small>
+
+                        </div>
+
+                        <div class="campo">
+
+                            <label for="horas">Horas trabajadas</label>
+
+                            <div class="entrada-con-boton">
+
+                                <input type="text" id="horas" inputmode="decimal"
+                                    placeholder="Ejemplo: 6,5" maxlength="5" required>
+
+                                <button type="button" class="boton-microfono" data-campo="horas"
+                                    aria-label="Ingresar horas por voz" title="Ingresar horas por voz">
+                                    🎙
+                                </button>
+
+                            </div>
+
+                            <small>Acepta 6,5 o frases como “seis horas y media”.</small>
+
+                        </div>
+
+                        <div class="campo campo-licencia">
+
+                            <div>
+
+                                <label for="esLicencia">Día de licencia</label>
+
+                                <small>Descontará un día del saldo disponible.</small>
+
+                            </div>
+
+                            <label class="interruptor">
+
+                                <input type="checkbox" id="esLicencia">
+
+                                <span class="deslizador"></span>
+
+                            </label>
+
+                        </div>
+
+                        <div class="campo">
+
+                            <label for="observaciones">Observaciones</label>
+
+                            <div class="entrada-con-boton entrada-textarea">
+
+                                <textarea id="observaciones" rows="4" maxlength="500"
+                                    placeholder="Tareas realizadas, traslados, horarios especiales..."></textarea>
+
+                                <button type="button" class="boton-microfono"
+                                    data-campo="observaciones"
+                                    aria-label="Ingresar observaciones por voz"
+                                    title="Ingresar observaciones por voz">
+                                    🎙
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                        <p id="mensajeFormulario" class="mensaje" aria-live="polite"></p>
+
+                        <button type="submit" class="boton boton-principal boton-completo">
+                            ＋ Guardar jornada
+                        </button>
+
+                    </form>
+
+                </section>
+
+                <section class="tarjeta tarjeta-registros">
+
+                    <div class="encabezado-listado">
+
+                        <div>
+                            <p class="etiqueta">DETALLE DEL MES</p>
+                            <h2>Jornadas registradas</h2>
+                        </div>
+
+                        <span id="contadorRegistros" class="contador">0</span>
+
+                    </div>
+
+                    <div id="listaRegistros" class="lista-registros"></div>
+
+                    <div class="acciones-mes">
+
+                        <button type="button" id="botonCerrarMes"
+                            class="boton boton-secundario">
+                            ✓ Pasar raya
+                        </button>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <section id="vistaInforme" class="vista-informe oculto">
+
+        <div class="acciones-informe no-imprimir">
+
+            <button type="button" id="botonVolver" class="boton boton-claro">
+                ← Volver
+            </button>
+
+            <button type="button" id="botonCompartir" class="boton boton-secundario">
+                Compartir
+            </button>
+
+            <button type="button" id="botonQR" class="boton boton-secundario">
+                Código QR
+            </button>
+
+            <button type="button" id="botonImprimir" class="boton boton-secundario">
+                Imprimir
+            </button>
+
+            <button type="button" id="botonPDF" class="boton boton-principal">
+                Descargar PDF
+            </button>
+
+        </div>
+
+        <article id="informeImprimible" class="informe">
+
+            <header class="informe-cabecera">
+
+                <div class="informe-marca">
+
+                    <div class="marca-icono">⏱</div>
+
+                    <div>
+                        <p>REGISTRO LABORAL</p>
+                        <h1>Informe mensual de horas</h1>
+                    </div>
+
+                </div>
+
+                <div class="estado-cierre">
+                    CIERRE REALIZADO
+                </div>
+
+            </header>
+
+            <section class="informacion-informe">
+
+                <div>
+                    <span>Trabajador</span>
+                    <strong id="informeTrabajador"></strong>
+                </div>
+
+                <div>
+                    <span>Período</span>
+                    <strong id="informePeriodo"></strong>
+                </div>
+
+                <div>
+                    <span>Fecha de cierre</span>
+                    <strong id="informeFechaCierre"></strong>
+                </div>
+
+                <div class="dato-licencia-informe">
+                    <span>Días de licencia restantes</span>
+                    <strong id="informeLicenciaRestante"></strong>
+                </div>
+
+            </section>
+
+            <section class="total-informe">
+
+                <span>Total de horas trabajadas</span>
+
+                <strong id="informeTotal"></strong>
+
+            </section>
+
+            <div class="tabla-contenedor">
+
+                <table class="tabla-informe">
+
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Horas</th>
+                            <th>Observaciones</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="cuerpoInforme"></tbody>
+
+                </table>
+
+            </div>
+
+            <footer class="informe-pie">
+
+                <p>
+                    Documento generado automáticamente por Registro Laboral.
+                </p>
+
+                <p id="identificadorInforme"></p>
+
+            </footer>
+
+        </article>
+
+    </section>
+
+    <dialog id="modalCierre" class="modal">
+
+        <form id="formularioCierre" method="dialog">
+
+            <p class="etiqueta">CIERRE DEL PERÍODO</p>
+
+            <h2>Pasar raya</h2>
+
+            <p class="texto-modal">
+                Se generará un informe con todas las jornadas del mes seleccionado.
+            </p>
+
+            <div class="campo">
+
+                <label for="nombreTrabajador">Nombre del trabajador</label>
+
+                <input type="text" id="nombreTrabajador" maxlength="100"
+                    placeholder="Ingresá tu nombre completo" required>
+
+            </div>
+
+            <div class="resumen-cierre">
+
+                <span>Total del período</span>
+
+                <strong id="totalModalCierre">0 h</strong>
+
+            </div>
+
+            <div class="acciones-modal">
+
+                <button type="button" id="cancelarCierre" class="boton boton-claro">
+                    Cancelar
+                </button>
+
+                <button type="submit" class="boton boton-principal">
+                    Generar informe
+                </button>
+
+            </div>
+
+        </form>
+
+    </dialog>
+
+    <dialog id="modalQR" class="modal modal-qr">
+
+        <div>
+
+            <p class="etiqueta">INFORME COMPARTIBLE</p>
+
+            <h2>Código QR</h2>
+
+            <p class="texto-modal">
+                Escaneá este código para abrir el informe desde otro dispositivo.
+            </p>
+
+            <div id="codigoQR"></div>
+
+            <p id="advertenciaQR" class="advertencia-qr"></p>
+
+            <button type="button" id="cerrarQR"
+                class="boton boton-principal boton-completo">
+                Cerrar
+            </button>
+
+        </div>
+
+    </dialog>
+
+    <div id="notificacion" class="notificacion" aria-live="polite"></div>
+
+</body>
+
+</html>
