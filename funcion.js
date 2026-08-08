@@ -1209,11 +1209,15 @@ function descargarPDF() {
     html2pdf()
         .set({
             margin: 8,
-
             filename:
                 "registro-laboral-" +
                 cierreActual.mes +
                 ".pdf",
+
+            pagebreak: {
+                mode: ["css", "legacy"],
+                avoid: [".tabla-informe tr"]
+            },
 
             html2canvas: {
                 scale: 2

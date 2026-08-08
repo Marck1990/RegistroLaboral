@@ -1105,3 +1105,14 @@ button {
         padding: 0;
     }
 }
+
+
+/* salto de pagina adecuadoi */
+.tabla-informe thead {
+    display: table-header-group;
+}
+
+.tabla-informe tr {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+}
