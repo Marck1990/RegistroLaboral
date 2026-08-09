@@ -36,40 +36,56 @@
             <div class="encabezado-acceso">
 
                 <p class="etiqueta">ACCESO PERSONAL</p>
-
                 <h2>Iniciar sesión</h2>
-
                 <p>Ingresá con tu usuario registrado.</p>
 
             </div>
 
             <div class="campo">
 
-                <label for="correoAcceso">Correo electrónico</label>
+                <label for="correoAcceso">
+                    Correo electrónico
+                </label>
 
-                <input type="email" id="correoAcceso" autocomplete="username" required>
+                <input type="email"
+                    id="correoAcceso"
+                    autocomplete="username"
+                    required>
 
             </div>
 
             <div class="campo">
 
-                <label for="contrasenaAcceso">Contraseña</label>
+                <label for="contrasenaAcceso">
+                    Contraseña
+                </label>
 
-                <input type="password" id="contrasenaAcceso" autocomplete="current-password" required>
+                <input type="password"
+                    id="contrasenaAcceso"
+                    autocomplete="current-password"
+                    required>
 
             </div>
 
-            <p id="mensajeAcceso" class="mensaje" aria-live="polite"></p>
+            <p id="mensajeAcceso"
+                class="mensaje"
+                aria-live="polite"></p>
 
-            <button type="submit" id="botonAcceder" class="boton boton-principal boton-completo">
+            <button type="submit"
+                id="botonAcceder"
+                class="boton boton-principal boton-completo">
                 Ingresar
             </button>
 
             <div class="alternativa-acceso">
 
-                <span>¿Todavía no tenés una cuenta?</span>
+                <span>
+                    ¿Todavía no tenés una cuenta?
+                </span>
 
-                <button type="button" id="botonMostrarRegistro" class="boton-enlace">
+                <button type="button"
+                    id="botonMostrarRegistro"
+                    class="boton-enlace">
                     Crear usuario
                 </button>
 
@@ -87,7 +103,9 @@
 
                 <div class="marca">
 
-                    <div class="marca-icono">⏱</div>
+                    <div class="marca-icono">
+                        ⏱
+                    </div>
 
                     <div>
                         <h1>Registro Laboral</h1>
@@ -98,16 +116,48 @@
 
                 <div class="cabecera-acciones">
 
+                    <div id="selectorRolAdministrador"
+                        class="selector-rol oculto">
+
+                        <span id="textoRolActual">
+                            Modo usuario
+                        </span>
+
+                        <div class="control-rol">
+
+                            <span>Usuario</span>
+
+                            <label class="interruptor-rol">
+
+                                <input type="checkbox"
+                                    id="cambiarRolAdministrador"
+                                    aria-label="Cambiar entre modo usuario y administrador">
+
+                                <span class="deslizador-rol"></span>
+
+                            </label>
+
+                            <span>Administrador</span>
+
+                        </div>
+
+                    </div>
+
                     <div class="indicador-base">
+
                         <span></span>
+
                         Supabase conectado
+
                     </div>
 
                     <div class="sesion-usuario">
 
                         <span id="correoUsuario"></span>
 
-                        <button type="button" id="botonCerrarSesion" class="boton-salir">
+                        <button type="button"
+                            id="botonCerrarSesion"
+                            class="boton-salir">
                             Salir
                         </button>
 
@@ -119,15 +169,20 @@
 
         </header>
 
-        <div class="contenedor contenido-principal">
+        <div id="contenidoUsuario"
+            class="contenedor contenido-principal">
 
             <section class="resumen-mensual">
 
                 <div>
 
-                    <p class="etiqueta">RESUMEN DEL PERÍODO</p>
+                    <p class="etiqueta">
+                        RESUMEN DEL PERÍODO
+                    </p>
 
-                    <h2 id="tituloMes">Mes actual</h2>
+                    <h2 id="tituloMes">
+                        Mes actual
+                    </h2>
 
                     <p id="cantidadJornadas">
                         0 jornadas registradas
@@ -141,7 +196,8 @@
                         Consultar mes
                     </label>
 
-                    <input type="month" id="mesSeleccionado">
+                    <input type="month"
+                        id="mesSeleccionado">
 
                 </div>
 
@@ -149,17 +205,22 @@
 
                     <span>Total acumulado</span>
 
-                    <strong id="totalHoras">0 h</strong>
+                    <strong id="totalHoras">
+                        0 h
+                    </strong>
 
                 </div>
 
             </section>
 
-            <section id="panelSaldoLicencia" class="panel-saldo-licencia">
+            <section id="panelSaldoLicencia"
+                class="panel-saldo-licencia">
 
                 <div class="saldo-licencia-informacion">
 
-                    <div class="saldo-licencia-icono">☂</div>
+                    <div class="saldo-licencia-icono">
+                        ☂
+                    </div>
 
                     <div>
 
@@ -179,7 +240,8 @@
 
                 </div>
 
-                <form id="formularioDiasLicencia" class="formulario-dias-licencia">
+                <form id="formularioDiasLicencia"
+                    class="formulario-dias-licencia">
 
                     <div>
 
@@ -187,11 +249,16 @@
                             Cantidad total
                         </label>
 
-                        <input type="number" id="diasLicenciaTotales" min="0" step="1" required>
+                        <input type="number"
+                            id="diasLicenciaTotales"
+                            min="0"
+                            step="1"
+                            required>
 
                     </div>
 
-                    <button type="submit" class="boton boton-secundario">
+                    <button type="submit"
+                        class="boton boton-secundario">
                         Guardar
                     </button>
 
@@ -205,7 +272,9 @@
 
                     <div class="encabezado-tarjeta">
 
-                        <div class="encabezado-icono">＋</div>
+                        <div class="encabezado-icono">
+                            ＋
+                        </div>
 
                         <div>
 
@@ -229,10 +298,15 @@
 
                             <div class="entrada-con-boton">
 
-                                <input type="date" id="fecha" required>
+                                <input type="date"
+                                    id="fecha"
+                                    required>
 
-                                <button type="button" class="boton-microfono" data-campo="fecha"
-                                    aria-label="Ingresar fecha por voz" title="Ingresar fecha por voz">
+                                <button type="button"
+                                    class="boton-microfono"
+                                    data-campo="fecha"
+                                    aria-label="Ingresar fecha por voz"
+                                    title="Ingresar fecha por voz">
                                     🎙
                                 </button>
 
@@ -252,11 +326,18 @@
 
                             <div class="entrada-con-boton">
 
-                                <input type="text" id="horas" inputmode="decimal"
-                                    placeholder="Ejemplo: 6,5" maxlength="5" required>
+                                <input type="text"
+                                    id="horas"
+                                    inputmode="decimal"
+                                    placeholder="Ejemplo: 6,5"
+                                    maxlength="5"
+                                    required>
 
-                                <button type="button" class="boton-microfono" data-campo="horas"
-                                    aria-label="Ingresar horas por voz" title="Ingresar horas por voz">
+                                <button type="button"
+                                    class="boton-microfono"
+                                    data-campo="horas"
+                                    aria-label="Ingresar horas por voz"
+                                    title="Ingresar horas por voz">
                                     🎙
                                 </button>
 
@@ -284,7 +365,8 @@
 
                             <label class="interruptor">
 
-                                <input type="checkbox" id="esLicencia">
+                                <input type="checkbox"
+                                    id="esLicencia">
 
                                 <span class="deslizador"></span>
 
@@ -300,10 +382,13 @@
 
                             <div class="entrada-con-boton entrada-textarea">
 
-                                <textarea id="observaciones" rows="4" maxlength="500"
+                                <textarea id="observaciones"
+                                    rows="4"
+                                    maxlength="500"
                                     placeholder="Tareas realizadas, traslados, horarios especiales..."></textarea>
 
-                                <button type="button" class="boton-microfono"
+                                <button type="button"
+                                    class="boton-microfono"
                                     data-campo="observaciones"
                                     aria-label="Ingresar observaciones por voz"
                                     title="Ingresar observaciones por voz">
@@ -314,9 +399,12 @@
 
                         </div>
 
-                        <p id="mensajeFormulario" class="mensaje" aria-live="polite"></p>
+                        <p id="mensajeFormulario"
+                            class="mensaje"
+                            aria-live="polite"></p>
 
-                        <button type="submit" class="boton boton-principal boton-completo">
+                        <button type="submit"
+                            class="boton boton-principal boton-completo">
                             ＋ Guardar jornada
                         </button>
 
@@ -334,21 +422,27 @@
                                 DETALLE DEL MES
                             </p>
 
-                            <h2>Jornadas registradas</h2>
+                            <h2>
+                                Jornadas registradas
+                            </h2>
 
                         </div>
 
-                        <span id="contadorRegistros" class="contador">
+                        <span id="contadorRegistros"
+                            class="contador">
                             0
                         </span>
 
                     </div>
 
-                    <div id="listaRegistros" class="lista-registros"></div>
+                    <div id="listaRegistros"
+                        class="lista-registros"></div>
 
                     <div class="acciones-mes">
 
-                        <button type="button" id="botonCerrarMes" class="boton boton-secundario">
+                        <button type="button"
+                            id="botonCerrarMes"
+                            class="boton boton-secundario">
                             ✓ Pasar raya
                         </button>
 
@@ -360,47 +454,129 @@
 
         </div>
 
+        <section id="panelAdministrador"
+            class="contenedor panel-administrador oculto">
+
+            <div class="encabezado-administrador">
+
+                <div>
+
+                    <p class="etiqueta">
+                        ADMINISTRACIÓN
+                    </p>
+
+                    <h2>
+                        Usuarios registrados
+                    </h2>
+
+                    <p>
+                        Gestioná el acceso de las cuentas de Registro Laboral.
+                    </p>
+
+                </div>
+
+                <span id="contadorUsuariosAdministrador"
+                    class="contador">
+                    0
+                </span>
+
+            </div>
+
+            <div class="buscador-usuarios">
+
+                <label for="buscarUsuario">
+                    Buscar por correo
+                </label>
+
+                <input type="search"
+                    id="buscarUsuario"
+                    placeholder="Escribí parte del correo..."
+                    autocomplete="off">
+
+            </div>
+
+            <p id="mensajeAdministrador"
+                class="mensaje"
+                aria-live="polite"></p>
+
+            <div id="listaUsuariosAdministrador"
+                class="lista-usuarios-administrador">
+
+                <div class="estado-vacio">
+
+                    <div class="estado-vacio-icono">
+                        👥
+                    </div>
+
+                    <h3>Cargando usuarios</h3>
+
+                    <p>
+                        La lista aparecerá en este espacio.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
     </main>
 
-    <section id="vistaInforme" class="vista-informe oculto">
+    <section id="vistaInforme"
+        class="vista-informe oculto">
 
         <div class="acciones-informe no-imprimir">
 
-            <button type="button" id="botonVolver" class="boton boton-claro">
+            <button type="button"
+                id="botonVolver"
+                class="boton boton-claro">
                 ← Volver
             </button>
 
-            <button type="button" id="botonCompartir" class="boton boton-secundario">
+            <button type="button"
+                id="botonCompartir"
+                class="boton boton-secundario">
                 Compartir
             </button>
 
-            <button type="button" id="botonQR" class="boton boton-secundario">
+            <button type="button"
+                id="botonQR"
+                class="boton boton-secundario">
                 Código QR
             </button>
 
-            <button type="button" id="botonImprimir" class="boton boton-secundario">
+            <button type="button"
+                id="botonImprimir"
+                class="boton boton-secundario">
                 Imprimir
             </button>
 
-            <button type="button" id="botonPDF" class="boton boton-principal">
+            <button type="button"
+                id="botonPDF"
+                class="boton boton-principal">
                 Descargar PDF
             </button>
 
         </div>
 
-        <article id="informeImprimible" class="informe">
+        <article id="informeImprimible"
+            class="informe">
 
             <header class="informe-cabecera">
 
                 <div class="informe-marca">
 
-                    <div class="marca-icono">⏱</div>
+                    <div class="marca-icono">
+                        ⏱
+                    </div>
 
                     <div>
 
                         <p>REGISTRO LABORAL</p>
 
-                        <h1>Informe mensual de horas</h1>
+                        <h1>
+                            Informe mensual de horas
+                        </h1>
 
                     </div>
 
@@ -440,7 +616,9 @@
 
                 <div class="dato-licencia-informe">
 
-                    <span>Días de licencia restantes</span>
+                    <span>
+                        Días de licencia restantes
+                    </span>
 
                     <strong id="informeLicenciaRestante"></strong>
 
@@ -450,7 +628,9 @@
 
             <section class="total-informe">
 
-                <span>Total de horas trabajadas</span>
+                <span>
+                    Total de horas trabajadas
+                </span>
 
                 <strong id="informeTotal"></strong>
 
@@ -490,7 +670,8 @@
 
     </section>
 
-    <dialog id="modalRegistroUsuario" class="modal">
+    <dialog id="modalRegistroUsuario"
+        class="modal">
 
         <form id="formularioRegistroUsuario">
 
@@ -510,7 +691,10 @@
                     Correo electrónico
                 </label>
 
-                <input type="email" id="correoRegistro" autocomplete="email" required>
+                <input type="email"
+                    id="correoRegistro"
+                    autocomplete="email"
+                    required>
 
             </div>
 
@@ -520,8 +704,11 @@
                     Contraseña
                 </label>
 
-                <input type="password" id="contrasenaRegistro" minlength="8"
-                    autocomplete="new-password" required>
+                <input type="password"
+                    id="contrasenaRegistro"
+                    minlength="8"
+                    autocomplete="new-password"
+                    required>
 
                 <small>
                     Mínimo 8 caracteres.
@@ -535,20 +722,29 @@
                     Repetir contraseña
                 </label>
 
-                <input type="password" id="repetirContrasenaRegistro" minlength="8"
-                    autocomplete="new-password" required>
+                <input type="password"
+                    id="repetirContrasenaRegistro"
+                    minlength="8"
+                    autocomplete="new-password"
+                    required>
 
             </div>
 
-            <p id="mensajeRegistroUsuario" class="mensaje" aria-live="polite"></p>
+            <p id="mensajeRegistroUsuario"
+                class="mensaje"
+                aria-live="polite"></p>
 
             <div class="acciones-modal">
 
-                <button type="button" id="cancelarRegistroUsuario" class="boton boton-claro">
+                <button type="button"
+                    id="cancelarRegistroUsuario"
+                    class="boton boton-claro">
                     Cancelar
                 </button>
 
-                <button type="submit" id="botonCrearUsuario" class="boton boton-principal">
+                <button type="submit"
+                    id="botonCrearUsuario"
+                    class="boton boton-principal">
                     Crear cuenta
                 </button>
 
@@ -558,9 +754,11 @@
 
     </dialog>
 
-    <dialog id="modalCierre" class="modal">
+    <dialog id="modalCierre"
+        class="modal">
 
-        <form id="formularioCierre" method="dialog">
+        <form id="formularioCierre"
+            method="dialog">
 
             <p class="etiqueta">
                 CIERRE DEL PERÍODO
@@ -578,8 +776,11 @@
                     Nombre del trabajador
                 </label>
 
-                <input type="text" id="nombreTrabajador" maxlength="100"
-                    placeholder="Ingresá tu nombre completo" required>
+                <input type="text"
+                    id="nombreTrabajador"
+                    maxlength="100"
+                    placeholder="Ingresá tu nombre completo"
+                    required>
 
             </div>
 
@@ -595,11 +796,14 @@
 
             <div class="acciones-modal">
 
-                <button type="button" id="cancelarCierre" class="boton boton-claro">
+                <button type="button"
+                    id="cancelarCierre"
+                    class="boton boton-claro">
                     Cancelar
                 </button>
 
-                <button type="submit" class="boton boton-principal">
+                <button type="submit"
+                    class="boton boton-principal">
                     Generar informe
                 </button>
 
@@ -609,7 +813,8 @@
 
     </dialog>
 
-    <dialog id="modalQR" class="modal modal-qr">
+    <dialog id="modalQR"
+        class="modal modal-qr">
 
         <div>
 
@@ -625,9 +830,12 @@
 
             <div id="codigoQR"></div>
 
-            <p id="advertenciaQR" class="advertencia-qr"></p>
+            <p id="advertenciaQR"
+                class="advertencia-qr"></p>
 
-            <button type="button" id="cerrarQR" class="boton boton-principal boton-completo">
+            <button type="button"
+                id="cerrarQR"
+                class="boton boton-principal boton-completo">
                 Cerrar
             </button>
 
@@ -635,7 +843,9 @@
 
     </dialog>
 
-    <div id="notificacion" class="notificacion" aria-live="polite"></div>
+    <div id="notificacion"
+        class="notificacion"
+        aria-live="polite"></div>
 
 </body>
 

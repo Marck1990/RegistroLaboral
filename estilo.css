@@ -129,9 +129,11 @@ button {
 .cabecera-contenido {
     min-height: 76px;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    gap: 15px;
+    gap: 10px 15px;
+    padding: 10px 0;
 }
 
 .marca {
@@ -166,9 +168,85 @@ button {
 
 .cabecera-acciones {
     display: flex;
+    flex: 1 1 auto;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: flex-end;
-    gap: 14px;
+    gap: 10px 14px;
+}
+
+.selector-rol {
+    order: 3;
+    width: 100%;
+    display: grid;
+    gap: 5px;
+    padding: 9px 12px;
+    border: 1px solid #bdd7cf;
+    border-radius: 13px;
+    background: var(--verde-claro);
+}
+
+.selector-rol > span {
+    color: var(--verde-oscuro);
+    font-size: 0.68rem;
+    font-weight: 800;
+    text-align: center;
+}
+
+.control-rol {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.control-rol > span {
+    color: var(--verde-oscuro);
+    font-size: 0.65rem;
+    font-weight: 700;
+}
+
+.interruptor-rol {
+    position: relative;
+    width: 48px;
+    height: 26px;
+    flex-shrink: 0;
+}
+
+.interruptor-rol input {
+    width: 0;
+    height: 0;
+    opacity: 0;
+}
+
+.deslizador-rol {
+    position: absolute;
+    inset: 0;
+    border-radius: 999px;
+    background: var(--verde);
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.deslizador-rol::before {
+    content: "";
+    position: absolute;
+    left: 4px;
+    bottom: 4px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: white;
+    box-shadow: 0 2px 7px rgba(0, 0, 0, 0.2);
+    transition: 0.25s;
+}
+
+.interruptor-rol input:checked + .deslizador-rol {
+    background: var(--dorado);
+}
+
+.interruptor-rol input:checked + .deslizador-rol::before {
+    transform: translateX(22px);
 }
 
 .indicador-base {
@@ -764,6 +842,17 @@ button {
     font-size: 2.4rem;
 }
 
+.estado-vacio h3 {
+    margin: 14px 0 6px;
+    font-family: Georgia, "Times New Roman", serif;
+}
+
+.estado-vacio p {
+    margin: 0;
+    color: var(--texto-suave);
+    font-size: 0.8rem;
+}
+
 .acciones-mes {
     padding: 18px 22px 22px;
     border-top: 1px solid var(--borde);
@@ -771,6 +860,212 @@ button {
 
 .acciones-mes .boton {
     width: 100%;
+}
+
+/* PANEL DE ADMINISTRACIÓN */
+
+.panel-administrador {
+    padding-top: 26px;
+    padding-bottom: 55px;
+}
+
+.encabezado-administrador {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 18px;
+    padding: 24px;
+    border-radius: 22px 22px 0 0;
+    background: var(--texto);
+    color: white;
+}
+
+.encabezado-administrador .etiqueta {
+    color: #a8c5bd;
+}
+
+.encabezado-administrador h2 {
+    margin: 0;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(1.7rem, 7vw, 2.5rem);
+    letter-spacing: -0.035em;
+}
+
+.encabezado-administrador p:last-child {
+    margin: 9px 0 0;
+    color: #b9cbc6;
+    font-size: 0.8rem;
+    line-height: 1.5;
+}
+
+.encabezado-administrador .contador {
+    flex-shrink: 0;
+    background: var(--dorado);
+    color: var(--texto);
+}
+
+.buscador-usuarios {
+    padding: 20px;
+    border-right: 1px solid var(--borde);
+    border-left: 1px solid var(--borde);
+    background: var(--superficie);
+}
+
+.buscador-usuarios label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.78rem;
+    font-weight: 800;
+}
+
+.buscador-usuarios input {
+    width: 100%;
+    min-height: 49px;
+    padding: 0 14px;
+    border: 1px solid var(--borde);
+    border-radius: 13px;
+    outline: none;
+    background: #fbfaf6;
+    color: var(--texto);
+}
+
+.buscador-usuarios input:focus {
+    border-color: var(--verde);
+    box-shadow: 0 0 0 3px rgba(23, 104, 91, 0.11);
+}
+
+#mensajeAdministrador {
+    margin: 0;
+    border-radius: 0;
+    border-right: 1px solid var(--borde);
+    border-left: 1px solid var(--borde);
+}
+
+.lista-usuarios-administrador {
+    min-height: 350px;
+    padding: 10px 18px 18px;
+    border: 1px solid var(--borde);
+    border-top: 0;
+    border-radius: 0 0 22px 22px;
+    background: var(--superficie);
+    box-shadow: var(--sombra);
+}
+
+.usuario-administrador {
+    display: grid;
+    gap: 15px;
+    padding: 18px 2px;
+    border-bottom: 1px solid #e6e7e0;
+}
+
+.usuario-administrador:last-child {
+    border-bottom: 0;
+}
+
+.usuario-administrador.inactivo {
+    opacity: 0.78;
+}
+
+.usuario-administrador-informacion {
+    min-width: 0;
+}
+
+.usuario-administrador-correo {
+    display: block;
+    overflow: hidden;
+    color: var(--texto);
+    font-size: 0.84rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.usuario-administrador-detalle {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 7px;
+    margin-top: 7px;
+}
+
+.usuario-administrador-fecha {
+    color: var(--texto-suave);
+    font-size: 0.7rem;
+}
+
+.estado-usuario {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    width: fit-content;
+    padding: 5px 9px;
+    border-radius: 999px;
+    font-size: 0.65rem;
+    font-weight: 800;
+}
+
+.estado-usuario::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+}
+
+.estado-usuario.activo {
+    background: var(--verde-claro);
+    color: var(--verde-oscuro);
+}
+
+.estado-usuario.activo::before {
+    background: #36a46d;
+}
+
+.estado-usuario.inactivo {
+    background: #f0e4ce;
+    color: #76531e;
+}
+
+.estado-usuario.inactivo::before {
+    background: #c38a32;
+}
+
+.acciones-usuario-administrador {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 9px;
+}
+
+.boton-estado-usuario,
+.boton-borrar-usuario {
+    min-height: 42px;
+    padding: 0 12px;
+    border-radius: 11px;
+    font-size: 0.7rem;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.boton-estado-usuario {
+    border: 1px solid #b9d4cc;
+    background: var(--verde-claro);
+    color: var(--verde-oscuro);
+}
+
+.boton-estado-usuario.activar {
+    border-color: #cbb382;
+    background: #f5e9d3;
+    color: #76531e;
+}
+
+.boton-borrar-usuario {
+    border: 1px solid var(--rojo-borde);
+    background: var(--rojo-claro);
+    color: var(--rojo-texto);
+}
+
+.boton-estado-usuario:disabled,
+.boton-borrar-usuario:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
 .modal {
@@ -1018,6 +1313,21 @@ button {
 }
 
 @media (min-width: 650px) {
+    .cabecera-contenido {
+        flex-wrap: nowrap;
+        padding: 0;
+    }
+
+    .cabecera-acciones {
+        flex-wrap: nowrap;
+    }
+
+    .selector-rol {
+        order: initial;
+        width: auto;
+        min-width: 185px;
+    }
+
     .indicador-base,
     .sesion-usuario > span {
         display: flex;
@@ -1053,6 +1363,27 @@ button {
     .informacion-informe {
         grid-template-columns: repeat(2, 1fr);
     }
+
+    .encabezado-administrador,
+    .buscador-usuarios {
+        padding-right: 28px;
+        padding-left: 28px;
+    }
+
+    .usuario-administrador {
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: center;
+        padding: 18px 10px;
+    }
+
+    .acciones-usuario-administrador {
+        display: flex;
+    }
+
+    .boton-estado-usuario,
+    .boton-borrar-usuario {
+        min-width: 120px;
+    }
 }
 
 @media (min-width: 980px) {
@@ -1087,6 +1418,18 @@ button {
     .marca .marca-icono {
         width: 39px;
         height: 39px;
+    }
+
+    .cabecera .marca p {
+        display: none;
+    }
+
+    .cabecera .marca h1 {
+        font-size: 0.88rem;
+    }
+
+    .acciones-usuario-administrador {
+        grid-template-columns: 1fr;
     }
 
     .informe {

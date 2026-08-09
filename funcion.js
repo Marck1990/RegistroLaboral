@@ -3,14 +3,20 @@ const URL_SUPABASE = "https://ldyczacdmhmprvbtpvku.supabase.co";
 const CLAVE_PUBLICA_SUPABASE =
     "sb_publishable_wYDLIYIC8gAUw8Z4JKxnaQ_QnEGTsue";
 
+const CORREO_ADMINISTRADOR =
+    "pirotec50@gmail.com";
+
 let clienteSupabase;
 let usuarioActual = null;
+let perfilUsuarioActual = null;
 let registrosActuales = [];
+let usuariosAdministrador = [];
 let cierreActual = null;
 let enlaceInformeActual = "";
 let reconocimientoActivo = null;
 let diasLicenciaTotales = 0;
 let diasLicenciaUsados = 0;
+let modoAdministrador = false;
 
 const vistaAcceso = document.getElementById("vistaAcceso");
 const formularioAcceso = document.getElementById("formularioAcceso");
@@ -157,6 +163,39 @@ const advertenciaQR = document.getElementById(
 
 const notificacion = document.getElementById(
     "notificacion"
+);
+
+const selectorRol = document.getElementById(
+    "selectorRol"
+);
+
+const interruptorRol = document.getElementById(
+    "interruptorRol"
+);
+
+const contenidoUsuario =
+    document.getElementById("contenidoUsuario") ||
+    document.querySelector(".contenido-principal");
+
+const panelAdministrador = document.getElementById(
+    "panelAdministrador"
+);
+
+const buscarUsuarioInput =
+    document.getElementById("buscarUsuario") ||
+    document.getElementById("busquedaUsuarios") ||
+    document.getElementById("buscadorUsuarios");
+
+const contadorUsuariosAdministrador =
+    document.getElementById("contadorUsuariosAdministrador") ||
+    document.getElementById("contadorUsuarios");
+
+const listaUsuariosAdministrador = document.getElementById(
+    "listaUsuariosAdministrador"
+);
+
+const mensajeAdministrador = document.getElementById(
+    "mensajeAdministrador"
 );
 
 const numerosTexto = {
@@ -353,6 +392,20 @@ function prepararEventos() {
             modalQR.close();
         }
     );
+
+    if (interruptorRol) {
+        interruptorRol.addEventListener(
+            "change",
+            cambiarModoRol
+        );
+    }
+
+    if (buscarUsuarioInput) {
+        buscarUsuarioInput.addEventListener(
+            "input",
+            renderizarUsuariosAdministrador
+        );
+    }
 }
 
 function abrirRegistroUsuario() {
@@ -391,10 +444,7 @@ async function crearCuentaUsuario(evento) {
         return;
     }
 
-    if (
-        contrasena !==
-        repetirContrasena
-    ) {
+    if (contrasena !== repetirContrasena) {
         mostrarMensajeRegistroUsuario(
             "Las contraseñas no coinciden.",
             true
@@ -449,7 +499,6 @@ async function crearCuentaUsuario(evento) {
         );
     } finally {
         botonCrearUsuario.disabled = false;
-
         botonCrearUsuario.textContent =
             "Crear cuenta";
     }
@@ -510,10 +559,7 @@ async function cerrarSesion() {
             throw respuesta.error;
         }
 
-        usuarioActual = null;
-        registrosActuales = [];
-        cierreActual = null;
-
+        limpiarSesionLocal();
         mostrarVistaAcceso();
     } catch (error) {
         mostrarNotificacion(
@@ -525,8 +571,64 @@ async function cerrarSesion() {
     }
 }
 
+function limpiarSesionLocal() {
+    usuarioActual = null;
+    perfilUsuarioActual = null;
+    registrosActuales = [];
+    usuariosAdministrador = [];
+    cierreActual = null;
+    modoAdministrador = false;
+
+    if (interruptorRol) {
+        interruptorRol.checked = false;
+    }
+
+    if (buscarUsuarioInput) {
+        buscarUsuarioInput.value = "";
+    }
+}
+
 async function activarAplicacion(usuario) {
     usuarioActual = usuario;
+
+    try {
+        perfilUsuarioActual =
+            await obtenerOCrearPerfilUsuario(
+                usuario
+            );
+
+        if (
+            perfilUsuarioActual.eliminado === true ||
+            perfilUsuarioActual.activo === false
+        ) {
+            await clienteSupabase.auth.signOut();
+
+            limpiarSesionLocal();
+            mostrarVistaAcceso();
+
+            mostrarMensajeAcceso(
+                perfilUsuarioActual &&
+                perfilUsuarioActual.eliminado === true
+                    ? "Esta cuenta fue eliminada."
+                    : "Esta cuenta se encuentra desactivada.",
+                true
+            );
+
+            return;
+        }
+    } catch (error) {
+        await clienteSupabase.auth.signOut();
+
+        limpiarSesionLocal();
+        mostrarVistaAcceso();
+
+        mostrarMensajeAcceso(
+            "No se pudo verificar el estado de la cuenta.",
+            true
+        );
+
+        return;
+    }
 
     correoUsuario.textContent =
         usuario.email || "Usuario";
@@ -535,7 +637,158 @@ async function activarAplicacion(usuario) {
     vistaInforme.classList.add("oculto");
     aplicacion.classList.remove("oculto");
 
+    configurarSelectorAdministrador();
+    mostrarModoUsuario();
+
     await cargarMesSeleccionado();
+}
+
+async function obtenerOCrearPerfilUsuario(usuario) {
+    let respuesta = await clienteSupabase
+        .from("perfiles_usuarios")
+        .select(
+            "usuario_id, correo, activo, eliminado, creado_en"
+        )
+        .eq(
+            "usuario_id",
+            usuario.id
+        )
+        .maybeSingle();
+
+    if (respuesta.error) {
+        throw respuesta.error;
+    }
+
+    if (respuesta.data) {
+        return respuesta.data;
+    }
+
+    respuesta = await clienteSupabase
+        .from("perfiles_usuarios")
+        .insert({
+            usuario_id:
+                usuario.id,
+
+            correo:
+                usuario.email || ""
+        })
+        .select(
+            "usuario_id, correo, activo, eliminado, creado_en"
+        )
+        .single();
+
+    if (respuesta.error) {
+        if (respuesta.error.code === "23505") {
+            const consulta =
+                await clienteSupabase
+                    .from("perfiles_usuarios")
+                    .select(
+                        "usuario_id, correo, activo, eliminado, creado_en"
+                    )
+                    .eq(
+                        "usuario_id",
+                        usuario.id
+                    )
+                    .single();
+
+            if (consulta.error) {
+                throw consulta.error;
+            }
+
+            return consulta.data;
+        }
+
+        throw respuesta.error;
+    }
+
+    return respuesta.data;
+}
+
+function esAdministradorPrincipal() {
+    if (!usuarioActual || !usuarioActual.email) {
+        return false;
+    }
+
+    return (
+        usuarioActual.email
+            .trim()
+            .toLowerCase() ===
+        CORREO_ADMINISTRADOR
+            .toLowerCase()
+    );
+}
+
+function configurarSelectorAdministrador() {
+    if (!selectorRol) {
+        return;
+    }
+
+    selectorRol.classList.toggle(
+        "oculto",
+        !esAdministradorPrincipal()
+    );
+
+    if (interruptorRol) {
+        interruptorRol.checked = false;
+    }
+}
+
+async function cambiarModoRol() {
+    if (!interruptorRol) {
+        return;
+    }
+
+    if (
+        interruptorRol.checked &&
+        esAdministradorPrincipal()
+    ) {
+        await mostrarModoAdministrador();
+    } else {
+        mostrarModoUsuario();
+    }
+}
+
+function mostrarModoUsuario() {
+    modoAdministrador = false;
+
+    if (interruptorRol) {
+        interruptorRol.checked = false;
+    }
+
+    if (contenidoUsuario) {
+        contenidoUsuario.classList.remove(
+            "oculto"
+        );
+    }
+
+    if (panelAdministrador) {
+        panelAdministrador.classList.add(
+            "oculto"
+        );
+    }
+}
+
+async function mostrarModoAdministrador() {
+    if (!esAdministradorPrincipal()) {
+        mostrarModoUsuario();
+        return;
+    }
+
+    modoAdministrador = true;
+
+    if (contenidoUsuario) {
+        contenidoUsuario.classList.add(
+            "oculto"
+        );
+    }
+
+    if (panelAdministrador) {
+        panelAdministrador.classList.remove(
+            "oculto"
+        );
+    }
+
+    await cargarUsuariosAdministrador();
 }
 
 function mostrarVistaAcceso() {
@@ -543,7 +796,514 @@ function mostrarVistaAcceso() {
     vistaInforme.classList.add("oculto");
     vistaAcceso.classList.remove("oculto");
 
+    if (panelAdministrador) {
+        panelAdministrador.classList.add(
+            "oculto"
+        );
+    }
+
+    ocultarMensajeAdministrador();
     correoAccesoInput.focus();
+}
+
+async function cargarUsuariosAdministrador() {
+    if (!esAdministradorPrincipal()) {
+        return;
+    }
+
+    ocultarMensajeAdministrador();
+
+    if (listaUsuariosAdministrador) {
+        listaUsuariosAdministrador.innerHTML = `
+            <div class="estado-vacio">
+                <div class="estado-vacio-icono">⌛</div>
+                <h3>Cargando usuarios</h3>
+                <p>Esperá un momento.</p>
+            </div>
+        `;
+    }
+
+    try {
+        const respuesta =
+            await clienteSupabase
+                .from("perfiles_usuarios")
+                .select(
+                    "usuario_id, correo, activo, eliminado, creado_en"
+                )
+                .eq(
+                    "eliminado",
+                    false
+                )
+                .order(
+                    "creado_en",
+                    {
+                        ascending: true
+                    }
+                );
+
+        if (respuesta.error) {
+            throw respuesta.error;
+        }
+
+        usuariosAdministrador =
+            respuesta.data || [];
+
+        usuariosAdministrador.sort(
+            function (usuarioA, usuarioB) {
+                const correoA =
+                    usuarioA.correo || "";
+
+                const correoB =
+                    usuarioB.correo || "";
+
+                if (
+                    correoA.toLowerCase() ===
+                    CORREO_ADMINISTRADOR.toLowerCase()
+                ) {
+                    return -1;
+                }
+
+                if (
+                    correoB.toLowerCase() ===
+                    CORREO_ADMINISTRADOR.toLowerCase()
+                ) {
+                    return 1;
+                }
+
+                return correoA.localeCompare(
+                    correoB,
+                    "es"
+                );
+            }
+        );
+
+        renderizarUsuariosAdministrador();
+    } catch (error) {
+        usuariosAdministrador = [];
+        renderizarUsuariosAdministrador();
+
+        mostrarMensajeAdministrador(
+            "No se pudieron cargar los usuarios.",
+            true
+        );
+    }
+}
+
+function renderizarUsuariosAdministrador() {
+    if (
+        !listaUsuariosAdministrador ||
+        !contadorUsuariosAdministrador
+    ) {
+        return;
+    }
+
+    const textoBusqueda =
+        buscarUsuarioInput
+            ? buscarUsuarioInput.value
+                .trim()
+                .toLowerCase()
+            : "";
+
+    const usuariosFiltrados =
+        usuariosAdministrador.filter(
+            function (usuario) {
+                const correo =
+                    usuario.correo || "";
+
+                return correo
+                    .toLowerCase()
+                    .includes(
+                        textoBusqueda
+                    );
+            }
+        );
+
+    contadorUsuariosAdministrador.textContent =
+        usuariosFiltrados.length;
+
+    listaUsuariosAdministrador.innerHTML =
+        "";
+
+    if (usuariosFiltrados.length === 0) {
+        listaUsuariosAdministrador.innerHTML = `
+            <div class="estado-vacio">
+                <div class="estado-vacio-icono">👤</div>
+                <h3>No se encontraron usuarios</h3>
+                <p>Probá con otro correo electrónico.</p>
+            </div>
+        `;
+
+        return;
+    }
+
+    usuariosFiltrados.forEach(
+        function (usuario) {
+            const articulo =
+                document.createElement(
+                    "article"
+                );
+
+            articulo.className =
+                usuario.activo
+                    ? "usuario-administrador"
+                    : "usuario-administrador inactivo";
+
+            const informacion =
+                document.createElement(
+                    "div"
+                );
+
+            informacion.className =
+                "usuario-administrador-informacion";
+
+            const correo =
+                document.createElement(
+                    "strong"
+                );
+
+            correo.className =
+                "usuario-administrador-correo";
+
+            correo.textContent =
+                usuario.correo ||
+                "Correo no disponible";
+
+            const detalle =
+                document.createElement(
+                    "div"
+                );
+
+            detalle.className =
+                "usuario-administrador-detalle";
+
+            const estado =
+                document.createElement(
+                    "span"
+                );
+
+            estado.className =
+                usuario.activo
+                    ? "estado-usuario activo"
+                    : "estado-usuario inactivo";
+
+            estado.textContent =
+                usuario.activo
+                    ? "Cuenta activa"
+                    : "Cuenta desactivada";
+
+            const fecha =
+                document.createElement(
+                    "span"
+                );
+
+            fecha.className =
+                "usuario-administrador-fecha";
+
+            fecha.textContent =
+                usuario.correo &&
+                usuario.correo.toLowerCase() ===
+                    CORREO_ADMINISTRADOR.toLowerCase()
+                    ? "Administrador principal"
+                    : formatearFechaRegistroUsuario(
+                        usuario.creado_en
+                    );
+
+            detalle.appendChild(estado);
+            detalle.appendChild(fecha);
+
+            informacion.appendChild(correo);
+            informacion.appendChild(detalle);
+
+            const acciones =
+                document.createElement(
+                    "div"
+                );
+
+            acciones.className =
+                "acciones-usuario-administrador";
+
+            const botonEstado =
+                document.createElement(
+                    "button"
+                );
+
+            botonEstado.type = "button";
+
+            botonEstado.className =
+                usuario.activo
+                    ? "boton-estado-usuario"
+                    : "boton-estado-usuario activar";
+
+            botonEstado.textContent =
+                usuario.activo
+                    ? "Desactivar"
+                    : "Activar";
+
+            const botonBorrar =
+                document.createElement(
+                    "button"
+                );
+
+            botonBorrar.type = "button";
+            botonBorrar.className =
+                "boton-borrar-usuario";
+
+            botonBorrar.textContent =
+                "Borrar usuario";
+
+            const esCuentaAdministrador =
+                usuario.correo &&
+                usuario.correo
+                    .toLowerCase() ===
+                    CORREO_ADMINISTRADOR
+                        .toLowerCase();
+
+            botonEstado.disabled =
+                esCuentaAdministrador;
+
+            botonBorrar.disabled =
+                esCuentaAdministrador;
+
+            botonEstado.addEventListener(
+                "click",
+                function () {
+                    cambiarEstadoUsuario(
+                        usuario
+                    );
+                }
+            );
+
+            botonBorrar.addEventListener(
+                "click",
+                function () {
+                    borrarUsuarioLogicamente(
+                        usuario
+                    );
+                }
+            );
+
+            acciones.appendChild(
+                botonEstado
+            );
+
+            acciones.appendChild(
+                botonBorrar
+            );
+
+            articulo.appendChild(
+                informacion
+            );
+
+            articulo.appendChild(
+                acciones
+            );
+
+            listaUsuariosAdministrador.appendChild(
+                articulo
+            );
+        }
+    );
+}
+
+async function cambiarEstadoUsuario(usuario) {
+    if (
+        !esAdministradorPrincipal() ||
+        esCorreoAdministrador(
+            usuario.correo
+        )
+    ) {
+        return;
+    }
+
+    const nuevoEstado =
+        !usuario.activo;
+
+    try {
+        const respuesta =
+            await clienteSupabase
+                .from("perfiles_usuarios")
+                .update({
+                    activo:
+                        nuevoEstado,
+
+                    actualizado_en:
+                        new Date().toISOString()
+                })
+                .eq(
+                    "usuario_id",
+                    usuario.usuario_id
+                )
+                .eq(
+                    "eliminado",
+                    false
+                )
+                .select("usuario_id")
+                .maybeSingle();
+
+        if (respuesta.error) {
+            throw respuesta.error;
+        }
+
+        if (!respuesta.data) {
+            throw new Error(
+                "No se encontró el usuario."
+            );
+        }
+
+        await cargarUsuariosAdministrador();
+
+        mostrarMensajeAdministrador(
+            nuevoEstado
+                ? "La cuenta fue activada correctamente."
+                : "La cuenta fue desactivada correctamente.",
+            false
+        );
+    } catch (error) {
+        mostrarMensajeAdministrador(
+            "No se pudo cambiar el estado de la cuenta.",
+            true
+        );
+    }
+}
+
+async function borrarUsuarioLogicamente(
+    usuario
+) {
+    if (
+        !esAdministradorPrincipal() ||
+        esCorreoAdministrador(
+            usuario.correo
+        )
+    ) {
+        return;
+    }
+
+    const confirmar = window.confirm(
+        "¿Querés borrar la cuenta " +
+        usuario.correo +
+        "?\n\nEl usuario perderá el acceso, pero sus datos se conservarán."
+    );
+
+    if (!confirmar) {
+        return;
+    }
+
+    try {
+        const respuesta =
+            await clienteSupabase
+                .from("perfiles_usuarios")
+                .update({
+                    activo:
+                        false,
+
+                    eliminado:
+                        true,
+
+                    actualizado_en:
+                        new Date().toISOString()
+                })
+                .eq(
+                    "usuario_id",
+                    usuario.usuario_id
+                )
+                .select("usuario_id")
+                .maybeSingle();
+
+        if (respuesta.error) {
+            throw respuesta.error;
+        }
+
+        if (!respuesta.data) {
+            throw new Error(
+                "No se encontró el usuario."
+            );
+        }
+
+        await cargarUsuariosAdministrador();
+
+        mostrarMensajeAdministrador(
+            "El usuario fue borrado lógicamente.",
+            false
+        );
+    } catch (error) {
+        mostrarMensajeAdministrador(
+            "No se pudo borrar el usuario.",
+            true
+        );
+    }
+}
+
+function esCorreoAdministrador(correo) {
+    return (
+        typeof correo === "string" &&
+        correo.trim().toLowerCase() ===
+            CORREO_ADMINISTRADOR.toLowerCase()
+    );
+}
+
+function formatearFechaRegistroUsuario(
+    fechaTexto
+) {
+    if (!fechaTexto) {
+        return "Fecha no disponible";
+    }
+
+    const fecha =
+        new Date(fechaTexto);
+
+    if (
+        Number.isNaN(
+            fecha.getTime()
+        )
+    ) {
+        return "Fecha no disponible";
+    }
+
+    return (
+        "Registrado el " +
+        new Intl.DateTimeFormat(
+            "es-UY",
+            {
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric"
+            }
+        ).format(fecha)
+    );
+}
+
+function mostrarMensajeAdministrador(
+    texto,
+    esError
+) {
+    if (!mensajeAdministrador) {
+        return;
+    }
+
+    mensajeAdministrador.textContent =
+        texto;
+
+    mensajeAdministrador.classList.add(
+        "visible"
+    );
+
+    mensajeAdministrador.classList.toggle(
+        "error",
+        esError
+    );
+}
+
+function ocultarMensajeAdministrador() {
+    if (!mensajeAdministrador) {
+        return;
+    }
+
+    mensajeAdministrador.textContent = "";
+
+    mensajeAdministrador.classList.remove(
+        "visible",
+        "error"
+    );
 }
 
 async function agregarRegistroBase(registro) {
@@ -1106,7 +1866,6 @@ function renderizarRegistros() {
     ) {
         listaRegistros.innerHTML = `
             <div class="estado-vacio">
-
                 <div class="estado-vacio-icono">
                     🗓
                 </div>
@@ -1118,7 +1877,6 @@ function renderizarRegistros() {
                 <p>
                     Agregá tu primera jornada de este mes.
                 </p>
-
             </div>
         `;
 
@@ -1533,7 +2291,12 @@ function volverAplicacion() {
         "oculto"
     );
 
-    cargarMesSeleccionado();
+    if (modoAdministrador) {
+        mostrarModoAdministrador();
+    } else {
+        mostrarModoUsuario();
+        cargarMesSeleccionado();
+    }
 }
 
 function imprimirInforme() {
