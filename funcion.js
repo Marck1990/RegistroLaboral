@@ -1,10 +1,7 @@
 const URL_SUPABASE = "https://ldyczacdmhmprvbtpvku.supabase.co";
-
 const CLAVE_PUBLICA_SUPABASE =
-    "sb_publishable_wYDLIYIC8gAUw8Z4JKxnaQ_QnEGTsue";
-
-const CORREO_ADMINISTRADOR =
-    "pirotec50@gmail.com";
+  "sb_publishable_wYDLIYIC8gAUw8Z4JKxnaQ_QnEGTsue";
+const CORREO_ADMINISTRADOR = "pirotec50@gmail.com";
 
 let clienteSupabase;
 let usuarioActual = null;
@@ -24,44 +21,46 @@ const correoAccesoInput = document.getElementById("correoAcceso");
 const contrasenaAccesoInput = document.getElementById("contrasenaAcceso");
 const mensajeAcceso = document.getElementById("mensajeAcceso");
 const botonAcceder = document.getElementById("botonAcceder");
-const botonMostrarRegistro = document.getElementById("botonMostrarRegistro");
+const botonMostrarRegistro = document.getElementById(
+  "botonMostrarRegistro"
+);
 const correoUsuario = document.getElementById("correoUsuario");
 const botonCerrarSesion = document.getElementById("botonCerrarSesion");
 
 const modalRegistroUsuario = document.getElementById(
-    "modalRegistroUsuario"
+  "modalRegistroUsuario"
 );
 
 const formularioRegistroUsuario = document.getElementById(
-    "formularioRegistroUsuario"
+  "formularioRegistroUsuario"
 );
 
 const correoRegistroInput = document.getElementById(
-    "correoRegistro"
+  "correoRegistro"
 );
 
 const contrasenaRegistroInput = document.getElementById(
-    "contrasenaRegistro"
+  "contrasenaRegistro"
 );
 
 const repetirContrasenaRegistroInput = document.getElementById(
-    "repetirContrasenaRegistro"
+  "repetirContrasenaRegistro"
 );
 
 const mensajeRegistroUsuario = document.getElementById(
-    "mensajeRegistroUsuario"
+  "mensajeRegistroUsuario"
 );
 
 const botonCrearUsuario = document.getElementById(
-    "botonCrearUsuario"
+  "botonCrearUsuario"
 );
 
 const cancelarRegistroUsuario = document.getElementById(
-    "cancelarRegistroUsuario"
+  "cancelarRegistroUsuario"
 );
 
 const formularioRegistro = document.getElementById(
-    "formularioRegistro"
+  "formularioRegistro"
 );
 
 const fechaInput = document.getElementById("fecha");
@@ -69,73 +68,73 @@ const horasInput = document.getElementById("horas");
 const licenciaInput = document.getElementById("esLicencia");
 
 const observacionesInput = document.getElementById(
-    "observaciones"
+  "observaciones"
 );
 
 const mesSeleccionadoInput = document.getElementById(
-    "mesSeleccionado"
+  "mesSeleccionado"
 );
 
 const mensajeFormulario = document.getElementById(
-    "mensajeFormulario"
+  "mensajeFormulario"
 );
 
 const tituloMes = document.getElementById("tituloMes");
 
 const cantidadJornadas = document.getElementById(
-    "cantidadJornadas"
+  "cantidadJornadas"
 );
 
 const totalHoras = document.getElementById("totalHoras");
 
 const contadorRegistros = document.getElementById(
-    "contadorRegistros"
+  "contadorRegistros"
 );
 
 const listaRegistros = document.getElementById(
-    "listaRegistros"
+  "listaRegistros"
 );
 
 const panelSaldoLicencia = document.getElementById(
-    "panelSaldoLicencia"
+  "panelSaldoLicencia"
 );
 
 const formularioDiasLicencia = document.getElementById(
-    "formularioDiasLicencia"
+  "formularioDiasLicencia"
 );
 
 const diasLicenciaTotalesInput = document.getElementById(
-    "diasLicenciaTotales"
+  "diasLicenciaTotales"
 );
 
 const diasLicenciaRestantesTexto = document.getElementById(
-    "diasLicenciaRestantes"
+  "diasLicenciaRestantes"
 );
 
 const detalleDiasLicencia = document.getElementById(
-    "detalleDiasLicencia"
+  "detalleDiasLicencia"
 );
 
 const botonCerrarMes = document.getElementById(
-    "botonCerrarMes"
+  "botonCerrarMes"
 );
 
 const modalCierre = document.getElementById("modalCierre");
 
 const formularioCierre = document.getElementById(
-    "formularioCierre"
+  "formularioCierre"
 );
 
 const nombreTrabajadorInput = document.getElementById(
-    "nombreTrabajador"
+  "nombreTrabajador"
 );
 
 const totalModalCierre = document.getElementById(
-    "totalModalCierre"
+  "totalModalCierre"
 );
 
 const cancelarCierre = document.getElementById(
-    "cancelarCierre"
+  "cancelarCierre"
 );
 
 const aplicacion = document.getElementById("aplicacion");
@@ -143,13 +142,13 @@ const vistaInforme = document.getElementById("vistaInforme");
 const botonVolver = document.getElementById("botonVolver");
 
 const botonCompartir = document.getElementById(
-    "botonCompartir"
+  "botonCompartir"
 );
 
 const botonQR = document.getElementById("botonQR");
 
 const botonImprimir = document.getElementById(
-    "botonImprimir"
+  "botonImprimir"
 );
 
 const botonPDF = document.getElementById("botonPDF");
@@ -158,2970 +157,2989 @@ const codigoQR = document.getElementById("codigoQR");
 const cerrarQR = document.getElementById("cerrarQR");
 
 const advertenciaQR = document.getElementById(
-    "advertenciaQR"
+  "advertenciaQR"
 );
 
 const notificacion = document.getElementById(
-    "notificacion"
+  "notificacion"
 );
 
 const selectorRol = document.getElementById(
-    "selectorRol"
+  "selectorRolAdministrador"
 );
 
 const interruptorRol = document.getElementById(
-    "interruptorRol"
+  "cambiarRolAdministrador"
+);
+
+const textoRolActual = document.getElementById(
+  "textoRolActual"
 );
 
 const contenidoUsuario =
-    document.getElementById("contenidoUsuario") ||
-    document.querySelector(".contenido-principal");
+  document.getElementById("contenidoUsuario") ||
+  document.querySelector(".contenido-principal");
 
 const panelAdministrador = document.getElementById(
-    "panelAdministrador"
+  "panelAdministrador"
 );
 
 const buscarUsuarioInput =
-    document.getElementById("buscarUsuario") ||
-    document.getElementById("busquedaUsuarios") ||
-    document.getElementById("buscadorUsuarios");
+  document.getElementById("buscarUsuario") ||
+  document.getElementById("busquedaUsuarios") ||
+  document.getElementById("buscadorUsuarios");
 
 const contadorUsuariosAdministrador =
-    document.getElementById("contadorUsuariosAdministrador") ||
-    document.getElementById("contadorUsuarios");
+  document.getElementById("contadorUsuariosAdministrador") ||
+  document.getElementById("contadorUsuarios");
 
 const listaUsuariosAdministrador = document.getElementById(
-    "listaUsuariosAdministrador"
+  "listaUsuariosAdministrador"
 );
 
 const mensajeAdministrador = document.getElementById(
-    "mensajeAdministrador"
+  "mensajeAdministrador"
 );
 
 const numerosTexto = {
-    cero: 0,
-    un: 1,
-    uno: 1,
-    una: 1,
-    dos: 2,
-    tres: 3,
-    cuatro: 4,
-    cinco: 5,
-    seis: 6,
-    siete: 7,
-    ocho: 8,
-    nueve: 9,
-    diez: 10,
-    once: 11,
-    doce: 12,
-    trece: 13,
-    catorce: 14,
-    quince: 15,
-    dieciseis: 16,
-    diecisiete: 17,
-    dieciocho: 18,
-    diecinueve: 19,
-    veinte: 20,
-    veintiuno: 21,
-    veintidos: 22,
-    veintitres: 23,
-    veinticuatro: 24
+  cero: 0,
+  un: 1,
+  uno: 1,
+  una: 1,
+  dos: 2,
+  tres: 3,
+  cuatro: 4,
+  cinco: 5,
+  seis: 6,
+  siete: 7,
+  ocho: 8,
+  nueve: 9,
+  diez: 10,
+  once: 11,
+  doce: 12,
+  trece: 13,
+  catorce: 14,
+  quince: 15,
+  dieciseis: 16,
+  diecisiete: 17,
+  dieciocho: 18,
+  diecinueve: 19,
+  veinte: 20,
+  veintiuno: 21,
+  veintidos: 22,
+  veintitres: 23,
+  veinticuatro: 24
 };
 
 document.addEventListener(
-    "DOMContentLoaded",
-    iniciarAplicacion
+  "DOMContentLoaded",
+  iniciarAplicacion
 );
 
 async function iniciarAplicacion() {
-    prepararEventos();
+  prepararEventos();
 
-    if (!window.supabase) {
-        mostrarMensajeAcceso(
-            "No se pudo cargar la conexión con Supabase.",
-            true
-        );
-
-        return;
-    }
-
-    clienteSupabase = window.supabase.createClient(
-        URL_SUPABASE,
-        CLAVE_PUBLICA_SUPABASE
+  if (!window.supabase) {
+    mostrarMensajeAcceso(
+      "No se pudo cargar la conexión con Supabase.",
+      true
     );
 
-    if (cargarInformeDesdeEnlace()) {
-        return;
+    return;
+  }
+
+  clienteSupabase = window.supabase.createClient(
+    URL_SUPABASE,
+    CLAVE_PUBLICA_SUPABASE
+  );
+
+  if (cargarInformeDesdeEnlace()) {
+    return;
+  }
+
+  fechaInput.value = convertirFechaParaInput(
+    new Date()
+  );
+
+  mesSeleccionadoInput.value =
+    obtenerMesActual();
+
+  nombreTrabajadorInput.value =
+    localStorage.getItem(
+      "nombreTrabajador"
+    ) || "";
+
+  try {
+    const respuesta =
+      await clienteSupabase.auth.getSession();
+
+    if (respuesta.error) {
+      throw respuesta.error;
     }
 
-    fechaInput.value = convertirFechaParaInput(
-        new Date()
+    if (respuesta.data.session) {
+      await activarAplicacion(
+        respuesta.data.session.user
+      );
+    } else {
+      mostrarVistaAcceso();
+    }
+  } catch (error) {
+    mostrarVistaAcceso();
+
+    mostrarMensajeAcceso(
+      "No se pudo comprobar la sesión.",
+      true
     );
-
-    mesSeleccionadoInput.value =
-        obtenerMesActual();
-
-    nombreTrabajadorInput.value =
-        localStorage.getItem(
-            "nombreTrabajador"
-        ) || "";
-
-    try {
-        const respuesta =
-            await clienteSupabase.auth.getSession();
-
-        if (respuesta.error) {
-            throw respuesta.error;
-        }
-
-        if (respuesta.data.session) {
-            await activarAplicacion(
-                respuesta.data.session.user
-            );
-        } else {
-            mostrarVistaAcceso();
-        }
-    } catch (error) {
-        mostrarVistaAcceso();
-
-        mostrarMensajeAcceso(
-            "No se pudo comprobar la sesión.",
-            true
-        );
-    }
+  }
 }
 
 function prepararEventos() {
-    formularioAcceso.addEventListener(
-        "submit",
-        iniciarSesion
-    );
+  formularioAcceso.addEventListener(
+    "submit",
+    iniciarSesion
+  );
 
-    botonCerrarSesion.addEventListener(
-        "click",
-        cerrarSesion
-    );
+  botonCerrarSesion.addEventListener(
+    "click",
+    cerrarSesion
+  );
 
-    botonMostrarRegistro.addEventListener(
-        "click",
-        abrirRegistroUsuario
-    );
+  botonMostrarRegistro.addEventListener(
+    "click",
+    abrirRegistroUsuario
+  );
 
-    cancelarRegistroUsuario.addEventListener(
-        "click",
-        cerrarRegistroUsuario
-    );
+  cancelarRegistroUsuario.addEventListener(
+    "click",
+    cerrarRegistroUsuario
+  );
 
-    formularioRegistroUsuario.addEventListener(
-        "submit",
-        crearCuentaUsuario
-    );
+  formularioRegistroUsuario.addEventListener(
+    "submit",
+    crearCuentaUsuario
+  );
 
-    formularioRegistro.addEventListener(
-        "submit",
-        guardarRegistro
-    );
+  formularioRegistro.addEventListener(
+    "submit",
+    guardarRegistro
+  );
 
-    formularioDiasLicencia.addEventListener(
-        "submit",
-        guardarCantidadLicencia
-    );
+  formularioDiasLicencia.addEventListener(
+    "submit",
+    guardarCantidadLicencia
+  );
 
-    mesSeleccionadoInput.addEventListener(
-        "change",
-        cargarMesSeleccionado
-    );
+  mesSeleccionadoInput.addEventListener(
+    "change",
+    cargarMesSeleccionado
+  );
 
-    document
-        .querySelectorAll(".boton-microfono")
-        .forEach(function (boton) {
-            boton.addEventListener(
-                "click",
-                function () {
-                    iniciarReconocimientoVoz(
-                        boton.dataset.campo,
-                        boton
-                    );
-                }
-            );
-        });
-
-    botonCerrarMes.addEventListener(
-        "click",
-        abrirCierre
-    );
-
-    cancelarCierre.addEventListener(
-        "click",
-        cerrarModalCierre
-    );
-
-    formularioCierre.addEventListener(
-        "submit",
-        generarCierre
-    );
-
-    botonVolver.addEventListener(
-        "click",
-        volverAplicacion
-    );
-
-    botonImprimir.addEventListener(
-        "click",
-        imprimirInforme
-    );
-
-    botonPDF.addEventListener(
-        "click",
-        descargarPDF
-    );
-
-    botonQR.addEventListener(
-        "click",
-        mostrarCodigoQR
-    );
-
-    botonCompartir.addEventListener(
-        "click",
-        compartirInforme
-    );
-
-    cerrarQR.addEventListener(
+  document
+    .querySelectorAll(".boton-microfono")
+    .forEach(function (boton) {
+      boton.addEventListener(
         "click",
         function () {
-            modalQR.close();
+          iniciarReconocimientoVoz(
+            boton.dataset.campo,
+            boton
+          );
         }
+      );
+    });
+
+  botonCerrarMes.addEventListener(
+    "click",
+    abrirCierre
+  );
+
+  cancelarCierre.addEventListener(
+    "click",
+    cerrarModalCierre
+  );
+
+  formularioCierre.addEventListener(
+    "submit",
+    generarCierre
+  );
+
+  botonVolver.addEventListener(
+    "click",
+    volverAplicacion
+  );
+
+  botonImprimir.addEventListener(
+    "click",
+    imprimirInforme
+  );
+
+  botonPDF.addEventListener(
+    "click",
+    descargarPDF
+  );
+
+  botonQR.addEventListener(
+    "click",
+    mostrarCodigoQR
+  );
+
+  botonCompartir.addEventListener(
+    "click",
+    compartirInforme
+  );
+
+  cerrarQR.addEventListener(
+    "click",
+    function () {
+      modalQR.close();
+    }
+  );
+
+  if (interruptorRol) {
+    interruptorRol.addEventListener(
+      "change",
+      cambiarModoRol
     );
+  }
 
-    if (interruptorRol) {
-        interruptorRol.addEventListener(
-            "change",
-            cambiarModoRol
-        );
-    }
-
-    if (buscarUsuarioInput) {
-        buscarUsuarioInput.addEventListener(
-            "input",
-            renderizarUsuariosAdministrador
-        );
-    }
+  if (buscarUsuarioInput) {
+    buscarUsuarioInput.addEventListener(
+      "input",
+      renderizarUsuariosAdministrador
+    );
+  }
 }
 
 function abrirRegistroUsuario() {
-    formularioRegistroUsuario.reset();
-    ocultarMensajeRegistroUsuario();
+  formularioRegistroUsuario.reset();
+  ocultarMensajeRegistroUsuario();
 
-    modalRegistroUsuario.showModal();
+  modalRegistroUsuario.showModal();
 
-    correoRegistroInput.focus();
+  correoRegistroInput.focus();
 }
 
 function cerrarRegistroUsuario() {
-    modalRegistroUsuario.close();
+  modalRegistroUsuario.close();
 }
 
 async function crearCuentaUsuario(evento) {
-    evento.preventDefault();
+  evento.preventDefault();
 
-    const correo =
-        correoRegistroInput.value.trim();
+  const correo =
+    correoRegistroInput.value.trim();
 
-    const contrasena =
-        contrasenaRegistroInput.value;
+  const contrasena =
+    contrasenaRegistroInput.value;
 
-    const repetirContrasena =
-        repetirContrasenaRegistroInput.value;
+  const repetirContrasena =
+    repetirContrasenaRegistroInput.value;
 
-    ocultarMensajeRegistroUsuario();
+  ocultarMensajeRegistroUsuario();
 
-    if (contrasena.length < 8) {
-        mostrarMensajeRegistroUsuario(
-            "La contraseña debe tener al menos 8 caracteres.",
-            true
-        );
+  if (contrasena.length < 8) {
+    mostrarMensajeRegistroUsuario(
+      "La contraseña debe tener al menos 8 caracteres.",
+      true
+    );
 
-        return;
+    return;
+  }
+
+  if (contrasena !== repetirContrasena) {
+    mostrarMensajeRegistroUsuario(
+      "Las contraseñas no coinciden.",
+      true
+    );
+
+    return;
+  }
+
+  botonCrearUsuario.disabled = true;
+  botonCrearUsuario.textContent =
+    "Creando...";
+
+  try {
+    const respuesta =
+      await clienteSupabase.auth.signUp({
+        email: correo,
+        password: contrasena,
+
+        options: {
+          emailRedirectTo:
+            window.location.origin
+        }
+      });
+
+    if (respuesta.error) {
+      throw respuesta.error;
     }
 
-    if (contrasena !== repetirContrasena) {
-        mostrarMensajeRegistroUsuario(
-            "Las contraseñas no coinciden.",
-            true
-        );
+    if (respuesta.data.session) {
+      modalRegistroUsuario.close();
 
-        return;
+      await activarAplicacion(
+        respuesta.data.user
+      );
+
+      mostrarNotificacion(
+        "Cuenta creada correctamente.",
+        false
+      );
+    } else {
+      formularioRegistroUsuario.reset();
+
+      mostrarMensajeRegistroUsuario(
+        "Cuenta creada. Revisá tu correo para confirmarla.",
+        false
+      );
     }
-
-    botonCrearUsuario.disabled = true;
+  } catch (error) {
+    mostrarMensajeRegistroUsuario(
+      "No se pudo crear la cuenta. Verificá el correo y la contraseña.",
+      true
+    );
+  } finally {
+    botonCrearUsuario.disabled = false;
     botonCrearUsuario.textContent =
-        "Creando...";
-
-    try {
-        const respuesta =
-            await clienteSupabase.auth.signUp({
-                email: correo,
-                password: contrasena,
-
-                options: {
-                    emailRedirectTo:
-                        window.location.origin
-                }
-            });
-
-        if (respuesta.error) {
-            throw respuesta.error;
-        }
-
-        if (respuesta.data.session) {
-            modalRegistroUsuario.close();
-
-            await activarAplicacion(
-                respuesta.data.user
-            );
-
-            mostrarNotificacion(
-                "Cuenta creada correctamente.",
-                false
-            );
-        } else {
-            formularioRegistroUsuario.reset();
-
-            mostrarMensajeRegistroUsuario(
-                "Cuenta creada. Revisá tu correo para confirmarla.",
-                false
-            );
-        }
-    } catch (error) {
-        mostrarMensajeRegistroUsuario(
-            "No se pudo crear la cuenta. Verificá el correo y la contraseña.",
-            true
-        );
-    } finally {
-        botonCrearUsuario.disabled = false;
-        botonCrearUsuario.textContent =
-            "Crear cuenta";
-    }
+      "Crear cuenta";
+  }
 }
 
 async function iniciarSesion(evento) {
-    evento.preventDefault();
+  evento.preventDefault();
 
-    const correo =
-        correoAccesoInput.value.trim();
+  const correo =
+    correoAccesoInput.value.trim();
 
-    const contrasena =
-        contrasenaAccesoInput.value;
+  const contrasena =
+    contrasenaAccesoInput.value;
 
-    ocultarMensajeAcceso();
+  ocultarMensajeAcceso();
 
-    botonAcceder.disabled = true;
-    botonAcceder.textContent =
-        "Ingresando...";
+  botonAcceder.disabled = true;
+  botonAcceder.textContent =
+    "Ingresando...";
 
-    try {
-        const respuesta =
-            await clienteSupabase.auth
-                .signInWithPassword({
-                    email: correo,
-                    password: contrasena
-                });
+  try {
+    const respuesta =
+      await clienteSupabase.auth
+        .signInWithPassword({
+          email: correo,
+          password: contrasena
+        });
 
-        if (respuesta.error) {
-            throw respuesta.error;
-        }
-
-        contrasenaAccesoInput.value = "";
-
-        await activarAplicacion(
-            respuesta.data.user
-        );
-    } catch (error) {
-        mostrarMensajeAcceso(
-            "Correo o contraseña incorrectos.",
-            true
-        );
-    } finally {
-        botonAcceder.disabled = false;
-        botonAcceder.textContent =
-            "Ingresar";
+    if (respuesta.error) {
+      throw respuesta.error;
     }
+
+    contrasenaAccesoInput.value = "";
+
+    await activarAplicacion(
+      respuesta.data.user
+    );
+  } catch (error) {
+    mostrarMensajeAcceso(
+      "Correo o contraseña incorrectos.",
+      true
+    );
+  } finally {
+    botonAcceder.disabled = false;
+    botonAcceder.textContent =
+      "Ingresar";
+  }
 }
 
 async function cerrarSesion() {
-    botonCerrarSesion.disabled = true;
+  botonCerrarSesion.disabled = true;
 
-    try {
-        const respuesta =
-            await clienteSupabase.auth.signOut();
+  try {
+    const respuesta =
+      await clienteSupabase.auth.signOut();
 
-        if (respuesta.error) {
-            throw respuesta.error;
-        }
-
-        limpiarSesionLocal();
-        mostrarVistaAcceso();
-    } catch (error) {
-        mostrarNotificacion(
-            "No se pudo cerrar la sesión.",
-            true
-        );
-    } finally {
-        botonCerrarSesion.disabled = false;
+    if (respuesta.error) {
+      throw respuesta.error;
     }
+
+    limpiarSesionLocal();
+    mostrarVistaAcceso();
+  } catch (error) {
+    mostrarNotificacion(
+      "No se pudo cerrar la sesión.",
+      true
+    );
+  } finally {
+    botonCerrarSesion.disabled = false;
+  }
 }
 
 function limpiarSesionLocal() {
-    usuarioActual = null;
-    perfilUsuarioActual = null;
-    registrosActuales = [];
-    usuariosAdministrador = [];
-    cierreActual = null;
-    modoAdministrador = false;
+  usuarioActual = null;
+  perfilUsuarioActual = null;
+  registrosActuales = [];
+  usuariosAdministrador = [];
+  cierreActual = null;
+  modoAdministrador = false;
 
-    if (interruptorRol) {
-        interruptorRol.checked = false;
-    }
+  if (interruptorRol) {
+    interruptorRol.checked = false;
+  }
 
-    if (buscarUsuarioInput) {
-        buscarUsuarioInput.value = "";
-    }
+  if (buscarUsuarioInput) {
+    buscarUsuarioInput.value = "";
+  }
 }
 
 async function activarAplicacion(usuario) {
-    usuarioActual = usuario;
+  usuarioActual = usuario;
 
-    try {
-        perfilUsuarioActual =
-            await obtenerOCrearPerfilUsuario(
-                usuario
-            );
+  try {
+    perfilUsuarioActual =
+      await obtenerOCrearPerfilUsuario(
+        usuario
+      );
 
-        if (
-            perfilUsuarioActual.eliminado === true ||
-            perfilUsuarioActual.activo === false
-        ) {
-            await clienteSupabase.auth.signOut();
+    if (
+      perfilUsuarioActual.eliminado === true ||
+      perfilUsuarioActual.activo === false
+    ) {
+      await clienteSupabase.auth.signOut();
 
-            limpiarSesionLocal();
-            mostrarVistaAcceso();
+      limpiarSesionLocal();
+      mostrarVistaAcceso();
 
-            mostrarMensajeAcceso(
-                perfilUsuarioActual &&
-                perfilUsuarioActual.eliminado === true
-                    ? "Esta cuenta fue eliminada."
-                    : "Esta cuenta se encuentra desactivada.",
-                true
-            );
+      mostrarMensajeAcceso(
+        perfilUsuarioActual &&
+        perfilUsuarioActual.eliminado === true
+          ? "Esta cuenta fue eliminada."
+          : "Esta cuenta se encuentra desactivada.",
+        true
+      );
 
-            return;
-        }
-    } catch (error) {
-        await clienteSupabase.auth.signOut();
-
-        limpiarSesionLocal();
-        mostrarVistaAcceso();
-
-        mostrarMensajeAcceso(
-            "No se pudo verificar el estado de la cuenta.",
-            true
-        );
-
-        return;
+      return;
     }
+  } catch (error) {
+    await clienteSupabase.auth.signOut();
 
-    correoUsuario.textContent =
-        usuario.email || "Usuario";
+    limpiarSesionLocal();
+    mostrarVistaAcceso();
 
-    vistaAcceso.classList.add("oculto");
-    vistaInforme.classList.add("oculto");
-    aplicacion.classList.remove("oculto");
+    mostrarMensajeAcceso(
+      "No se pudo verificar el estado de la cuenta.",
+      true
+    );
 
-    configurarSelectorAdministrador();
-    mostrarModoUsuario();
+    return;
+  }
 
-    await cargarMesSeleccionado();
+  correoUsuario.textContent =
+    usuario.email || "Usuario";
+
+  vistaAcceso.classList.add("oculto");
+  vistaInforme.classList.add("oculto");
+  aplicacion.classList.remove("oculto");
+
+  configurarSelectorAdministrador();
+  mostrarModoUsuario();
+
+  await cargarMesSeleccionado();
 }
 
 async function obtenerOCrearPerfilUsuario(usuario) {
-    let respuesta = await clienteSupabase
-        .from("perfiles_usuarios")
-        .select(
+  let respuesta = await clienteSupabase
+    .from("perfiles_usuarios")
+    .select(
+      "usuario_id, correo, activo, eliminado, creado_en"
+    )
+    .eq(
+      "usuario_id",
+      usuario.id
+    )
+    .maybeSingle();
+
+  if (respuesta.error) {
+    throw respuesta.error;
+  }
+
+  if (respuesta.data) {
+    return respuesta.data;
+  }
+
+  respuesta = await clienteSupabase
+    .from("perfiles_usuarios")
+    .insert({
+      usuario_id:
+        usuario.id,
+
+      correo:
+        usuario.email || ""
+    })
+    .select(
+      "usuario_id, correo, activo, eliminado, creado_en"
+    )
+    .single();
+
+  if (respuesta.error) {
+    if (respuesta.error.code === "23505") {
+      const consulta =
+        await clienteSupabase
+          .from("perfiles_usuarios")
+          .select(
             "usuario_id, correo, activo, eliminado, creado_en"
-        )
-        .eq(
+          )
+          .eq(
             "usuario_id",
             usuario.id
-        )
-        .maybeSingle();
+          )
+          .single();
 
-    if (respuesta.error) {
-        throw respuesta.error;
+      if (consulta.error) {
+        throw consulta.error;
+      }
+
+      return consulta.data;
     }
 
-    if (respuesta.data) {
-        return respuesta.data;
-    }
+    throw respuesta.error;
+  }
 
-    respuesta = await clienteSupabase
-        .from("perfiles_usuarios")
-        .insert({
-            usuario_id:
-                usuario.id,
-
-            correo:
-                usuario.email || ""
-        })
-        .select(
-            "usuario_id, correo, activo, eliminado, creado_en"
-        )
-        .single();
-
-    if (respuesta.error) {
-        if (respuesta.error.code === "23505") {
-            const consulta =
-                await clienteSupabase
-                    .from("perfiles_usuarios")
-                    .select(
-                        "usuario_id, correo, activo, eliminado, creado_en"
-                    )
-                    .eq(
-                        "usuario_id",
-                        usuario.id
-                    )
-                    .single();
-
-            if (consulta.error) {
-                throw consulta.error;
-            }
-
-            return consulta.data;
-        }
-
-        throw respuesta.error;
-    }
-
-    return respuesta.data;
+  return respuesta.data;
 }
 
 function esAdministradorPrincipal() {
-    if (!usuarioActual || !usuarioActual.email) {
-        return false;
-    }
+  if (
+    !usuarioActual ||
+    !usuarioActual.email
+  ) {
+    return false;
+  }
 
-    return (
-        usuarioActual.email
-            .trim()
-            .toLowerCase() ===
-        CORREO_ADMINISTRADOR
-            .toLowerCase()
-    );
+  return (
+    usuarioActual.email
+      .trim()
+      .toLowerCase() ===
+    CORREO_ADMINISTRADOR
+      .toLowerCase()
+  );
 }
 
 function configurarSelectorAdministrador() {
-    if (!selectorRol) {
-        return;
-    }
+  if (!selectorRol) {
+    return;
+  }
 
-    selectorRol.classList.toggle(
-        "oculto",
-        !esAdministradorPrincipal()
-    );
+  selectorRol.classList.toggle(
+    "oculto",
+    !esAdministradorPrincipal()
+  );
 
-    if (interruptorRol) {
-        interruptorRol.checked = false;
-    }
+  if (interruptorRol) {
+    interruptorRol.checked = false;
+  }
 }
 
 async function cambiarModoRol() {
-    if (!interruptorRol) {
-        return;
-    }
+  if (!interruptorRol) {
+    return;
+  }
 
-    if (
-        interruptorRol.checked &&
-        esAdministradorPrincipal()
-    ) {
-        await mostrarModoAdministrador();
-    } else {
-        mostrarModoUsuario();
-    }
+  if (
+    interruptorRol.checked &&
+    esAdministradorPrincipal()
+  ) {
+    await mostrarModoAdministrador();
+  } else {
+    mostrarModoUsuario();
+  }
 }
 
 function mostrarModoUsuario() {
-    modoAdministrador = false;
+  modoAdministrador = false;
 
-    if (interruptorRol) {
-        interruptorRol.checked = false;
-    }
+  if (interruptorRol) {
+    interruptorRol.checked = false;
+  }
 
-    if (contenidoUsuario) {
-        contenidoUsuario.classList.remove(
-            "oculto"
-        );
-    }
+  if (textoRolActual) {
+    textoRolActual.textContent =
+      "Modo usuario";
+  }
 
-    if (panelAdministrador) {
-        panelAdministrador.classList.add(
-            "oculto"
-        );
-    }
+  if (contenidoUsuario) {
+    contenidoUsuario.classList.remove(
+      "oculto"
+    );
+  }
+
+  if (panelAdministrador) {
+    panelAdministrador.classList.add(
+      "oculto"
+    );
+  }
 }
 
 async function mostrarModoAdministrador() {
-    if (!esAdministradorPrincipal()) {
-        mostrarModoUsuario();
-        return;
-    }
+  if (!esAdministradorPrincipal()) {
+    mostrarModoUsuario();
+    return;
+  }
 
-    modoAdministrador = true;
+  modoAdministrador = true;
 
-    if (contenidoUsuario) {
-        contenidoUsuario.classList.add(
-            "oculto"
-        );
-    }
+  if (textoRolActual) {
+    textoRolActual.textContent =
+      "Modo administrador";
+  }
 
-    if (panelAdministrador) {
-        panelAdministrador.classList.remove(
-            "oculto"
-        );
-    }
+  if (contenidoUsuario) {
+    contenidoUsuario.classList.add(
+      "oculto"
+    );
+  }
 
-    await cargarUsuariosAdministrador();
+  if (panelAdministrador) {
+    panelAdministrador.classList.remove(
+      "oculto"
+    );
+  }
+
+  await cargarUsuariosAdministrador();
 }
 
 function mostrarVistaAcceso() {
-    aplicacion.classList.add("oculto");
-    vistaInforme.classList.add("oculto");
-    vistaAcceso.classList.remove("oculto");
+  aplicacion.classList.add("oculto");
+  vistaInforme.classList.add("oculto");
+  vistaAcceso.classList.remove("oculto");
 
-    if (panelAdministrador) {
-        panelAdministrador.classList.add(
-            "oculto"
-        );
-    }
+  if (panelAdministrador) {
+    panelAdministrador.classList.add(
+      "oculto"
+    );
+  }
 
-    ocultarMensajeAdministrador();
-    correoAccesoInput.focus();
+  ocultarMensajeAdministrador();
+  correoAccesoInput.focus();
 }
 
 async function cargarUsuariosAdministrador() {
-    if (!esAdministradorPrincipal()) {
-        return;
+  if (!esAdministradorPrincipal()) {
+    return;
+  }
+
+  ocultarMensajeAdministrador();
+
+  if (listaUsuariosAdministrador) {
+    listaUsuariosAdministrador.innerHTML = `
+      <div class="estado-vacio">
+        <div class="estado-vacio-icono">⌛</div>
+        <h3>Cargando usuarios</h3>
+        <p>Esperá un momento.</p>
+      </div>
+    `;
+  }
+
+  try {
+    const respuesta =
+      await clienteSupabase
+        .from("perfiles_usuarios")
+        .select(
+          "usuario_id, correo, activo, eliminado, creado_en"
+        )
+        .eq(
+          "eliminado",
+          false
+        )
+        .order(
+          "creado_en",
+          {
+            ascending: true
+          }
+        );
+
+    if (respuesta.error) {
+      throw respuesta.error;
     }
 
-    ocultarMensajeAdministrador();
+    usuariosAdministrador =
+      respuesta.data || [];
 
-    if (listaUsuariosAdministrador) {
-        listaUsuariosAdministrador.innerHTML = `
-            <div class="estado-vacio">
-                <div class="estado-vacio-icono">⌛</div>
-                <h3>Cargando usuarios</h3>
-                <p>Esperá un momento.</p>
-            </div>
-        `;
-    }
+    usuariosAdministrador.sort(
+      function (usuarioA, usuarioB) {
+        const correoA =
+          usuarioA.correo || "";
 
-    try {
-        const respuesta =
-            await clienteSupabase
-                .from("perfiles_usuarios")
-                .select(
-                    "usuario_id, correo, activo, eliminado, creado_en"
-                )
-                .eq(
-                    "eliminado",
-                    false
-                )
-                .order(
-                    "creado_en",
-                    {
-                        ascending: true
-                    }
-                );
+        const correoB =
+          usuarioB.correo || "";
 
-        if (respuesta.error) {
-            throw respuesta.error;
+        if (
+          correoA.toLowerCase() ===
+          CORREO_ADMINISTRADOR.toLowerCase()
+        ) {
+          return -1;
         }
 
-        usuariosAdministrador =
-            respuesta.data || [];
+        if (
+          correoB.toLowerCase() ===
+          CORREO_ADMINISTRADOR.toLowerCase()
+        ) {
+          return 1;
+        }
 
-        usuariosAdministrador.sort(
-            function (usuarioA, usuarioB) {
-                const correoA =
-                    usuarioA.correo || "";
-
-                const correoB =
-                    usuarioB.correo || "";
-
-                if (
-                    correoA.toLowerCase() ===
-                    CORREO_ADMINISTRADOR.toLowerCase()
-                ) {
-                    return -1;
-                }
-
-                if (
-                    correoB.toLowerCase() ===
-                    CORREO_ADMINISTRADOR.toLowerCase()
-                ) {
-                    return 1;
-                }
-
-                return correoA.localeCompare(
-                    correoB,
-                    "es"
-                );
-            }
+        return correoA.localeCompare(
+          correoB,
+          "es"
         );
+      }
+    );
 
-        renderizarUsuariosAdministrador();
-    } catch (error) {
-        usuariosAdministrador = [];
-        renderizarUsuariosAdministrador();
+    renderizarUsuariosAdministrador();
+  } catch (error) {
+    usuariosAdministrador = [];
+    renderizarUsuariosAdministrador();
 
-        mostrarMensajeAdministrador(
-            "No se pudieron cargar los usuarios.",
-            true
-        );
-    }
+    mostrarMensajeAdministrador(
+      "No se pudieron cargar los usuarios.",
+      true
+    );
+  }
 }
 
 function renderizarUsuariosAdministrador() {
-    if (
-        !listaUsuariosAdministrador ||
-        !contadorUsuariosAdministrador
-    ) {
-        return;
-    }
+  if (
+    !listaUsuariosAdministrador ||
+    !contadorUsuariosAdministrador
+  ) {
+    return;
+  }
 
-    const textoBusqueda =
-        buscarUsuarioInput
-            ? buscarUsuarioInput.value
-                .trim()
-                .toLowerCase()
-            : "";
+  const textoBusqueda =
+    buscarUsuarioInput
+      ? buscarUsuarioInput.value
+          .trim()
+          .toLowerCase()
+      : "";
 
-    const usuariosFiltrados =
-        usuariosAdministrador.filter(
-            function (usuario) {
-                const correo =
-                    usuario.correo || "";
+  const usuariosFiltrados =
+    usuariosAdministrador.filter(
+      function (usuario) {
+        const correo =
+          usuario.correo || "";
 
-                return correo
-                    .toLowerCase()
-                    .includes(
-                        textoBusqueda
-                    );
-            }
+        return correo
+          .toLowerCase()
+          .includes(
+            textoBusqueda
+          );
+      }
+    );
+
+  contadorUsuariosAdministrador.textContent =
+    usuariosFiltrados.length;
+
+  listaUsuariosAdministrador.innerHTML =
+    "";
+
+  if (usuariosFiltrados.length === 0) {
+    listaUsuariosAdministrador.innerHTML = `
+      <div class="estado-vacio">
+        <div class="estado-vacio-icono">👤</div>
+        <h3>No se encontraron usuarios</h3>
+        <p>Probá con otro correo electrónico.</p>
+      </div>
+    `;
+
+    return;
+  }
+
+  usuariosFiltrados.forEach(
+    function (usuario) {
+      const articulo =
+        document.createElement(
+          "article"
         );
 
-    contadorUsuariosAdministrador.textContent =
-        usuariosFiltrados.length;
+      articulo.className =
+        usuario.activo
+          ? "usuario-administrador"
+          : "usuario-administrador inactivo";
 
-    listaUsuariosAdministrador.innerHTML =
-        "";
+      const informacion =
+        document.createElement(
+          "div"
+        );
 
-    if (usuariosFiltrados.length === 0) {
-        listaUsuariosAdministrador.innerHTML = `
-            <div class="estado-vacio">
-                <div class="estado-vacio-icono">👤</div>
-                <h3>No se encontraron usuarios</h3>
-                <p>Probá con otro correo electrónico.</p>
-            </div>
-        `;
+      informacion.className =
+        "usuario-administrador-informacion";
 
-        return;
-    }
+      const correo =
+        document.createElement(
+          "strong"
+        );
 
-    usuariosFiltrados.forEach(
-        function (usuario) {
-            const articulo =
-                document.createElement(
-                    "article"
-                );
+      correo.className =
+        "usuario-administrador-correo";
 
-            articulo.className =
-                usuario.activo
-                    ? "usuario-administrador"
-                    : "usuario-administrador inactivo";
+      correo.textContent =
+        usuario.correo ||
+        "Correo no disponible";
 
-            const informacion =
-                document.createElement(
-                    "div"
-                );
+      const detalle =
+        document.createElement(
+          "div"
+        );
 
-            informacion.className =
-                "usuario-administrador-informacion";
+      detalle.className =
+        "usuario-administrador-detalle";
 
-            const correo =
-                document.createElement(
-                    "strong"
-                );
+      const estado =
+        document.createElement(
+          "span"
+        );
 
-            correo.className =
-                "usuario-administrador-correo";
+      estado.className =
+        usuario.activo
+          ? "estado-usuario activo"
+          : "estado-usuario inactivo";
 
-            correo.textContent =
-                usuario.correo ||
-                "Correo no disponible";
+      estado.textContent =
+        usuario.activo
+          ? "Cuenta activa"
+          : "Cuenta desactivada";
 
-            const detalle =
-                document.createElement(
-                    "div"
-                );
+      const fecha =
+        document.createElement(
+          "span"
+        );
 
-            detalle.className =
-                "usuario-administrador-detalle";
+      fecha.className =
+        "usuario-administrador-fecha";
 
-            const estado =
-                document.createElement(
-                    "span"
-                );
-
-            estado.className =
-                usuario.activo
-                    ? "estado-usuario activo"
-                    : "estado-usuario inactivo";
-
-            estado.textContent =
-                usuario.activo
-                    ? "Cuenta activa"
-                    : "Cuenta desactivada";
-
-            const fecha =
-                document.createElement(
-                    "span"
-                );
-
-            fecha.className =
-                "usuario-administrador-fecha";
-
-            fecha.textContent =
-                usuario.correo &&
-                usuario.correo.toLowerCase() ===
-                    CORREO_ADMINISTRADOR.toLowerCase()
-                    ? "Administrador principal"
-                    : formatearFechaRegistroUsuario(
-                        usuario.creado_en
-                    );
-
-            detalle.appendChild(estado);
-            detalle.appendChild(fecha);
-
-            informacion.appendChild(correo);
-            informacion.appendChild(detalle);
-
-            const acciones =
-                document.createElement(
-                    "div"
-                );
-
-            acciones.className =
-                "acciones-usuario-administrador";
-
-            const botonEstado =
-                document.createElement(
-                    "button"
-                );
-
-            botonEstado.type = "button";
-
-            botonEstado.className =
-                usuario.activo
-                    ? "boton-estado-usuario"
-                    : "boton-estado-usuario activar";
-
-            botonEstado.textContent =
-                usuario.activo
-                    ? "Desactivar"
-                    : "Activar";
-
-            const botonBorrar =
-                document.createElement(
-                    "button"
-                );
-
-            botonBorrar.type = "button";
-            botonBorrar.className =
-                "boton-borrar-usuario";
-
-            botonBorrar.textContent =
-                "Borrar usuario";
-
-            const esCuentaAdministrador =
-                usuario.correo &&
-                usuario.correo
-                    .toLowerCase() ===
-                    CORREO_ADMINISTRADOR
-                        .toLowerCase();
-
-            botonEstado.disabled =
-                esCuentaAdministrador;
-
-            botonBorrar.disabled =
-                esCuentaAdministrador;
-
-            botonEstado.addEventListener(
-                "click",
-                function () {
-                    cambiarEstadoUsuario(
-                        usuario
-                    );
-                }
+      fecha.textContent =
+        usuario.correo &&
+        usuario.correo.toLowerCase() ===
+          CORREO_ADMINISTRADOR.toLowerCase()
+          ? "Administrador principal"
+          : formatearFechaRegistroUsuario(
+              usuario.creado_en
             );
 
-            botonBorrar.addEventListener(
-                "click",
-                function () {
-                    borrarUsuarioLogicamente(
-                        usuario
-                    );
-                }
-            );
+      detalle.appendChild(estado);
+      detalle.appendChild(fecha);
 
-            acciones.appendChild(
-                botonEstado
-            );
+      informacion.appendChild(correo);
+      informacion.appendChild(detalle);
 
-            acciones.appendChild(
-                botonBorrar
-            );
+      const acciones =
+        document.createElement(
+          "div"
+        );
 
-            articulo.appendChild(
-                informacion
-            );
+      acciones.className =
+        "acciones-usuario-administrador";
 
-            articulo.appendChild(
-                acciones
-            );
+      const botonEstado =
+        document.createElement(
+          "button"
+        );
 
-            listaUsuariosAdministrador.appendChild(
-                articulo
-            );
+      botonEstado.type = "button";
+
+      botonEstado.className =
+        usuario.activo
+          ? "boton-estado-usuario"
+          : "boton-estado-usuario activar";
+
+      botonEstado.textContent =
+        usuario.activo
+          ? "Desactivar"
+          : "Activar";
+
+      const botonBorrar =
+        document.createElement(
+          "button"
+        );
+
+      botonBorrar.type = "button";
+
+      botonBorrar.className =
+        "boton-borrar-usuario";
+
+      botonBorrar.textContent =
+        "Borrar usuario";
+
+      const esCuentaAdministrador =
+        usuario.correo &&
+        usuario.correo
+          .toLowerCase() ===
+          CORREO_ADMINISTRADOR
+            .toLowerCase();
+
+      botonEstado.disabled =
+        esCuentaAdministrador;
+
+      botonBorrar.disabled =
+        esCuentaAdministrador;
+
+      botonEstado.addEventListener(
+        "click",
+        function () {
+          cambiarEstadoUsuario(
+            usuario
+          );
         }
-    );
+      );
+
+      botonBorrar.addEventListener(
+        "click",
+        function () {
+          borrarUsuarioLogicamente(
+            usuario
+          );
+        }
+      );
+
+      acciones.appendChild(
+        botonEstado
+      );
+
+      acciones.appendChild(
+        botonBorrar
+      );
+
+      articulo.appendChild(
+        informacion
+      );
+
+      articulo.appendChild(
+        acciones
+      );
+
+      listaUsuariosAdministrador.appendChild(
+        articulo
+      );
+    }
+  );
 }
 
 async function cambiarEstadoUsuario(usuario) {
-    if (
-        !esAdministradorPrincipal() ||
-        esCorreoAdministrador(
-            usuario.correo
-        )
-    ) {
-        return;
-    }
+  if (
+    !esAdministradorPrincipal() ||
+    esCorreoAdministrador(
+      usuario.correo
+    )
+  ) {
+    return;
+  }
 
-    const nuevoEstado =
-        !usuario.activo;
+  const nuevoEstado =
+    !usuario.activo;
 
-    try {
-        const respuesta =
-            await clienteSupabase
-                .from("perfiles_usuarios")
-                .update({
-                    activo:
-                        nuevoEstado,
+  try {
+    const respuesta =
+      await clienteSupabase
+        .from("perfiles_usuarios")
+        .update({
+          activo:
+            nuevoEstado,
 
-                    actualizado_en:
-                        new Date().toISOString()
-                })
-                .eq(
-                    "usuario_id",
-                    usuario.usuario_id
-                )
-                .eq(
-                    "eliminado",
-                    false
-                )
-                .select("usuario_id")
-                .maybeSingle();
-
-        if (respuesta.error) {
-            throw respuesta.error;
-        }
-
-        if (!respuesta.data) {
-            throw new Error(
-                "No se encontró el usuario."
-            );
-        }
-
-        await cargarUsuariosAdministrador();
-
-        mostrarMensajeAdministrador(
-            nuevoEstado
-                ? "La cuenta fue activada correctamente."
-                : "La cuenta fue desactivada correctamente.",
-            false
-        );
-    } catch (error) {
-        mostrarMensajeAdministrador(
-            "No se pudo cambiar el estado de la cuenta.",
-            true
-        );
-    }
-}
-
-async function borrarUsuarioLogicamente(
-    usuario
-) {
-    if (
-        !esAdministradorPrincipal() ||
-        esCorreoAdministrador(
-            usuario.correo
-        )
-    ) {
-        return;
-    }
-
-    const confirmar = window.confirm(
-        "¿Querés borrar la cuenta " +
-        usuario.correo +
-        "?\n\nEl usuario perderá el acceso, pero sus datos se conservarán."
-    );
-
-    if (!confirmar) {
-        return;
-    }
-
-    try {
-        const respuesta =
-            await clienteSupabase
-                .from("perfiles_usuarios")
-                .update({
-                    activo:
-                        false,
-
-                    eliminado:
-                        true,
-
-                    actualizado_en:
-                        new Date().toISOString()
-                })
-                .eq(
-                    "usuario_id",
-                    usuario.usuario_id
-                )
-                .select("usuario_id")
-                .maybeSingle();
-
-        if (respuesta.error) {
-            throw respuesta.error;
-        }
-
-        if (!respuesta.data) {
-            throw new Error(
-                "No se encontró el usuario."
-            );
-        }
-
-        await cargarUsuariosAdministrador();
-
-        mostrarMensajeAdministrador(
-            "El usuario fue borrado lógicamente.",
-            false
-        );
-    } catch (error) {
-        mostrarMensajeAdministrador(
-            "No se pudo borrar el usuario.",
-            true
-        );
-    }
-}
-
-function esCorreoAdministrador(correo) {
-    return (
-        typeof correo === "string" &&
-        correo.trim().toLowerCase() ===
-            CORREO_ADMINISTRADOR.toLowerCase()
-    );
-}
-
-function formatearFechaRegistroUsuario(
-    fechaTexto
-) {
-    if (!fechaTexto) {
-        return "Fecha no disponible";
-    }
-
-    const fecha =
-        new Date(fechaTexto);
-
-    if (
-        Number.isNaN(
-            fecha.getTime()
-        )
-    ) {
-        return "Fecha no disponible";
-    }
-
-    return (
-        "Registrado el " +
-        new Intl.DateTimeFormat(
-            "es-UY",
-            {
-                day: "2-digit",
-                month: "2-digit",
-                year: "numeric"
-            }
-        ).format(fecha)
-    );
-}
-
-function mostrarMensajeAdministrador(
-    texto,
-    esError
-) {
-    if (!mensajeAdministrador) {
-        return;
-    }
-
-    mensajeAdministrador.textContent =
-        texto;
-
-    mensajeAdministrador.classList.add(
-        "visible"
-    );
-
-    mensajeAdministrador.classList.toggle(
-        "error",
-        esError
-    );
-}
-
-function ocultarMensajeAdministrador() {
-    if (!mensajeAdministrador) {
-        return;
-    }
-
-    mensajeAdministrador.textContent = "";
-
-    mensajeAdministrador.classList.remove(
-        "visible",
-        "error"
-    );
-}
-
-async function agregarRegistroBase(registro) {
-    const respuesta = await clienteSupabase
-        .from("registros_laborales")
-        .insert({
-            usuario_id:
-                usuarioActual.id,
-
-            fecha:
-                registro.fecha,
-
-            minutos:
-                registro.minutos,
-
-            observaciones:
-                registro.observaciones,
-
-            es_licencia:
-                registro.esLicencia
+          actualizado_en:
+            new Date().toISOString()
         })
-        .select()
-        .single();
-
-    if (respuesta.error) {
-        throw respuesta.error;
-    }
-
-    return convertirRegistroSupabase(
-        respuesta.data
-    );
-}
-
-async function eliminarRegistroBase(id) {
-    const respuesta = await clienteSupabase
-        .from("registros_laborales")
-        .delete()
-        .eq("id", id)
         .eq(
-            "usuario_id",
-            usuarioActual.id
-        );
-
-    if (respuesta.error) {
-        throw respuesta.error;
-    }
-}
-
-async function obtenerRegistrosDelMes(mes) {
-    const respuesta = await clienteSupabase
-        .from("registros_laborales")
-        .select(
-            "id, fecha, minutos, observaciones, es_licencia, creado_en"
+          "usuario_id",
+          usuario.usuario_id
         )
         .eq(
-            "usuario_id",
-            usuarioActual.id
+          "eliminado",
+          false
         )
-        .gte(
-            "fecha",
-            mes + "-01"
-        )
-        .lt(
-            "fecha",
-            obtenerInicioMesSiguiente(mes)
-        )
-        .order(
-            "fecha",
-            {
-                ascending: false
-            }
-        );
-
-    if (respuesta.error) {
-        throw respuesta.error;
-    }
-
-    return (
-        respuesta.data || []
-    ).map(
-        convertirRegistroSupabase
-    );
-}
-
-async function obtenerTodosLosRegistros() {
-    const respuesta = await clienteSupabase
-        .from("registros_laborales")
-        .select(
-            "id, fecha, minutos, observaciones, es_licencia, creado_en"
-        )
-        .eq(
-            "usuario_id",
-            usuarioActual.id
-        );
-
-    if (respuesta.error) {
-        throw respuesta.error;
-    }
-
-    return (
-        respuesta.data || []
-    ).map(
-        convertirRegistroSupabase
-    );
-}
-
-async function guardarCierreBase(cierre) {
-    const respuesta = await clienteSupabase
-        .from("cierres_mensuales")
-        .upsert(
-            {
-                usuario_id:
-                    usuarioActual.id,
-
-                mes:
-                    cierre.mes + "-01",
-
-                total_minutos:
-                    cierre.totalMinutos,
-
-                dias_licencia_restantes:
-                    cierre.diasLicenciaRestantes,
-
-                detalle:
-                    cierre,
-
-                creado_en:
-                    cierre.fechaCierre
-            },
-            {
-                onConflict:
-                    "usuario_id,mes"
-            }
-        );
-
-    if (respuesta.error) {
-        throw respuesta.error;
-    }
-}
-
-async function obtenerCierreBase(mes) {
-    const respuesta = await clienteSupabase
-        .from("cierres_mensuales")
-        .select("detalle")
-        .eq(
-            "usuario_id",
-            usuarioActual.id
-        )
-        .eq(
-            "mes",
-            mes + "-01"
-        )
+        .select("usuario_id")
         .maybeSingle();
 
     if (respuesta.error) {
-        throw respuesta.error;
-    }
-
-    return respuesta.data
-        ? respuesta.data.detalle
-        : null;
-}
-
-async function guardarConfiguracion(
-    clave,
-    valor
-) {
-    const respuesta = await clienteSupabase
-        .from("configuracion_licencia")
-        .upsert(
-            {
-                usuario_id:
-                    usuarioActual.id,
-
-                dias_totales:
-                    valor,
-
-                actualizado_en:
-                    new Date().toISOString()
-            },
-            {
-                onConflict:
-                    "usuario_id"
-            }
-        );
-
-    if (respuesta.error) {
-        throw respuesta.error;
-    }
-}
-
-async function obtenerConfiguracion(
-    clave
-) {
-    const respuesta = await clienteSupabase
-        .from("configuracion_licencia")
-        .select("dias_totales")
-        .eq(
-            "usuario_id",
-            usuarioActual.id
-        )
-        .maybeSingle();
-
-    if (respuesta.error) {
-        throw respuesta.error;
+      throw respuesta.error;
     }
 
     if (!respuesta.data) {
-        return null;
+      throw new Error(
+        "No se encontró el usuario."
+      );
     }
 
-    return {
-        clave: clave,
-        valor:
-            respuesta.data.dias_totales
-    };
+    await cargarUsuariosAdministrador();
+
+    mostrarMensajeAdministrador(
+      nuevoEstado
+        ? "La cuenta fue activada correctamente."
+        : "La cuenta fue desactivada correctamente.",
+      false
+    );
+  } catch (error) {
+    mostrarMensajeAdministrador(
+      "No se pudo cambiar el estado de la cuenta.",
+      true
+    );
+  }
+}
+
+async function borrarUsuarioLogicamente(
+  usuario
+) {
+  if (
+    !esAdministradorPrincipal() ||
+    esCorreoAdministrador(
+      usuario.correo
+    )
+  ) {
+    return;
+  }
+
+  const confirmar = window.confirm(
+    "¿Querés borrar la cuenta " +
+      usuario.correo +
+      "?\n\nEl usuario perderá el acceso, pero sus datos se conservarán."
+  );
+
+  if (!confirmar) {
+    return;
+  }
+
+  try {
+    const respuesta =
+      await clienteSupabase
+        .from("perfiles_usuarios")
+        .update({
+          activo:
+            false,
+
+          eliminado:
+            true,
+
+          actualizado_en:
+            new Date().toISOString()
+        })
+        .eq(
+          "usuario_id",
+          usuario.usuario_id
+        )
+        .select("usuario_id")
+        .maybeSingle();
+
+    if (respuesta.error) {
+      throw respuesta.error;
+    }
+
+    if (!respuesta.data) {
+      throw new Error(
+        "No se encontró el usuario."
+      );
+    }
+
+    await cargarUsuariosAdministrador();
+
+    mostrarMensajeAdministrador(
+      "El usuario fue borrado lógicamente.",
+      false
+    );
+  } catch (error) {
+    mostrarMensajeAdministrador(
+      "No se pudo borrar el usuario.",
+      true
+    );
+  }
+}
+
+function esCorreoAdministrador(correo) {
+  return (
+    typeof correo === "string" &&
+    correo.trim().toLowerCase() ===
+      CORREO_ADMINISTRADOR.toLowerCase()
+  );
+}
+
+function formatearFechaRegistroUsuario(
+  fechaTexto
+) {
+  if (!fechaTexto) {
+    return "Fecha no disponible";
+  }
+
+  const fecha =
+    new Date(fechaTexto);
+
+  if (
+    Number.isNaN(
+      fecha.getTime()
+    )
+  ) {
+    return "Fecha no disponible";
+  }
+
+  return (
+    "Registrado el " +
+    new Intl.DateTimeFormat(
+      "es-UY",
+      {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric"
+      }
+    ).format(fecha)
+  );
+}
+
+function mostrarMensajeAdministrador(
+  texto,
+  esError
+) {
+  if (!mensajeAdministrador) {
+    return;
+  }
+
+  mensajeAdministrador.textContent =
+    texto;
+
+  mensajeAdministrador.classList.add(
+    "visible"
+  );
+
+  mensajeAdministrador.classList.toggle(
+    "error",
+    esError
+  );
+}
+
+function ocultarMensajeAdministrador() {
+  if (!mensajeAdministrador) {
+    return;
+  }
+
+  mensajeAdministrador.textContent = "";
+
+  mensajeAdministrador.classList.remove(
+    "visible",
+    "error"
+  );
+}
+
+async function agregarRegistroBase(registro) {
+  const respuesta = await clienteSupabase
+    .from("registros_laborales")
+    .insert({
+      usuario_id:
+        usuarioActual.id,
+
+      fecha:
+        registro.fecha,
+
+      minutos:
+        registro.minutos,
+
+      observaciones:
+        registro.observaciones,
+
+      es_licencia:
+        registro.esLicencia
+    })
+    .select()
+    .single();
+
+  if (respuesta.error) {
+    throw respuesta.error;
+  }
+
+  return convertirRegistroSupabase(
+    respuesta.data
+  );
+}
+
+async function eliminarRegistroBase(id) {
+  const respuesta = await clienteSupabase
+    .from("registros_laborales")
+    .delete()
+    .eq("id", id)
+    .eq(
+      "usuario_id",
+      usuarioActual.id
+    );
+
+  if (respuesta.error) {
+    throw respuesta.error;
+  }
+}
+
+async function obtenerRegistrosDelMes(mes) {
+  const respuesta = await clienteSupabase
+    .from("registros_laborales")
+    .select(
+      "id, fecha, minutos, observaciones, es_licencia, creado_en"
+    )
+    .eq(
+      "usuario_id",
+      usuarioActual.id
+    )
+    .gte(
+      "fecha",
+      mes + "-01"
+    )
+    .lt(
+      "fecha",
+      obtenerInicioMesSiguiente(mes)
+    )
+    .order(
+      "fecha",
+      {
+        ascending: false
+      }
+    );
+
+  if (respuesta.error) {
+    throw respuesta.error;
+  }
+
+  return (
+    respuesta.data || []
+  ).map(
+    convertirRegistroSupabase
+  );
+}
+
+async function obtenerTodosLosRegistros() {
+  const respuesta = await clienteSupabase
+    .from("registros_laborales")
+    .select(
+      "id, fecha, minutos, observaciones, es_licencia, creado_en"
+    )
+    .eq(
+      "usuario_id",
+      usuarioActual.id
+    );
+
+  if (respuesta.error) {
+    throw respuesta.error;
+  }
+
+  return (
+    respuesta.data || []
+  ).map(
+    convertirRegistroSupabase
+  );
+}
+
+async function guardarCierreBase(cierre) {
+  const respuesta = await clienteSupabase
+    .from("cierres_mensuales")
+    .upsert(
+      {
+        usuario_id:
+          usuarioActual.id,
+
+        mes:
+          cierre.mes + "-01",
+
+        total_minutos:
+          cierre.totalMinutos,
+
+        dias_licencia_restantes:
+          cierre.diasLicenciaRestantes,
+
+        detalle:
+          cierre,
+
+        creado_en:
+          cierre.fechaCierre
+      },
+      {
+        onConflict:
+          "usuario_id,mes"
+      }
+    );
+
+  if (respuesta.error) {
+    throw respuesta.error;
+  }
+}
+
+async function obtenerCierreBase(mes) {
+  const respuesta = await clienteSupabase
+    .from("cierres_mensuales")
+    .select("detalle")
+    .eq(
+      "usuario_id",
+      usuarioActual.id
+    )
+    .eq(
+      "mes",
+      mes + "-01"
+    )
+    .maybeSingle();
+
+  if (respuesta.error) {
+    throw respuesta.error;
+  }
+
+  return respuesta.data
+    ? respuesta.data.detalle
+    : null;
+}
+
+async function guardarConfiguracion(
+  clave,
+  valor
+) {
+  const respuesta = await clienteSupabase
+    .from("configuracion_licencia")
+    .upsert(
+      {
+        usuario_id:
+          usuarioActual.id,
+
+        dias_totales:
+          valor,
+
+        actualizado_en:
+          new Date().toISOString()
+      },
+      {
+        onConflict:
+          "usuario_id"
+      }
+    );
+
+  if (respuesta.error) {
+    throw respuesta.error;
+  }
+}
+
+async function obtenerConfiguracion(
+  clave
+) {
+  const respuesta = await clienteSupabase
+    .from("configuracion_licencia")
+    .select("dias_totales")
+    .eq(
+      "usuario_id",
+      usuarioActual.id
+    )
+    .maybeSingle();
+
+  if (respuesta.error) {
+    throw respuesta.error;
+  }
+
+  if (!respuesta.data) {
+    return null;
+  }
+
+  return {
+    clave: clave,
+
+    valor:
+      respuesta.data.dias_totales
+  };
 }
 
 function convertirRegistroSupabase(fila) {
-    return {
-        id:
-            fila.id,
+  return {
+    id:
+      fila.id,
 
-        fecha:
-            fila.fecha,
+    fecha:
+      fila.fecha,
 
-        mes:
-            fila.fecha.substring(0, 7),
+    mes:
+      fila.fecha.substring(0, 7),
 
-        minutos:
-            Number(fila.minutos),
+    minutos:
+      Number(fila.minutos),
 
-        observaciones:
-            fila.observaciones || "",
+    observaciones:
+      fila.observaciones || "",
 
-        esLicencia:
-            fila.es_licencia === true,
+    esLicencia:
+      fila.es_licencia === true,
 
-        creadoEn:
-            fila.creado_en
-    };
+    creadoEn:
+      fila.creado_en
+  };
 }
 
 async function guardarCantidadLicencia(
-    evento
+  evento
 ) {
-    evento.preventDefault();
+  evento.preventDefault();
 
-    const cantidad = Number(
-        diasLicenciaTotalesInput.value
+  const cantidad = Number(
+    diasLicenciaTotalesInput.value
+  );
+
+  if (
+    !Number.isInteger(cantidad) ||
+    cantidad < 0
+  ) {
+    mostrarNotificacion(
+      "Ingresá una cantidad válida de días.",
+      true
     );
 
-    if (
-        !Number.isInteger(cantidad) ||
-        cantidad < 0
-    ) {
-        mostrarNotificacion(
-            "Ingresá una cantidad válida de días.",
-            true
-        );
+    return;
+  }
 
-        return;
-    }
+  try {
+    await guardarConfiguracion(
+      "diasLicenciaTotales",
+      cantidad
+    );
 
-    try {
-        await guardarConfiguracion(
-            "diasLicenciaTotales",
-            cantidad
-        );
+    diasLicenciaTotales = cantidad;
 
-        diasLicenciaTotales = cantidad;
+    await actualizarSaldoLicencia();
 
-        await actualizarSaldoLicencia();
-
-        mostrarNotificacion(
-            "Cantidad de días guardada.",
-            false
-        );
-    } catch (error) {
-        mostrarNotificacion(
-            "No se pudo guardar la cantidad de días.",
-            true
-        );
-    }
+    mostrarNotificacion(
+      "Cantidad de días guardada.",
+      false
+    );
+  } catch (error) {
+    mostrarNotificacion(
+      "No se pudo guardar la cantidad de días.",
+      true
+    );
+  }
 }
 
 async function actualizarSaldoLicencia() {
-    const configuracion =
-        await obtenerConfiguracion(
-            "diasLicenciaTotales"
+  const configuracion =
+    await obtenerConfiguracion(
+      "diasLicenciaTotales"
+    );
+
+  const todosLosRegistros =
+    await obtenerTodosLosRegistros();
+
+  diasLicenciaTotales =
+    configuracion
+      ? Number(
+          configuracion.valor
+        )
+      : 0;
+
+  const fechasDeLicencia =
+    new Set();
+
+  todosLosRegistros.forEach(
+    function (registro) {
+      if (registro.esLicencia) {
+        fechasDeLicencia.add(
+          registro.fecha
         );
+      }
+    }
+  );
 
-    const todosLosRegistros =
-        await obtenerTodosLosRegistros();
+  diasLicenciaUsados =
+    fechasDeLicencia.size;
 
-    diasLicenciaTotales =
-        configuracion
-            ? Number(
-                configuracion.valor
-            )
-            : 0;
+  const diasRestantes = Math.max(
+    diasLicenciaTotales -
+      diasLicenciaUsados,
+    0
+  );
 
-    const fechasDeLicencia =
-        new Set();
-
-    todosLosRegistros.forEach(
-        function (registro) {
-            if (registro.esLicencia) {
-                fechasDeLicencia.add(
-                    registro.fecha
-                );
-            }
-        }
+  diasLicenciaRestantesTexto.textContent =
+    diasRestantes +
+    (
+      diasRestantes === 1
+        ? " día disponible"
+        : " días disponibles"
     );
 
-    diasLicenciaUsados =
-        fechasDeLicencia.size;
+  detalleDiasLicencia.textContent =
+    diasLicenciaUsados +
+    " utilizados de " +
+    diasLicenciaTotales +
+    " configurados";
 
-    const diasRestantes = Math.max(
-        diasLicenciaTotales -
-            diasLicenciaUsados,
-        0
-    );
+  diasLicenciaTotalesInput.value =
+    diasLicenciaTotales;
 
-    diasLicenciaRestantesTexto.textContent =
-        diasRestantes +
-        (
-            diasRestantes === 1
-                ? " día disponible"
-                : " días disponibles"
-        );
-
-    detalleDiasLicencia.textContent =
-        diasLicenciaUsados +
-        " utilizados de " +
-        diasLicenciaTotales +
-        " configurados";
-
-    diasLicenciaTotalesInput.value =
-        diasLicenciaTotales;
-
-    panelSaldoLicencia.classList.toggle(
-        "sin-saldo",
-        diasRestantes === 0
-    );
+  panelSaldoLicencia.classList.toggle(
+    "sin-saldo",
+    diasRestantes === 0
+  );
 }
 
 async function guardarRegistro(evento) {
-    evento.preventDefault();
+  evento.preventDefault();
 
-    const fecha =
-        fechaInput.value;
+  const fecha =
+    fechaInput.value;
 
-    const horasDecimales =
-        convertirHorasDecimales(
-            horasInput.value
+  const horasDecimales =
+    convertirHorasDecimales(
+      horasInput.value
+    );
+
+  const esLicencia =
+    licenciaInput.checked;
+
+  const observaciones =
+    observacionesInput.value.trim();
+
+  ocultarMensajeFormulario();
+
+  if (!fecha) {
+    mostrarMensajeFormulario(
+      "Ingresá una fecha válida.",
+      true
+    );
+
+    return;
+  }
+
+  if (horasDecimales === null) {
+    mostrarMensajeFormulario(
+      "Ingresá una cantidad válida, por ejemplo 6,5.",
+      true
+    );
+
+    return;
+  }
+
+  try {
+    if (esLicencia) {
+      const todosLosRegistros =
+        await obtenerTodosLosRegistros();
+
+      const fechaYaMarcada =
+        todosLosRegistros.some(
+          function (registro) {
+            return (
+              registro.esLicencia &&
+              registro.fecha === fecha
+            );
+          }
         );
 
-    const esLicencia =
-        licenciaInput.checked;
+      const diasRestantes =
+        diasLicenciaTotales -
+        diasLicenciaUsados;
 
-    const observaciones =
-        observacionesInput.value.trim();
-
-    ocultarMensajeFormulario();
-
-    if (!fecha) {
+      if (
+        !fechaYaMarcada &&
+        diasRestantes <= 0
+      ) {
         mostrarMensajeFormulario(
-            "Ingresá una fecha válida.",
-            true
+          "No quedan días de licencia disponibles.",
+          true
         );
 
         return;
+      }
     }
 
-    if (horasDecimales === null) {
-        mostrarMensajeFormulario(
-            "Ingresá una cantidad válida, por ejemplo 6,5.",
-            true
-        );
+    const registro = {
+      fecha:
+        fecha,
 
-        return;
-    }
+      mes:
+        fecha.substring(0, 7),
 
-    try {
-        if (esLicencia) {
-            const todosLosRegistros =
-                await obtenerTodosLosRegistros();
+      minutos:
+        Math.round(
+          horasDecimales * 60
+        ),
 
-            const fechaYaMarcada =
-                todosLosRegistros.some(
-                    function (registro) {
-                        return (
-                            registro.esLicencia &&
-                            registro.fecha === fecha
-                        );
-                    }
-                );
+      observaciones:
+        observaciones,
 
-            const diasRestantes =
-                diasLicenciaTotales -
-                diasLicenciaUsados;
+      esLicencia:
+        esLicencia,
 
-            if (
-                !fechaYaMarcada &&
-                diasRestantes <= 0
-            ) {
-                mostrarMensajeFormulario(
-                    "No quedan días de licencia disponibles.",
-                    true
-                );
+      creadoEn:
+        new Date().toISOString()
+    };
 
-                return;
-            }
-        }
+    await agregarRegistroBase(
+      registro
+    );
 
-        const registro = {
-            fecha:
-                fecha,
+    horasInput.value = "";
+    observacionesInput.value = "";
+    licenciaInput.checked = false;
 
-            mes:
-                fecha.substring(0, 7),
+    mesSeleccionadoInput.value =
+      registro.mes;
 
-            minutos:
-                Math.round(
-                    horasDecimales * 60
-                ),
+    await cargarMesSeleccionado();
 
-            observaciones:
-                observaciones,
+    mostrarMensajeFormulario(
+      esLicencia
+        ? "Día de licencia guardado y descontado."
+        : "Jornada guardada correctamente.",
+      false
+    );
+  } catch (error) {
+    const mensaje =
+      error &&
+      error.code === "23505"
+        ? "Ya existe una jornada registrada para esa fecha."
+        : "No se pudo guardar el registro.";
 
-            esLicencia:
-                esLicencia,
-
-            creadoEn:
-                new Date().toISOString()
-        };
-
-        await agregarRegistroBase(
-            registro
-        );
-
-        horasInput.value = "";
-        observacionesInput.value = "";
-        licenciaInput.checked = false;
-
-        mesSeleccionadoInput.value =
-            registro.mes;
-
-        await cargarMesSeleccionado();
-
-        mostrarMensajeFormulario(
-            esLicencia
-                ? "Día de licencia guardado y descontado."
-                : "Jornada guardada correctamente.",
-            false
-        );
-    } catch (error) {
-        const mensaje =
-            error &&
-            error.code === "23505"
-                ? "Ya existe una jornada registrada para esa fecha."
-                : "No se pudo guardar el registro.";
-
-        mostrarMensajeFormulario(
-            mensaje,
-            true
-        );
-    }
+    mostrarMensajeFormulario(
+      mensaje,
+      true
+    );
+  }
 }
 
 async function cargarMesSeleccionado() {
-    const mes =
-        mesSeleccionadoInput.value;
+  const mes =
+    mesSeleccionadoInput.value;
 
-    if (!mes || !usuarioActual) {
-        return;
-    }
+  if (!mes || !usuarioActual) {
+    return;
+  }
 
-    try {
-        registrosActuales =
-            await obtenerRegistrosDelMes(
-                mes
-            );
+  try {
+    registrosActuales =
+      await obtenerRegistrosDelMes(
+        mes
+      );
 
-        cierreActual =
-            await obtenerCierreBase(
-                mes
-            );
+    cierreActual =
+      await obtenerCierreBase(
+        mes
+      );
 
-        registrosActuales.sort(
-            function (
-                registroA,
-                registroB
-            ) {
-                return registroB.fecha
-                    .localeCompare(
-                        registroA.fecha
-                    );
-            }
-        );
+    registrosActuales.sort(
+      function (
+        registroA,
+        registroB
+      ) {
+        return registroB.fecha
+          .localeCompare(
+            registroA.fecha
+          );
+      }
+    );
 
-        await actualizarSaldoLicencia();
+    await actualizarSaldoLicencia();
 
-        renderizarResumen();
-        renderizarRegistros();
-    } catch (error) {
-        mostrarNotificacion(
-            "No se pudieron cargar los registros.",
-            true
-        );
-    }
+    renderizarResumen();
+    renderizarRegistros();
+  } catch (error) {
+    mostrarNotificacion(
+      "No se pudieron cargar los registros.",
+      true
+    );
+  }
 }
 
 function renderizarResumen() {
-    const totalMinutos =
-        calcularTotalMinutos(
-            registrosActuales
-        );
+  const totalMinutos =
+    calcularTotalMinutos(
+      registrosActuales
+    );
 
-    const cantidad =
-        registrosActuales.length;
+  const cantidad =
+    registrosActuales.length;
 
-    tituloMes.textContent =
-        obtenerNombreMes(
-            mesSeleccionadoInput.value
-        );
+  tituloMes.textContent =
+    obtenerNombreMes(
+      mesSeleccionadoInput.value
+    );
 
-    cantidadJornadas.textContent =
-        cantidad +
-        (
-            cantidad === 1
-                ? " día registrado"
-                : " días registrados"
-        );
+  cantidadJornadas.textContent =
+    cantidad +
+    (
+      cantidad === 1
+        ? " día registrado"
+        : " días registrados"
+    );
 
-    totalHoras.textContent =
-        mostrarHoras(totalMinutos);
+  totalHoras.textContent =
+    mostrarHoras(totalMinutos);
 
-    totalModalCierre.textContent =
-        mostrarHoras(totalMinutos);
+  totalModalCierre.textContent =
+    mostrarHoras(totalMinutos);
 
-    contadorRegistros.textContent =
-        cantidad;
+  contadorRegistros.textContent =
+    cantidad;
 
-    botonCerrarMes.disabled =
-        cantidad === 0;
+  botonCerrarMes.disabled =
+    cantidad === 0;
 
-    botonCerrarMes.textContent =
-        cierreActual
-            ? "✓ Actualizar cierre"
-            : "✓ Pasar raya";
+  botonCerrarMes.textContent =
+    cierreActual
+      ? "✓ Actualizar cierre"
+      : "✓ Pasar raya";
 }
 
 function renderizarRegistros() {
-    listaRegistros.innerHTML = "";
+  listaRegistros.innerHTML = "";
 
-    if (
-        registrosActuales.length === 0
-    ) {
-        listaRegistros.innerHTML = `
-            <div class="estado-vacio">
-                <div class="estado-vacio-icono">
-                    🗓
-                </div>
+  if (
+    registrosActuales.length === 0
+  ) {
+    listaRegistros.innerHTML = `
+      <div class="estado-vacio">
+        <div class="estado-vacio-icono">
+          🗓
+        </div>
 
-                <h3>
-                    Todavía no hay registros
-                </h3>
+        <h3>
+          Todavía no hay registros
+        </h3>
 
-                <p>
-                    Agregá tu primera jornada de este mes.
-                </p>
-            </div>
-        `;
+        <p>
+          Agregá tu primera jornada de este mes.
+        </p>
+      </div>
+    `;
 
-        return;
-    }
+    return;
+  }
 
-    registrosActuales.forEach(
-        function (registro) {
-            const articulo =
-                document.createElement(
-                    "article"
-                );
+  registrosActuales.forEach(
+    function (registro) {
+      const articulo =
+        document.createElement(
+          "article"
+        );
 
-            articulo.className =
-                registro.esLicencia
-                    ? "registro registro-licencia"
-                    : "registro";
+      articulo.className =
+        registro.esLicencia
+          ? "registro registro-licencia"
+          : "registro";
 
-            const fecha =
-                document.createElement(
-                    "div"
-                );
+      const fecha =
+        document.createElement(
+          "div"
+        );
 
-            fecha.className =
-                "registro-fecha";
+      fecha.className =
+        "registro-fecha";
 
-            fecha.textContent =
-                mostrarFecha(
-                    registro.fecha
-                );
+      fecha.textContent =
+        mostrarFecha(
+          registro.fecha
+        );
 
-            const contenido =
-                document.createElement(
-                    "div"
-                );
+      const contenido =
+        document.createElement(
+          "div"
+        );
 
-            contenido.className =
-                "registro-contenido";
+      contenido.className =
+        "registro-contenido";
 
-            const horas =
-                document.createElement(
-                    "strong"
-                );
+      const horas =
+        document.createElement(
+          "strong"
+        );
 
-            horas.textContent =
-                mostrarHoras(
-                    registro.minutos
-                );
+      horas.textContent =
+        mostrarHoras(
+          registro.minutos
+        );
 
-            const observacion =
-                document.createElement(
-                    "p"
-                );
+      const observacion =
+        document.createElement(
+          "p"
+        );
 
-            observacion.textContent =
-                registro.observaciones ||
-                "Sin observaciones";
+      observacion.textContent =
+        registro.observaciones ||
+        "Sin observaciones";
 
-            contenido.appendChild(
-                horas
-            );
+      contenido.appendChild(
+        horas
+      );
 
-            contenido.appendChild(
-                observacion
-            );
+      contenido.appendChild(
+        observacion
+      );
 
-            if (
-                registro.esLicencia
-            ) {
-                const distintivo =
-                    document.createElement(
-                        "span"
-                    );
+      if (
+        registro.esLicencia
+      ) {
+        const distintivo =
+          document.createElement(
+            "span"
+          );
 
-                distintivo.className =
-                    "distintivo-licencia";
+        distintivo.className =
+          "distintivo-licencia";
 
-                distintivo.textContent =
-                    "Licencia";
+        distintivo.textContent =
+          "Licencia";
 
-                contenido.appendChild(
-                    distintivo
-                );
-            }
+        contenido.appendChild(
+          distintivo
+        );
+      }
 
-            const botonEliminar =
-                document.createElement(
-                    "button"
-                );
+      const botonEliminar =
+        document.createElement(
+          "button"
+        );
 
-            botonEliminar.type =
-                "button";
+      botonEliminar.type =
+        "button";
 
-            botonEliminar.className =
-                "boton-eliminar";
+      botonEliminar.className =
+        "boton-eliminar";
 
-            botonEliminar.textContent =
-                "🗑";
+      botonEliminar.textContent =
+        "🗑";
 
-            botonEliminar.setAttribute(
-                "aria-label",
-                "Eliminar registro"
-            );
+      botonEliminar.setAttribute(
+        "aria-label",
+        "Eliminar registro"
+      );
 
-            botonEliminar.addEventListener(
-                "click",
-                function () {
-                    confirmarEliminacion(
-                        registro.id
-                    );
-                }
-            );
-
-            articulo.appendChild(
-                fecha
-            );
-
-            articulo.appendChild(
-                contenido
-            );
-
-            articulo.appendChild(
-                botonEliminar
-            );
-
-            listaRegistros.appendChild(
-                articulo
-            );
+      botonEliminar.addEventListener(
+        "click",
+        function () {
+          confirmarEliminacion(
+            registro.id
+          );
         }
-    );
+      );
+
+      articulo.appendChild(
+        fecha
+      );
+
+      articulo.appendChild(
+        contenido
+      );
+
+      articulo.appendChild(
+        botonEliminar
+      );
+
+      listaRegistros.appendChild(
+        articulo
+      );
+    }
+  );
 }
 
 async function confirmarEliminacion(id) {
-    const confirmar = window.confirm(
-        "¿Querés eliminar este registro?"
+  const confirmar = window.confirm(
+    "¿Querés eliminar este registro?"
+  );
+
+  if (!confirmar) {
+    return;
+  }
+
+  try {
+    await eliminarRegistroBase(id);
+    await cargarMesSeleccionado();
+
+    mostrarNotificacion(
+      "Registro eliminado correctamente.",
+      false
     );
-
-    if (!confirmar) {
-        return;
-    }
-
-    try {
-        await eliminarRegistroBase(id);
-        await cargarMesSeleccionado();
-
-        mostrarNotificacion(
-            "Registro eliminado correctamente.",
-            false
-        );
-    } catch (error) {
-        mostrarNotificacion(
-            "No se pudo eliminar el registro.",
-            true
-        );
-    }
+  } catch (error) {
+    mostrarNotificacion(
+      "No se pudo eliminar el registro.",
+      true
+    );
+  }
 }
 
 function abrirCierre() {
-    if (
-        registrosActuales.length === 0
-    ) {
-        return;
-    }
+  if (
+    registrosActuales.length === 0
+  ) {
+    return;
+  }
 
-    totalModalCierre.textContent =
-        mostrarHoras(
-            calcularTotalMinutos(
-                registrosActuales
-            )
-        );
+  totalModalCierre.textContent =
+    mostrarHoras(
+      calcularTotalMinutos(
+        registrosActuales
+      )
+    );
 
-    modalCierre.showModal();
+  modalCierre.showModal();
 }
 
 function cerrarModalCierre() {
-    modalCierre.close();
+  modalCierre.close();
 }
 
 async function generarCierre(evento) {
-    evento.preventDefault();
+  evento.preventDefault();
 
-    const nombre =
-        nombreTrabajadorInput.value.trim();
+  const nombre =
+    nombreTrabajadorInput.value.trim();
 
-    if (!nombre) {
-        return;
-    }
+  if (!nombre) {
+    return;
+  }
 
-    localStorage.setItem(
-        "nombreTrabajador",
-        nombre
+  localStorage.setItem(
+    "nombreTrabajador",
+    nombre
+  );
+
+  const mes =
+    mesSeleccionadoInput.value;
+
+  const cierre = {
+    version: 1,
+    mes: mes,
+    trabajador: nombre,
+
+    totalMinutos:
+      calcularTotalMinutos(
+        registrosActuales
+      ),
+
+    fechaCierre:
+      new Date().toISOString(),
+
+    identificador:
+      generarIdentificador(),
+
+    diasLicenciaTotales:
+      diasLicenciaTotales,
+
+    diasLicenciaUsados:
+      diasLicenciaUsados,
+
+    diasLicenciaRestantes:
+      Math.max(
+        diasLicenciaTotales -
+          diasLicenciaUsados,
+        0
+      ),
+
+    registros:
+      registrosActuales
+        .slice()
+        .sort(function (a, b) {
+          return a.fecha.localeCompare(
+            b.fecha
+          );
+        })
+        .map(function (registro) {
+          return {
+            fecha:
+              registro.fecha,
+
+            minutos:
+              registro.minutos,
+
+            observaciones:
+              registro.observaciones,
+
+            esLicencia:
+              registro.esLicencia ===
+              true
+          };
+        })
+  };
+
+  try {
+    await guardarCierreBase(
+      cierre
     );
 
-    const mes =
-        mesSeleccionadoInput.value;
+    cierreActual = cierre;
 
-    const cierre = {
-        version: 1,
-        mes: mes,
-        trabajador: nombre,
+    modalCierre.close();
 
-        totalMinutos:
-            calcularTotalMinutos(
-                registrosActuales
-            ),
-
-        fechaCierre:
-            new Date().toISOString(),
-
-        identificador:
-            generarIdentificador(),
-
-        diasLicenciaTotales:
-            diasLicenciaTotales,
-
-        diasLicenciaUsados:
-            diasLicenciaUsados,
-
-        diasLicenciaRestantes:
-            Math.max(
-                diasLicenciaTotales -
-                    diasLicenciaUsados,
-                0
-            ),
-
-        registros:
-            registrosActuales
-                .slice()
-                .sort(function (a, b) {
-                    return a.fecha.localeCompare(
-                        b.fecha
-                    );
-                })
-                .map(function (registro) {
-                    return {
-                        fecha:
-                            registro.fecha,
-
-                        minutos:
-                            registro.minutos,
-
-                        observaciones:
-                            registro.observaciones,
-
-                        esLicencia:
-                            registro.esLicencia ===
-                            true
-                    };
-                })
-    };
-
-    try {
-        await guardarCierreBase(
-            cierre
-        );
-
-        cierreActual = cierre;
-
-        modalCierre.close();
-
-        mostrarInforme(
-            cierre,
-            false
-        );
-    } catch (error) {
-        mostrarNotificacion(
-            "No se pudo guardar el cierre.",
-            true
-        );
-    }
+    mostrarInforme(
+      cierre,
+      false
+    );
+  } catch (error) {
+    mostrarNotificacion(
+      "No se pudo guardar el cierre.",
+      true
+    );
+  }
 }
 
 function mostrarInforme(
-    cierre,
-    esPublico
+  cierre,
+  esPublico
 ) {
-    cierreActual = cierre;
+  cierreActual = cierre;
 
-    enlaceInformeActual =
-        crearEnlaceInforme(
-            cierre
-        );
+  enlaceInformeActual =
+    crearEnlaceInforme(
+      cierre
+    );
 
-    document.getElementById(
-        "informeTrabajador"
-    ).textContent =
-        cierre.trabajador;
+  document.getElementById(
+    "informeTrabajador"
+  ).textContent =
+    cierre.trabajador;
 
-    document.getElementById(
-        "informePeriodo"
-    ).textContent =
-        obtenerNombreMes(
-            cierre.mes
-        );
+  document.getElementById(
+    "informePeriodo"
+  ).textContent =
+    obtenerNombreMes(
+      cierre.mes
+    );
 
-    document.getElementById(
-        "informeFechaCierre"
-    ).textContent =
-        formatearFechaHora(
-            cierre.fechaCierre
-        );
+  document.getElementById(
+    "informeFechaCierre"
+  ).textContent =
+    formatearFechaHora(
+      cierre.fechaCierre
+    );
 
-    document.getElementById(
-        "informeTotal"
-    ).textContent =
-        mostrarHoras(
-            cierre.totalMinutos
-        );
+  document.getElementById(
+    "informeTotal"
+  ).textContent =
+    mostrarHoras(
+      cierre.totalMinutos
+    );
 
-    const diasRestantes =
-        Number.isFinite(
-            Number(
-                cierre.diasLicenciaRestantes
-            )
+  const diasRestantes =
+    Number.isFinite(
+      Number(
+        cierre.diasLicenciaRestantes
+      )
+    )
+      ? Number(
+          cierre.diasLicenciaRestantes
         )
-            ? Number(
-                cierre.diasLicenciaRestantes
-            )
-            : 0;
+      : 0;
 
+  document.getElementById(
+    "informeLicenciaRestante"
+  ).textContent =
+    diasRestantes +
+    (
+      diasRestantes === 1
+        ? " día"
+        : " días"
+    );
+
+  document.getElementById(
+    "identificadorInforme"
+  ).textContent =
+    "Identificador: " +
+    cierre.identificador;
+
+  const cuerpoInforme =
     document.getElementById(
-        "informeLicenciaRestante"
-    ).textContent =
-        diasRestantes +
-        (
-            diasRestantes === 1
-                ? " día"
-                : " días"
+      "cuerpoInforme"
+    );
+
+  cuerpoInforme.innerHTML = "";
+
+  cierre.registros.forEach(
+    function (registro) {
+      const fila =
+        document.createElement(
+          "tr"
         );
 
-    document.getElementById(
-        "identificadorInforme"
-    ).textContent =
-        "Identificador: " +
-        cierre.identificador;
-
-    const cuerpoInforme =
-        document.getElementById(
-            "cuerpoInforme"
+      if (
+        registro.esLicencia
+      ) {
+        fila.classList.add(
+          "fila-licencia"
         );
+      }
 
-    cuerpoInforme.innerHTML = "";
+      fila.innerHTML = `
+        <td>
+          ${mostrarFechaCompleta(
+            registro.fecha
+          )}
+        </td>
 
-    cierre.registros.forEach(
-        function (registro) {
-            const fila =
-                document.createElement(
-                    "tr"
-                );
+        <td>
+          ${mostrarHoras(
+            registro.minutos
+          )}
+        </td>
 
-            if (
-                registro.esLicencia
-            ) {
-                fila.classList.add(
-                    "fila-licencia"
-                );
-            }
+        <td>
+          ${escaparHTML(
+            registro.observaciones ||
+            "Sin observaciones"
+          )}
+        </td>
+      `;
 
-            fila.innerHTML = `
-                <td>
-                    ${mostrarFechaCompleta(
-                        registro.fecha
-                    )}
-                </td>
+      cuerpoInforme.appendChild(
+        fila
+      );
+    }
+  );
 
-                <td>
-                    ${mostrarHoras(
-                        registro.minutos
-                    )}
-                </td>
+  vistaAcceso.classList.add(
+    "oculto"
+  );
 
-                <td>
-                    ${escaparHTML(
-                        registro.observaciones ||
-                        "Sin observaciones"
-                    )}
-                </td>
-            `;
+  aplicacion.classList.add(
+    "oculto"
+  );
 
-            cuerpoInforme.appendChild(
-                fila
-            );
-        }
-    );
+  vistaInforme.classList.remove(
+    "oculto"
+  );
 
-    vistaAcceso.classList.add(
-        "oculto"
-    );
+  botonVolver.classList.toggle(
+    "oculto",
+    esPublico
+  );
 
-    aplicacion.classList.add(
-        "oculto"
-    );
-
-    vistaInforme.classList.remove(
-        "oculto"
-    );
-
-    botonVolver.classList.toggle(
-        "oculto",
-        esPublico
-    );
-
-    window.scrollTo(0, 0);
+  window.scrollTo(0, 0);
 }
 
 function volverAplicacion() {
-    vistaInforme.classList.add(
-        "oculto"
-    );
+  vistaInforme.classList.add(
+    "oculto"
+  );
 
-    aplicacion.classList.remove(
-        "oculto"
-    );
+  aplicacion.classList.remove(
+    "oculto"
+  );
 
-    if (modoAdministrador) {
-        mostrarModoAdministrador();
-    } else {
-        mostrarModoUsuario();
-        cargarMesSeleccionado();
-    }
+  if (modoAdministrador) {
+    mostrarModoAdministrador();
+  } else {
+    mostrarModoUsuario();
+    cargarMesSeleccionado();
+  }
 }
 
 function imprimirInforme() {
-    window.print();
+  window.print();
 }
 
 function descargarPDF() {
-    html2pdf()
-        .set({
-            margin: 8,
+  html2pdf()
+    .set({
+      margin: 8,
 
-            filename:
-                "registro-laboral-" +
-                cierreActual.mes +
-                ".pdf",
+      filename:
+        "registro-laboral-" +
+        cierreActual.mes +
+        ".pdf",
 
-            pagebreak: {
-                mode: [
-                    "css",
-                    "legacy"
-                ],
+      pagebreak: {
+        mode: [
+          "css",
+          "legacy"
+        ],
 
-                avoid: [
-                    ".tabla-informe tr"
-                ]
-            },
+        avoid: [
+          ".tabla-informe tr"
+        ]
+      },
 
-            html2canvas: {
-                scale: 2
-            },
+      html2canvas: {
+        scale: 2
+      },
 
-            jsPDF: {
-                unit: "mm",
-                format: "a4"
-            }
-        })
-        .from(
-            document.getElementById(
-                "informeImprimible"
-            )
-        )
-        .save();
+      jsPDF: {
+        unit: "mm",
+        format: "a4"
+      }
+    })
+    .from(
+      document.getElementById(
+        "informeImprimible"
+      )
+    )
+    .save();
 }
 
 function mostrarCodigoQR() {
-    enlaceInformeActual =
-        crearEnlaceInforme(
-            cierreActual
-        );
+  enlaceInformeActual =
+    crearEnlaceInforme(
+      cierreActual
+    );
 
-    codigoQR.innerHTML = "";
+  codigoQR.innerHTML = "";
 
-    try {
-        new QRCode(
-            codigoQR,
-            {
-                text:
-                    enlaceInformeActual,
+  try {
+    new QRCode(
+      codigoQR,
+      {
+        text:
+          enlaceInformeActual,
 
-                width:
-                    220,
+        width:
+          220,
 
-                height:
-                    220,
+        height:
+          220,
 
-                colorDark:
-                    "#173734",
+        colorDark:
+          "#173734",
 
-                colorLight:
-                    "#ffffff",
+        colorLight:
+          "#ffffff",
 
-                correctLevel:
-                    QRCode.CorrectLevel.L
-            }
-        );
+        correctLevel:
+          QRCode.CorrectLevel.L
+      }
+    );
 
-        advertenciaQR.textContent =
-            window.location.protocol ===
-            "file:"
-                ? "Publicá primero la aplicación para abrirlo desde otro dispositivo."
-                : "Cualquier persona con este código podrá ver el informe.";
+    advertenciaQR.textContent =
+      window.location.protocol ===
+      "file:"
+        ? "Publicá primero la aplicación para abrirlo desde otro dispositivo."
+        : "Cualquier persona con este código podrá ver el informe.";
 
-        modalQR.showModal();
-    } catch (error) {
-        mostrarNotificacion(
-            "El informe es demasiado extenso para generar el código QR.",
-            true
-        );
-    }
+    modalQR.showModal();
+  } catch (error) {
+    mostrarNotificacion(
+      "El informe es demasiado extenso para generar el código QR.",
+      true
+    );
+  }
 }
 
 async function compartirInforme() {
-    enlaceInformeActual =
-        crearEnlaceInforme(
-            cierreActual
-        );
+  enlaceInformeActual =
+    crearEnlaceInforme(
+      cierreActual
+    );
 
-    try {
-        if (navigator.share) {
-            await navigator.share({
-                title:
-                    "Registro Laboral",
+  try {
+    if (navigator.share) {
+      await navigator.share({
+        title:
+          "Registro Laboral",
 
-                url:
-                    enlaceInformeActual
-            });
+        url:
+          enlaceInformeActual
+      });
 
-            return;
-        }
-
-        window.open(
-            "https://wa.me/?text=" +
-                encodeURIComponent(
-                    enlaceInformeActual
-                ),
-            "_blank",
-            "noopener,noreferrer"
-        );
-    } catch (error) {
-        if (
-            error.name !==
-            "AbortError"
-        ) {
-            mostrarNotificacion(
-                "No se pudo compartir el informe.",
-                true
-            );
-        }
+      return;
     }
+
+    window.open(
+      "https://wa.me/?text=" +
+        encodeURIComponent(
+          enlaceInformeActual
+        ),
+      "_blank",
+      "noopener,noreferrer"
+    );
+  } catch (error) {
+    if (
+      error.name !==
+      "AbortError"
+    ) {
+      mostrarNotificacion(
+        "No se pudo compartir el informe.",
+        true
+      );
+    }
+  }
 }
 
 function crearEnlaceInforme(cierre) {
-    const comprimido =
-        LZString
-            .compressToEncodedURIComponent(
-                JSON.stringify(cierre)
-            );
+  const comprimido =
+    LZString
+      .compressToEncodedURIComponent(
+        JSON.stringify(cierre)
+      );
 
-    return (
-        window.location.href.split(
-            "#"
-        )[0] +
-        "#informe=" +
-        comprimido
-    );
+  return (
+    window.location.href.split(
+      "#"
+    )[0] +
+    "#informe=" +
+    comprimido
+  );
 }
 
 function cargarInformeDesdeEnlace() {
-    if (
-        !window.location.hash.startsWith(
-            "#informe="
-        )
-    ) {
-        return false;
-    }
+  if (
+    !window.location.hash.startsWith(
+      "#informe="
+    )
+  ) {
+    return false;
+  }
 
-    try {
-        const contenido =
-            window.location.hash.substring(
-                9
-            );
+  try {
+    const contenido =
+      window.location.hash.substring(
+        9
+      );
 
-        const texto =
-            LZString
-                .decompressFromEncodedURIComponent(
-                    contenido
-                );
-
-        const cierre =
-            JSON.parse(texto);
-
-        if (
-            !cierre ||
-            !cierre.mes ||
-            !Array.isArray(
-                cierre.registros
-            )
-        ) {
-            return false;
-        }
-
-        mostrarInforme(
-            cierre,
-            true
+    const texto =
+      LZString
+        .decompressFromEncodedURIComponent(
+          contenido
         );
 
-        return true;
-    } catch (error) {
-        return false;
+    const cierre =
+      JSON.parse(texto);
+
+    if (
+      !cierre ||
+      !cierre.mes ||
+      !Array.isArray(
+        cierre.registros
+      )
+    ) {
+      return false;
     }
+
+    mostrarInforme(
+      cierre,
+      true
+    );
+
+    return true;
+  } catch (error) {
+    return false;
+  }
 }
 
 function iniciarReconocimientoVoz(
-    campo,
-    boton
+  campo,
+  boton
 ) {
-    const ConstructorReconocimiento =
-        window.SpeechRecognition ||
-        window.webkitSpeechRecognition;
+  const ConstructorReconocimiento =
+    window.SpeechRecognition ||
+    window.webkitSpeechRecognition;
 
-    if (!ConstructorReconocimiento) {
-        mostrarNotificacion(
-            "El reconocimiento de voz no está disponible en este navegador.",
-            true
-        );
-
-        return;
-    }
-
-    if (reconocimientoActivo) {
-        reconocimientoActivo.stop();
-    }
-
-    const reconocimiento =
-        new ConstructorReconocimiento();
-
-    reconocimiento.lang =
-        "es-UY";
-
-    reconocimientoActivo =
-        reconocimiento;
-
-    boton.classList.add(
-        "escuchando"
+  if (!ConstructorReconocimiento) {
+    mostrarNotificacion(
+      "El reconocimiento de voz no está disponible en este navegador.",
+      true
     );
 
-    reconocimiento.onresult =
-        function (evento) {
-            procesarTextoReconocido(
-                campo,
-                evento.results[0][0]
-                    .transcript
-                    .trim()
-            );
-        };
+    return;
+  }
 
-    reconocimiento.onerror =
-        function () {
-            mostrarNotificacion(
-                "No se pudo reconocer la voz.",
-                true
-            );
-        };
+  if (reconocimientoActivo) {
+    reconocimientoActivo.stop();
+  }
 
-    reconocimiento.onend =
-        function () {
-            boton.classList.remove(
-                "escuchando"
-            );
+  const reconocimiento =
+    new ConstructorReconocimiento();
 
-            reconocimientoActivo =
-                null;
-        };
+  reconocimiento.lang =
+    "es-UY";
 
-    reconocimiento.start();
+  reconocimientoActivo =
+    reconocimiento;
+
+  boton.classList.add(
+    "escuchando"
+  );
+
+  reconocimiento.onresult =
+    function (evento) {
+      procesarTextoReconocido(
+        campo,
+        evento.results[0][0]
+          .transcript
+          .trim()
+      );
+    };
+
+  reconocimiento.onerror =
+    function () {
+      mostrarNotificacion(
+        "No se pudo reconocer la voz.",
+        true
+      );
+    };
+
+  reconocimiento.onend =
+    function () {
+      boton.classList.remove(
+        "escuchando"
+      );
+
+      reconocimientoActivo =
+        null;
+    };
+
+  reconocimiento.start();
 }
 
 function procesarTextoReconocido(
-    campo,
-    texto
+  campo,
+  texto
 ) {
-    if (campo === "horas") {
-        const horas =
-            interpretarHorasDictadas(
-                texto
-            );
+  if (campo === "horas") {
+    const horas =
+      interpretarHorasDictadas(
+        texto
+      );
 
-        if (horas !== null) {
-            horasInput.value =
-                String(horas).replace(
-                    ".",
-                    ","
-                );
-        }
+    if (horas !== null) {
+      horasInput.value =
+        String(horas).replace(
+          ".",
+          ","
+        );
     }
+  }
 
-    if (campo === "fecha") {
-        const fecha =
-            interpretarFechaDictada(
-                texto
-            );
+  if (campo === "fecha") {
+    const fecha =
+      interpretarFechaDictada(
+        texto
+      );
 
-        if (fecha) {
-            fechaInput.value =
-                fecha;
-        }
+    if (fecha) {
+      fechaInput.value =
+        fecha;
     }
+  }
 
-    if (
-        campo === "observaciones"
-    ) {
-        observacionesInput.value =
-            observacionesInput.value
-                .trim() === ""
-                ? texto
-                : observacionesInput.value
-                    .trim() +
-                    " " +
-                    texto;
-    }
+  if (
+    campo === "observaciones"
+  ) {
+    observacionesInput.value =
+      observacionesInput.value
+        .trim() === ""
+        ? texto
+        : observacionesInput.value
+            .trim() +
+          " " +
+          texto;
+  }
 }
 
 function interpretarHorasDictadas(
-    texto
+  texto
 ) {
-    const limpio =
-        limpiarTexto(texto)
-            .replace(
-                ",",
-                "."
-            );
+  const limpio =
+    limpiarTexto(texto)
+      .replace(
+        ",",
+        "."
+      );
 
-    const numero =
-        limpio.match(
-            /\d+(?:\.\d+)?/
+  const numero =
+    limpio.match(
+      /\d+(?:\.\d+)?/
+    );
+
+  if (numero) {
+    return Number(
+      numero[0]
+    );
+  }
+
+  const palabra =
+    Object.keys(
+      numerosTexto
+    ).find(
+      function (clave) {
+        return limpio.includes(
+          clave
         );
+      }
+    );
 
-    if (numero) {
-        return Number(
-            numero[0]
-        );
-    }
+  if (!palabra) {
+    return null;
+  }
 
-    const palabra =
-        Object.keys(
-            numerosTexto
-        ).find(
-            function (clave) {
-                return limpio.includes(
-                    clave
-                );
-            }
-        );
+  let resultado =
+    numerosTexto[palabra];
 
-    if (!palabra) {
-        return null;
-    }
+  if (
+    limpio.includes("media")
+  ) {
+    resultado += 0.5;
+  }
 
-    let resultado =
-        numerosTexto[palabra];
-
-    if (
-        limpio.includes("media")
-    ) {
-        resultado += 0.5;
-    }
-
-    return resultado;
+  return resultado;
 }
 
 function interpretarFechaDictada(
-    texto
+  texto
 ) {
-    const limpio =
-        limpiarTexto(texto);
+  const limpio =
+    limpiarTexto(texto);
 
-    const fecha =
-        new Date();
+  const fecha =
+    new Date();
 
-    if (
-        limpio.includes("hoy")
-    ) {
-        return convertirFechaParaInput(
-            fecha
-        );
-    }
+  if (
+    limpio.includes("hoy")
+  ) {
+    return convertirFechaParaInput(
+      fecha
+    );
+  }
 
-    if (
-        limpio.includes("ayer")
-    ) {
-        fecha.setDate(
-            fecha.getDate() - 1
-        );
-
-        return convertirFechaParaInput(
-            fecha
-        );
-    }
-
-    const coincidencia =
-        limpio.match(
-            /(\d{1,2})\s+de\s+([a-z]+)(?:\s+de\s+(\d{4}))?/
-        );
-
-    if (!coincidencia) {
-        return null;
-    }
-
-    const nombresMeses = {
-        enero: 0,
-        febrero: 1,
-        marzo: 2,
-        abril: 3,
-        mayo: 4,
-        junio: 5,
-        julio: 6,
-        agosto: 7,
-        setiembre: 8,
-        septiembre: 8,
-        octubre: 9,
-        noviembre: 10,
-        diciembre: 11
-    };
-
-    const numeroMes =
-        nombresMeses[
-            coincidencia[2]
-        ];
-
-    if (
-        numeroMes === undefined
-    ) {
-        return null;
-    }
-
-    const anio =
-        coincidencia[3]
-            ? Number(
-                coincidencia[3]
-            )
-            : new Date()
-                .getFullYear();
-
-    const fechaInterpretada =
-        new Date(
-            anio,
-            numeroMes,
-            Number(
-                coincidencia[1]
-            )
-        );
-
-    if (
-        fechaInterpretada.getMonth() !==
-            numeroMes ||
-        fechaInterpretada.getDate() !==
-            Number(
-                coincidencia[1]
-            )
-    ) {
-        return null;
-    }
+  if (
+    limpio.includes("ayer")
+  ) {
+    fecha.setDate(
+      fecha.getDate() - 1
+    );
 
     return convertirFechaParaInput(
-        fechaInterpretada
+      fecha
     );
+  }
+
+  const coincidencia =
+    limpio.match(
+      /(\d{1,2})\s+de\s+([a-z]+)(?:\s+de\s+(\d{4}))?/
+    );
+
+  if (!coincidencia) {
+    return null;
+  }
+
+  const nombresMeses = {
+    enero: 0,
+    febrero: 1,
+    marzo: 2,
+    abril: 3,
+    mayo: 4,
+    junio: 5,
+    julio: 6,
+    agosto: 7,
+    setiembre: 8,
+    septiembre: 8,
+    octubre: 9,
+    noviembre: 10,
+    diciembre: 11
+  };
+
+  const numeroMes =
+    nombresMeses[
+      coincidencia[2]
+    ];
+
+  if (
+    numeroMes === undefined
+  ) {
+    return null;
+  }
+
+  const anio =
+    coincidencia[3]
+      ? Number(
+          coincidencia[3]
+        )
+      : new Date()
+          .getFullYear();
+
+  const fechaInterpretada =
+    new Date(
+      anio,
+      numeroMes,
+      Number(
+        coincidencia[1]
+      )
+    );
+
+  if (
+    fechaInterpretada.getMonth() !==
+      numeroMes ||
+    fechaInterpretada.getDate() !==
+      Number(
+        coincidencia[1]
+      )
+  ) {
+    return null;
+  }
+
+  return convertirFechaParaInput(
+    fechaInterpretada
+  );
 }
 
 function convertirHorasDecimales(
-    valor
+  valor
 ) {
-    const numero = Number(
-        valor
-            .trim()
-            .replace(
-                ",",
-                "."
-            )
-    );
+  const numero = Number(
+    valor
+      .trim()
+      .replace(
+        ",",
+        "."
+      )
+  );
 
-    if (
-        !Number.isFinite(numero) ||
-        numero <= 0 ||
-        numero > 24
-    ) {
-        return null;
-    }
+  if (
+    !Number.isFinite(numero) ||
+    numero <= 0 ||
+    numero > 24
+  ) {
+    return null;
+  }
 
-    return numero;
+  return numero;
 }
 
 function calcularTotalMinutos(
-    registros
+  registros
 ) {
-    return registros.reduce(
-        function (
-            total,
-            registro
-        ) {
-            return (
-                total +
-                Number(
-                    registro.minutos
-                )
-            );
-        },
-        0
-    );
+  return registros.reduce(
+    function (
+      total,
+      registro
+    ) {
+      return (
+        total +
+        Number(
+          registro.minutos
+        )
+      );
+    },
+    0
+  );
 }
 
 function mostrarHoras(minutos) {
-    const horas =
-        Math.floor(
-            minutos / 60
-        );
+  const horas =
+    Math.floor(
+      minutos / 60
+    );
 
-    const resto =
-        minutos % 60;
+  const resto =
+    minutos % 60;
 
-    return resto === 0
-        ? horas + " h"
-        : horas +
-            " h " +
-            resto +
-            " min";
+  return resto === 0
+    ? horas + " h"
+    : horas +
+        " h " +
+        resto +
+        " min";
 }
 
 function mostrarFecha(fechaTexto) {
-    return new Intl.DateTimeFormat(
-        "es-UY",
-        {
-            weekday:
-                "short",
+  return new Intl.DateTimeFormat(
+    "es-UY",
+    {
+      weekday:
+        "short",
 
-            day:
-                "2-digit",
+      day:
+        "2-digit",
 
-            month:
-                "short"
-        }
-    ).format(
-        new Date(
-            fechaTexto +
-            "T12:00:00"
-        )
-    );
+      month:
+        "short"
+    }
+  ).format(
+    new Date(
+      fechaTexto +
+        "T12:00:00"
+    )
+  );
 }
 
 function mostrarFechaCompleta(
-    fechaTexto
+  fechaTexto
 ) {
-    return new Intl.DateTimeFormat(
-        "es-UY",
-        {
-            weekday:
-                "long",
+  return new Intl.DateTimeFormat(
+    "es-UY",
+    {
+      weekday:
+        "long",
 
-            day:
-                "2-digit",
+      day:
+        "2-digit",
 
-            month:
-                "long",
+      month:
+        "long",
 
-            year:
-                "numeric"
-        }
-    ).format(
-        new Date(
-            fechaTexto +
-            "T12:00:00"
-        )
-    );
+      year:
+        "numeric"
+    }
+  ).format(
+    new Date(
+      fechaTexto +
+        "T12:00:00"
+    )
+  );
 }
 
 function formatearFechaHora(
-    fechaTexto
+  fechaTexto
 ) {
-    return new Intl.DateTimeFormat(
-        "es-UY",
-        {
-            day:
-                "2-digit",
+  return new Intl.DateTimeFormat(
+    "es-UY",
+    {
+      day:
+        "2-digit",
 
-            month:
-                "2-digit",
+      month:
+        "2-digit",
 
-            year:
-                "numeric",
+      year:
+        "numeric",
 
-            hour:
-                "2-digit",
+      hour:
+        "2-digit",
 
-            minute:
-                "2-digit"
-        }
-    ).format(
-        new Date(fechaTexto)
-    );
+      minute:
+        "2-digit"
+    }
+  ).format(
+    new Date(fechaTexto)
+  );
 }
 
 function obtenerNombreMes(
-    mesTexto
+  mesTexto
 ) {
-    const partes =
-        mesTexto.split("-");
+  const partes =
+    mesTexto.split("-");
 
-    return new Intl.DateTimeFormat(
-        "es-UY",
-        {
-            month:
-                "long",
+  return new Intl.DateTimeFormat(
+    "es-UY",
+    {
+      month:
+        "long",
 
-            year:
-                "numeric"
-        }
-    ).format(
-        new Date(
-            Number(
-                partes[0]
-            ),
+      year:
+        "numeric"
+    }
+  ).format(
+    new Date(
+      Number(
+        partes[0]
+      ),
 
-            Number(
-                partes[1]
-            ) - 1,
+      Number(
+        partes[1]
+      ) - 1,
 
-            1
-        )
-    );
+      1
+    )
+  );
 }
 
 function convertirFechaParaInput(
-    fecha
+  fecha
 ) {
-    return (
-        fecha.getFullYear() +
-        "-" +
-        String(
-            fecha.getMonth() + 1
-        ).padStart(
-            2,
-            "0"
-        ) +
-        "-" +
-        String(
-            fecha.getDate()
-        ).padStart(
-            2,
-            "0"
-        )
-    );
+  return (
+    fecha.getFullYear() +
+    "-" +
+    String(
+      fecha.getMonth() + 1
+    ).padStart(
+      2,
+      "0"
+    ) +
+    "-" +
+    String(
+      fecha.getDate()
+    ).padStart(
+      2,
+      "0"
+    )
+  );
 }
 
 function obtenerMesActual() {
-    return convertirFechaParaInput(
-        new Date()
-    ).substring(
-        0,
-        7
-    );
+  return convertirFechaParaInput(
+    new Date()
+  ).substring(
+    0,
+    7
+  );
 }
 
 function obtenerInicioMesSiguiente(
-    mesTexto
+  mesTexto
 ) {
-    const partes =
-        mesTexto.split("-");
+  const partes =
+    mesTexto.split("-");
 
-    let anio =
-        Number(partes[0]);
+  let anio =
+    Number(partes[0]);
 
-    let mes =
-        Number(partes[1]);
+  let mes =
+    Number(partes[1]);
 
-    if (mes === 12) {
-        anio += 1;
-        mes = 1;
-    } else {
-        mes += 1;
-    }
+  if (mes === 12) {
+    anio += 1;
+    mes = 1;
+  } else {
+    mes += 1;
+  }
 
-    return (
-        anio +
-        "-" +
-        String(mes).padStart(
-            2,
-            "0"
-        ) +
-        "-01"
-    );
+  return (
+    anio +
+    "-" +
+    String(mes).padStart(
+      2,
+      "0"
+    ) +
+    "-01"
+  );
 }
 
 function limpiarTexto(texto) {
-    return texto
-        .normalize("NFD")
-        .replace(
-            /[\u0300-\u036f]/g,
-            ""
-        )
-        .toLowerCase();
+  return texto
+    .normalize("NFD")
+    .replace(
+      /[\u0300-\u036f]/g,
+      ""
+    )
+    .toLowerCase();
 }
 
 function generarIdentificador() {
-    if (
-        crypto.randomUUID
-    ) {
-        return crypto
-            .randomUUID()
-            .replaceAll(
-                "-",
-                ""
-            )
-            .substring(
-                0,
-                16
-            )
-            .toUpperCase();
-    }
+  if (
+    crypto.randomUUID
+  ) {
+    return crypto
+      .randomUUID()
+      .replaceAll(
+        "-",
+        ""
+      )
+      .substring(
+        0,
+        16
+      )
+      .toUpperCase();
+  }
 
-    return (
-        Date.now().toString(16) +
-        Math.random()
-            .toString(16)
-            .substring(2)
+  return (
+    Date.now().toString(16) +
+    Math.random()
+      .toString(16)
+      .substring(2)
+  )
+    .substring(
+      0,
+      16
     )
-        .substring(
-            0,
-            16
-        )
-        .toUpperCase();
+    .toUpperCase();
 }
 
 function escaparHTML(texto) {
-    const elemento =
-        document.createElement(
-            "div"
-        );
+  const elemento =
+    document.createElement(
+      "div"
+    );
 
-    elemento.textContent =
-        texto;
+  elemento.textContent =
+    texto;
 
-    return elemento.innerHTML;
+  return elemento.innerHTML;
 }
 
 function mostrarMensajeAcceso(
-    texto,
-    esError
+  texto,
+  esError
 ) {
-    mensajeAcceso.textContent =
-        texto;
+  mensajeAcceso.textContent =
+    texto;
 
-    mensajeAcceso.classList.add(
-        "visible"
-    );
+  mensajeAcceso.classList.add(
+    "visible"
+  );
 
-    mensajeAcceso.classList.toggle(
-        "error",
-        esError
-    );
+  mensajeAcceso.classList.toggle(
+    "error",
+    esError
+  );
 }
 
 function ocultarMensajeAcceso() {
-    mensajeAcceso.textContent = "";
+  mensajeAcceso.textContent = "";
 
-    mensajeAcceso.classList.remove(
-        "visible",
-        "error"
-    );
+  mensajeAcceso.classList.remove(
+    "visible",
+    "error"
+  );
 }
 
 function mostrarMensajeRegistroUsuario(
-    texto,
-    esError
+  texto,
+  esError
 ) {
-    mensajeRegistroUsuario.textContent =
-        texto;
+  mensajeRegistroUsuario.textContent =
+    texto;
 
-    mensajeRegistroUsuario.classList.add(
-        "visible"
-    );
+  mensajeRegistroUsuario.classList.add(
+    "visible"
+  );
 
-    mensajeRegistroUsuario.classList.toggle(
-        "error",
-        esError
-    );
+  mensajeRegistroUsuario.classList.toggle(
+    "error",
+    esError
+  );
 }
 
 function ocultarMensajeRegistroUsuario() {
-    mensajeRegistroUsuario.textContent =
-        "";
+  mensajeRegistroUsuario.textContent =
+    "";
 
-    mensajeRegistroUsuario.classList.remove(
-        "visible",
-        "error"
-    );
+  mensajeRegistroUsuario.classList.remove(
+    "visible",
+    "error"
+  );
 }
 
 function mostrarMensajeFormulario(
-    texto,
-    esError
+  texto,
+  esError
 ) {
-    mensajeFormulario.textContent =
-        texto;
+  mensajeFormulario.textContent =
+    texto;
 
-    mensajeFormulario.classList.add(
-        "visible"
-    );
+  mensajeFormulario.classList.add(
+    "visible"
+  );
 
-    mensajeFormulario.classList.toggle(
-        "error",
-        esError
-    );
+  mensajeFormulario.classList.toggle(
+    "error",
+    esError
+  );
 }
 
 function ocultarMensajeFormulario() {
-    mensajeFormulario.textContent =
-        "";
+  mensajeFormulario.textContent =
+    "";
 
-    mensajeFormulario.classList.remove(
-        "visible",
-        "error"
-    );
+  mensajeFormulario.classList.remove(
+    "visible",
+    "error"
+  );
 }
 
 function mostrarNotificacion(
-    texto,
-    esError
+  texto,
+  esError
 ) {
-    notificacion.textContent =
-        texto;
+  notificacion.textContent =
+    texto;
 
-    notificacion.classList.toggle(
-        "error",
-        esError
-    );
+  notificacion.classList.toggle(
+    "error",
+    esError
+  );
 
-    notificacion.classList.add(
+  notificacion.classList.add(
+    "visible"
+  );
+
+  setTimeout(
+    function () {
+      notificacion.classList.remove(
         "visible"
-    );
-
-    setTimeout(
-        function () {
-            notificacion.classList.remove(
-                "visible"
-            );
-        },
-        3200
-    );
+      );
+    },
+    3200
+  );
 }
