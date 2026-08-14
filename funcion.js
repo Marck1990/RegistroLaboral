@@ -583,6 +583,24 @@ function limpiarSesionLocal() {
   usuariosAdministrador = [];
   cierreActual = null;
   modoAdministrador = false;
+  diasLicenciaTotales = 0;
+  diasLicenciaUsados = 0;
+
+  listaRegistros.innerHTML = "";
+
+  tituloMes.textContent = "Cargando...";
+  cantidadJornadas.textContent = "0 jornadas registradas";
+  totalHoras.textContent = "0 h";
+  totalModalCierre.textContent = "0 h";
+  contadorRegistros.textContent = "0";
+
+  diasLicenciaRestantesTexto.textContent =
+    "0 días disponibles";
+
+  detalleDiasLicencia.textContent =
+    "Cargando saldo de licencia...";
+
+  botonCerrarMes.disabled = true;
 
   if (interruptorRol) {
     interruptorRol.checked = false;
@@ -595,6 +613,9 @@ function limpiarSesionLocal() {
 
 async function activarAplicacion(usuario) {
   usuarioActual = usuario;
+
+  aplicacion.classList.add("oculto");
+  vistaInforme.classList.add("oculto");
 
   try {
     perfilUsuarioActual = await obtenerOCrearPerfilUsuario(
@@ -636,15 +657,55 @@ async function activarAplicacion(usuario) {
 
   correoUsuario.textContent = usuario.email || "Usuario";
 
-  vistaAcceso.classList.add("oculto");
-  vistaInforme.classList.add("oculto");
-  aplicacion.classList.remove("oculto");
+  registrosActuales = [];
+  cierreActual = null;
+  diasLicenciaTotales = 0;
+  diasLicenciaUsados = 0;
+
+  tituloMes.textContent = "Cargando...";
+  cantidadJornadas.textContent = "Cargando registros...";
+  totalHoras.textContent = "0 h";
+  totalModalCierre.textContent = "0 h";
+  contadorRegistros.textContent = "0";
+
+  diasLicenciaRestantesTexto.textContent =
+    "Cargando saldo...";
+
+  detalleDiasLicencia.textContent =
+    "Esperá un momento.";
+
+  botonCerrarMes.disabled = true;
+  panelSaldoLicencia.classList.remove("sin-saldo");
+
+  listaRegistros.innerHTML = `
+    <div class="estado-vacio">
+
+      <div class="estado-vacio-icono">
+        ⌛
+      </div>
+
+      <h3>
+        Cargando registros
+      </h3>
+
+      <p>
+        Esperá un momento.
+      </p>
+
+    </div>
+  `;
 
   configurarSelectorAdministrador();
   mostrarModoUsuario();
 
   await cargarMesSeleccionado();
+
+  vistaAcceso.classList.add("oculto");
+  aplicacion.classList.remove("oculto");
 }
+
+
+
 
 async function obtenerOCrearPerfilUsuario(usuario) {
   let respuesta = await clienteSupabase
