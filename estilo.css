@@ -1283,10 +1283,259 @@ button {
     font-size: 0.72rem;
 }
 
+/* BOTÓN FLOTANTE DE APORTES */
+
+.boton-apoyar {
+    position: fixed;
+    right: 18px;
+    bottom: 18px;
+    z-index: 60;
+    min-height: 50px;
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 0 17px 0 10px;
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    border-radius: 999px;
+    background: var(--texto);
+    color: white;
+    box-shadow: 0 12px 32px rgba(15, 45, 41, 0.28);
+    font-size: 0.78rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition:
+        transform 0.2s,
+        box-shadow 0.2s,
+        background 0.2s;
+}
+
+.boton-apoyar:hover {
+    background: var(--verde);
+    box-shadow: 0 15px 38px rgba(15, 45, 41, 0.34);
+    transform: translateY(-2px);
+}
+
+.boton-apoyar:focus-visible,
+.boton-cerrar-apoyo:focus-visible,
+.enlace-paypal:focus-visible {
+    outline: 3px solid var(--dorado);
+    outline-offset: 3px;
+}
+
+.boton-apoyar-icono {
+    width: 34px;
+    height: 34px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.12);
+    font-size: 1rem;
+}
+
+/* VENTANA DE APORTES */
+
+.modal-apoyo {
+    width: min(820px, calc(100% - 24px));
+    max-height: min(92vh, 850px);
+    max-height: min(92dvh, 850px);
+    overflow: auto;
+    border-radius: 26px;
+}
+
+.modal-apoyo > .apoyo-contenido {
+    display: grid;
+    padding: 0;
+}
+
+.boton-cerrar-apoyo {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 2;
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    padding: 0 0 3px;
+    border: 1px solid rgba(23, 55, 52, 0.12);
+    border-radius: 50%;
+    background: rgba(255, 253, 248, 0.94);
+    color: var(--texto);
+    box-shadow: 0 7px 20px rgba(15, 38, 35, 0.14);
+    font-size: 1.45rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.apoyo-imagen-contenedor {
+    min-height: 240px;
+    margin: 0;
+    overflow: hidden;
+    background: #1e302b;
+}
+
+.apoyo-imagen {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center;
+}
+
+.apoyo-cuerpo {
+    padding: 25px 22px 22px;
+}
+
+.apoyo-cuerpo h2 {
+    font-size: clamp(1.65rem, 7vw, 2.25rem);
+}
+
+.apoyo-presentacion {
+    margin: 13px 0 20px;
+    color: #465b56;
+    font-size: 0.84rem;
+    line-height: 1.65;
+}
+
+.metodos-apoyo {
+    display: grid;
+    gap: 13px;
+}
+
+.metodo-apoyo {
+    padding: 16px;
+    border: 1px solid var(--borde);
+    border-radius: 17px;
+    background: #f8f7f1;
+}
+
+.metodo-apoyo-cabecera {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    margin-bottom: 14px;
+}
+
+.metodo-apoyo-icono {
+    width: 39px;
+    height: 39px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    border-radius: 12px;
+    background: var(--verde);
+    color: white;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.25rem;
+    font-weight: 800;
+}
+
+.metodo-apoyo-icono.paypal {
+    background: #1474c4;
+}
+
+.metodo-apoyo h3 {
+    margin: 0;
+    font-size: 0.92rem;
+}
+
+.metodo-apoyo-cabecera p,
+.paypal-acciones p {
+    margin: 4px 0 0;
+    color: var(--texto-suave);
+    font-size: 0.7rem;
+    line-height: 1.4;
+}
+
+.cuenta-prex {
+    display: grid;
+    gap: 5px;
+    margin-bottom: 11px;
+    padding: 12px 13px;
+    border: 1px dashed #a9c7bd;
+    border-radius: 12px;
+    background: white;
+}
+
+.cuenta-prex span {
+    color: var(--texto-suave);
+    font-size: 0.67rem;
+}
+
+.cuenta-prex strong {
+    overflow-wrap: anywhere;
+    font-size: 0.88rem;
+}
+
+.paypal-contenido {
+    display: grid;
+    grid-template-columns: 132px minmax(0, 1fr);
+    align-items: center;
+    gap: 14px;
+}
+
+.codigo-qr-paypal {
+    width: 132px;
+    height: 132px;
+    display: grid;
+    place-items: center;
+    padding: 7px;
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+    background: white;
+    color: var(--texto-suave);
+    font-size: 0.68rem;
+    text-align: center;
+}
+
+.codigo-qr-paypal img,
+.codigo-qr-paypal canvas {
+    max-width: 100%;
+    height: auto !important;
+}
+
+.qr-paypal-pendiente {
+    width: 74px;
+    height: 74px;
+    display: grid;
+    place-items: center;
+    border: 2px dashed #c5cbc7;
+    border-radius: 12px;
+    color: #96a19d;
+    font-size: 0.72rem;
+    font-weight: 800;
+}
+
+.paypal-acciones {
+    min-width: 0;
+}
+
+.enlace-paypal {
+    width: 100%;
+    min-height: 44px;
+    background: #1474c4;
+    color: white;
+    font-size: 0.77rem;
+    text-decoration: none;
+}
+
+.enlace-paypal.deshabilitado {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.apoyo-aviso {
+    margin: 15px 0 0;
+    color: var(--texto-suave);
+    font-size: 0.68rem;
+    line-height: 1.45;
+    text-align: center;
+}
+
 .notificacion {
     position: fixed;
     right: 15px;
-    bottom: 15px;
+    bottom: 82px;
     z-index: 100;
     padding: 13px 17px;
     border-radius: 12px;
@@ -1384,6 +1633,20 @@ button {
     .boton-borrar-usuario {
         min-width: 120px;
     }
+
+    .modal-apoyo > .apoyo-contenido {
+        grid-template-columns:
+            minmax(270px, 0.85fr)
+            minmax(360px, 1.15fr);
+    }
+
+    .apoyo-imagen-contenedor {
+        min-height: 100%;
+    }
+
+    .apoyo-cuerpo {
+        padding: 31px 28px 25px;
+    }
 }
 
 @media (min-width: 980px) {
@@ -1450,6 +1713,28 @@ button {
     .estado-cierre {
         width: fit-content;
     }
+
+    .boton-apoyar {
+        right: 12px;
+        bottom: 12px;
+    }
+
+    .notificacion {
+        right: 12px;
+        bottom: 76px;
+        left: 12px;
+        text-align: center;
+    }
+
+    .paypal-contenido {
+        grid-template-columns: 116px minmax(0, 1fr);
+        gap: 11px;
+    }
+
+    .codigo-qr-paypal {
+        width: 116px;
+        height: 116px;
+    }
 }
 
 @media print {
@@ -1462,7 +1747,8 @@ button {
     #vistaAcceso,
     .no-imprimir,
     .modal,
-    .notificacion {
+    .notificacion,
+    .boton-apoyar {
         display: none !important;
     }
 

@@ -843,6 +843,157 @@
 
     </dialog>
 
+    <button type="button"
+        id="botonApoyar"
+        class="boton-apoyar"
+        aria-haspopup="dialog"
+        aria-controls="modalApoyo">
+
+        <span class="boton-apoyar-icono"
+            aria-hidden="true">
+            ☕
+        </span>
+
+        <span>Apoyar la app</span>
+
+    </button>
+
+    <dialog id="modalApoyo"
+        class="modal modal-apoyo"
+        aria-labelledby="tituloApoyo">
+
+        <button type="button"
+            id="botonCerrarApoyo"
+            class="boton-cerrar-apoyo"
+            aria-label="Cerrar ventana de aportes">
+            ×
+        </button>
+
+        <div class="apoyo-contenido">
+
+            <figure class="apoyo-imagen-contenedor">
+
+                <img src="imagenes/apoyo-registro-laboral.png"
+                    alt="Ilustración de Marcos programando entre libros y animales"
+                    class="apoyo-imagen">
+
+            </figure>
+
+            <div class="apoyo-cuerpo">
+
+                <p class="etiqueta">
+                    APORTE VOLUNTARIO
+                </p>
+
+                <h2 id="tituloApoyo">
+                    ¿Te dio una mano?
+                </h2>
+
+                <p class="apoyo-presentacion">
+                    Soy Marcos, el programador detrás de Registro Laboral, y entre mate, código y algún error que casi me hace hablar solo armé esta app para que lleves tus horas claras y nadie te birle ni un minuto. Si te dio una mano y querés invitarme un cafecito —o financiar el próximo paquete de yerba Moncayo para calmar la “ansiedattttt/locura”—, podés dejarme un aporte voluntario por acá: ¡muchas gracias!
+                </p>
+
+                <div class="metodos-apoyo">
+
+                    <section class="metodo-apoyo metodo-prex">
+
+                        <div class="metodo-apoyo-cabecera">
+
+                            <span class="metodo-apoyo-icono"
+                                aria-hidden="true">
+                                P
+                            </span>
+
+                            <div>
+
+                                <h3>Transferencia Prex</h3>
+
+                                <p>
+                                    Copiá la cuenta y transferí desde Prex o tu banco.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                        <div class="cuenta-prex">
+
+                            <span>Número de cuenta</span>
+
+                            <strong id="numeroCuentaPrex">
+                                1188359
+                            </strong>
+
+                        </div>
+
+                        <button type="button"
+                            id="botonCopiarPrex"
+                            class="boton boton-secundario boton-completo">
+                            Copiar cuenta Prex
+                        </button>
+
+                    </section>
+
+                    <section class="metodo-apoyo metodo-paypal">
+
+                        <div class="metodo-apoyo-cabecera">
+
+                            <span class="metodo-apoyo-icono paypal"
+                                aria-hidden="true">
+                                P
+                            </span>
+
+                            <div>
+
+                                <h3>PayPal</h3>
+
+                                <p>
+                                    Escaneá el QR o abrí el enlace desde tu celular.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                        <div class="paypal-contenido">
+
+                            <div id="codigoQRPaypal"
+                                class="codigo-qr-paypal"
+                                aria-label="Código QR para aportar mediante PayPal">
+                            </div>
+
+                            <div class="paypal-acciones">
+
+                                <a id="enlacePaypal"
+                                    class="boton enlace-paypal deshabilitado"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-disabled="true">
+                                    Abrir PayPal
+                                </a>
+
+                                <p id="mensajePaypal">
+                                    Enlace pendiente de configurar.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+                </div>
+
+                <p class="apoyo-aviso">
+                    El aporte es completamente voluntario y no desbloquea funciones.
+                </p>
+
+            </div>
+
+        </div>
+
+    </dialog>
+
     <div id="notificacion"
         class="notificacion"
         aria-live="polite"></div>
