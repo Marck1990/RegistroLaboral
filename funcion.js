@@ -1695,9 +1695,9 @@ async function generarCierre(evento) {
     ),
     registros: registrosActuales
       .slice()
-    .sort(function (a, b) {
-  return b.fecha.localeCompare(a.fecha);
-})
+      .sort(function (a, b) {
+        return a.fecha.localeCompare(b.fecha);
+      })
       .map(function (registro) {
         return {
           fecha: registro.fecha,
